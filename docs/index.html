@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>WST Enrollment Funnel</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --blue: #002855;
+    --med-blue: #0070F0;
+    --sky-blue: #46B1EF;
+    --lime: #97E152;
+    --grey: #A7A7A7;
+    --light-grey: #F1F1F1;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: Arial, 'Futura PT', sans-serif; margin: 0; background: white; color: #001731; }
+  header { background: var(--blue); color: white; padding: 18px 24px; }
+  header .eyebrow { font-size: 12px; letter-spacing: 1.5px; color: var(--sky-blue); font-weight: 700; }
+  header h1 { font-size: 22px; margin: 2px 0 0; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--light-grey); }
+  .kpi { padding: 18px 20px; border-right: 1px solid var(--light-grey); }
+  .kpi:last-child { border-right: none; }
+  .kpi .label { font-size: 11px; color: var(--grey); font-weight: 700; letter-spacing: 0.5px; }
+  .kpi .value { font-size: 30px; font-weight: 800; color: var(--blue); margin-top: 4px; }
+  .section { padding: 16px 20px; border-top: 1px solid var(--light-grey); }
+  .section h2 { font-size: 12px; font-weight: 800; color: var(--blue); letter-spacing: 0.5px; margin: 0 0 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 4px 8px; }
+  th { color: var(--grey); font-size: 11px; font-weight: 700; }
+  .best { background: #e9f9ed; font-weight: 700; }
+  canvas { max-height: 320px; }
+  footer { padding: 10px 20px; font-size: 10.5px; color: var(--grey); border-top: 1px solid var(--light-grey); }
+</style>
+</head>
+<body>
+  <header>
+    <div class="eyebrow">WGU · SCHOOL OF TECHNOLOGY</div>
+    <h1>WST Enrollment Funnel — Forecast &amp; Pacing</h1>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="section">
+    <h2>MODEL CONFIDENCE (backtest, last 14 actual days)</h2>
+    <table id="backtest-table"></table>
+  </div>
+
+  <div class="section">
+    <h2>TREND — ACTUAL VS. RECOMMENDED MODEL</h2>
+    <canvas id="trendChart"></canvas>
+  </div>
+
+  <footer id="footer-note">Loading…</footer>
+
+<script>
+async function loadData() {
+  const [daily, modelOutput] = await Promise.all([
+    fetch('data/daily.json').then(r => r.json()),
+    fetch('data/model_output.json').then(r => r.json()),
+  ]);
+  return { daily, modelOutput };
+}
+
+function renderKpis(daily, modelOutput) {
+  const last = daily[daily.length - 1];
+  const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
+  const bestKey = sorted[0][0];
+  const bestLabel = sorted[0][1].label;
+
+  const kpiDiv = document.getElementById('kpis');
+  kpiDiv.innerHTML = `
+    <div class="kpi">
+      <div class="label">LAST ACTUAL DAY</div>
+      <div class="value">${last['App Complete']}</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:2px;">${last.date}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">RECOMMENDED MODEL</div>
+      <div class="value" style="font-size:20px;">${bestLabel}</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:2px;">lowest 14-day error</div>
+    </div>
+    <div class="kpi">
+      <div class="label">DATA LAST UPDATED</div>
+      <div class="value" style="font-size:16px;">${new Date(modelOutput.generated).toLocaleString()}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">DAYS OF ACTUAL DATA</div>
+      <div class="value">${daily.length}</div>
+    </div>
+  `;
+}
+
+function renderBacktest(modelOutput) {
+  const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
+  const table = document.getElementById('backtest-table');
+  table.innerHTML = `
+    <tr><th>Model</th><th>Total error</th><th>Over N days</th></tr>
+    ${sorted.map(([key, b], i) => `
+      <tr class="${i === 0 ? 'best' : ''}">
+        <td>${b.label}${i === 0 ? ' ★ best' : ''}</td>
+        <td>${b.totalError}</td>
+        <td>${b.days}</td>
+      </tr>
+    `).join('')}
+  `;
+}
+
+function renderTrend(daily, modelOutput) {
+  const bestKey = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
+  const recent = daily.slice(-60);
+  const labels = recent.map(d => d.date);
+  const actuals = recent.map(d => d['App Complete']);
+
+  const projLabels = modelOutput.projections.map(p => p.date);
+  const projValues = modelOutput.projections.map(p => p[bestKey]);
+
+  const allLabels = [...labels, ...projLabels];
+  const actualSeries = [...actuals, ...projLabels.map(() => null)];
+  const projSeries = [...labels.map(() => null), recent.length ? actuals[actuals.length-1] : null, ...projValues.slice(1)];
+
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        { label: 'Actual', data: actualSeries, borderColor: '#0070F0', backgroundColor: 'rgba(0,112,240,0.1)', fill: true, tension: 0.2, pointRadius: 0 },
+        { label: 'Projection', data: projSeries, borderColor: '#46B1EF', borderDash: [5,3], tension: 0.2, pointRadius: 0 },
+      ],
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      scales: { x: { ticks: { maxTicksLimit: 12, font: { size: 9 } } } },
+    },
+  });
+}
+
+loadData().then(({ daily, modelOutput }) => {
+  renderKpis(daily, modelOutput);
+  renderBacktest(modelOutput);
+  renderTrend(daily, modelOutput);
+  document.getElementById('footer-note').textContent =
+    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day.`;
+}).catch(err => {
+  document.getElementById('footer-note').textContent = 'Error loading data: ' + err.message;
+});
+</script>
+</body>
+</html>

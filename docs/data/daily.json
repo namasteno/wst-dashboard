@@ -1,0 +1,3296 @@
+[
+  {
+    "date": "Apr 1, 2025",
+    "Inquiries": 424,
+    "Intenders": 358,
+    "App Complete": 332
+  },
+  {
+    "date": "Apr 2, 2025",
+    "Inquiries": 387,
+    "Intenders": 323,
+    "App Complete": 322
+  },
+  {
+    "date": "Apr 3, 2025",
+    "Inquiries": 344,
+    "Intenders": 304,
+    "App Complete": 302
+  },
+  {
+    "date": "Apr 4, 2025",
+    "Inquiries": 309,
+    "Intenders": 276,
+    "App Complete": 264
+  },
+  {
+    "date": "Apr 5, 2025",
+    "Inquiries": 236,
+    "Intenders": 204,
+    "App Complete": 192
+  },
+  {
+    "date": "Apr 6, 2025",
+    "Inquiries": 251,
+    "Intenders": 212,
+    "App Complete": 196
+  },
+  {
+    "date": "Apr 7, 2025",
+    "Inquiries": 403,
+    "Intenders": 340,
+    "App Complete": 333
+  },
+  {
+    "date": "Apr 8, 2025",
+    "Inquiries": 442,
+    "Intenders": 387,
+    "App Complete": 394
+  },
+  {
+    "date": "Apr 9, 2025",
+    "Inquiries": 388,
+    "Intenders": 343,
+    "App Complete": 331
+  },
+  {
+    "date": "Apr 10, 2025",
+    "Inquiries": 406,
+    "Intenders": 347,
+    "App Complete": 328
+  },
+  {
+    "date": "Apr 11, 2025",
+    "Inquiries": 349,
+    "Intenders": 286,
+    "App Complete": 299
+  },
+  {
+    "date": "Apr 12, 2025",
+    "Inquiries": 268,
+    "Intenders": 236,
+    "App Complete": 215
+  },
+  {
+    "date": "Apr 13, 2025",
+    "Inquiries": 233,
+    "Intenders": 205,
+    "App Complete": 186
+  },
+  {
+    "date": "Apr 14, 2025",
+    "Inquiries": 490,
+    "Intenders": 436,
+    "App Complete": 420
+  },
+  {
+    "date": "Apr 15, 2025",
+    "Inquiries": 435,
+    "Intenders": 388,
+    "App Complete": 361
+  },
+  {
+    "date": "Apr 16, 2025",
+    "Inquiries": 404,
+    "Intenders": 348,
+    "App Complete": 345
+  },
+  {
+    "date": "Apr 17, 2025",
+    "Inquiries": 364,
+    "Intenders": 316,
+    "App Complete": 316
+  },
+  {
+    "date": "Apr 18, 2025",
+    "Inquiries": 290,
+    "Intenders": 254,
+    "App Complete": 238
+  },
+  {
+    "date": "Apr 19, 2025",
+    "Inquiries": 226,
+    "Intenders": 198,
+    "App Complete": 185
+  },
+  {
+    "date": "Apr 20, 2025",
+    "Inquiries": 220,
+    "Intenders": 194,
+    "App Complete": 189
+  },
+  {
+    "date": "Apr 21, 2025",
+    "Inquiries": 461,
+    "Intenders": 407,
+    "App Complete": 368
+  },
+  {
+    "date": "Apr 22, 2025",
+    "Inquiries": 479,
+    "Intenders": 424,
+    "App Complete": 377
+  },
+  {
+    "date": "Apr 23, 2025",
+    "Inquiries": 449,
+    "Intenders": 391,
+    "App Complete": 400
+  },
+  {
+    "date": "Apr 24, 2025",
+    "Inquiries": 425,
+    "Intenders": 361,
+    "App Complete": 345
+  },
+  {
+    "date": "Apr 25, 2025",
+    "Inquiries": 349,
+    "Intenders": 299,
+    "App Complete": 289
+  },
+  {
+    "date": "Apr 26, 2025",
+    "Inquiries": 227,
+    "Intenders": 193,
+    "App Complete": 181
+  },
+  {
+    "date": "Apr 27, 2025",
+    "Inquiries": 303,
+    "Intenders": 274,
+    "App Complete": 261
+  },
+  {
+    "date": "Apr 28, 2025",
+    "Inquiries": 492,
+    "Intenders": 447,
+    "App Complete": 424
+  },
+  {
+    "date": "Apr 29, 2025",
+    "Inquiries": 442,
+    "Intenders": 386,
+    "App Complete": 383
+  },
+  {
+    "date": "Apr 30, 2025",
+    "Inquiries": 462,
+    "Intenders": 429,
+    "App Complete": 386
+  },
+  {
+    "date": "May 1, 2025",
+    "Inquiries": 370,
+    "Intenders": 349,
+    "App Complete": 345
+  },
+  {
+    "date": "May 2, 2025",
+    "Inquiries": 302,
+    "Intenders": 293,
+    "App Complete": 220
+  },
+  {
+    "date": "May 3, 2025",
+    "Inquiries": 350,
+    "Intenders": 323,
+    "App Complete": 228
+  },
+  {
+    "date": "May 4, 2025",
+    "Inquiries": 515,
+    "Intenders": 508,
+    "App Complete": 384
+  },
+  {
+    "date": "May 5, 2025",
+    "Inquiries": 488,
+    "Intenders": 468,
+    "App Complete": 384
+  },
+  {
+    "date": "May 6, 2025",
+    "Inquiries": 518,
+    "Intenders": 515,
+    "App Complete": 387
+  },
+  {
+    "date": "May 7, 2025",
+    "Inquiries": 428,
+    "Intenders": 413,
+    "App Complete": 313
+  },
+  {
+    "date": "May 8, 2025",
+    "Inquiries": 388,
+    "Intenders": 381,
+    "App Complete": 286
+  },
+  {
+    "date": "May 9, 2025",
+    "Inquiries": 321,
+    "Intenders": 312,
+    "App Complete": 233
+  },
+  {
+    "date": "May 10, 2025",
+    "Inquiries": 300,
+    "Intenders": 287,
+    "App Complete": 216
+  },
+  {
+    "date": "May 11, 2025",
+    "Inquiries": 540,
+    "Intenders": 515,
+    "App Complete": 450
+  },
+  {
+    "date": "May 12, 2025",
+    "Inquiries": 494,
+    "Intenders": 469,
+    "App Complete": 381
+  },
+  {
+    "date": "May 13, 2025",
+    "Inquiries": 533,
+    "Intenders": 508,
+    "App Complete": 453
+  },
+  {
+    "date": "May 14, 2025",
+    "Inquiries": 479,
+    "Intenders": 451,
+    "App Complete": 404
+  },
+  {
+    "date": "May 15, 2025",
+    "Inquiries": 456,
+    "Intenders": 447,
+    "App Complete": 376
+  },
+  {
+    "date": "May 16, 2025",
+    "Inquiries": 356,
+    "Intenders": 354,
+    "App Complete": 308
+  },
+  {
+    "date": "May 17, 2025",
+    "Inquiries": 319,
+    "Intenders": 305,
+    "App Complete": 259
+  },
+  {
+    "date": "May 18, 2025",
+    "Inquiries": 348,
+    "Intenders": 337,
+    "App Complete": 273
+  },
+  {
+    "date": "May 19, 2025",
+    "Inquiries": 574,
+    "Intenders": 537,
+    "App Complete": 479
+  },
+  {
+    "date": "May 20, 2025",
+    "Inquiries": 516,
+    "Intenders": 554,
+    "App Complete": 425
+  },
+  {
+    "date": "May 21, 2025",
+    "Inquiries": 528,
+    "Intenders": 506,
+    "App Complete": 427
+  },
+  {
+    "date": "May 22, 2025",
+    "Inquiries": 441,
+    "Intenders": 421,
+    "App Complete": 385
+  },
+  {
+    "date": "May 23, 2025",
+    "Inquiries": 375,
+    "Intenders": 362,
+    "App Complete": 320
+  },
+  {
+    "date": "May 24, 2025",
+    "Inquiries": 272,
+    "Intenders": 267,
+    "App Complete": 230
+  },
+  {
+    "date": "May 25, 2025",
+    "Inquiries": 268,
+    "Intenders": 261,
+    "App Complete": 226
+  },
+  {
+    "date": "May 26, 2025",
+    "Inquiries": 330,
+    "Intenders": 318,
+    "App Complete": 278
+  },
+  {
+    "date": "May 27, 2025",
+    "Inquiries": 544,
+    "Intenders": 531,
+    "App Complete": 464
+  },
+  {
+    "date": "May 28, 2025",
+    "Inquiries": 671,
+    "Intenders": 648,
+    "App Complete": 582
+  },
+  {
+    "date": "May 29, 2025",
+    "Inquiries": 525,
+    "Intenders": 517,
+    "App Complete": 448
+  },
+  {
+    "date": "May 30, 2025",
+    "Inquiries": 369,
+    "Intenders": 363,
+    "App Complete": 323
+  },
+  {
+    "date": "May 31, 2025",
+    "Inquiries": 299,
+    "Intenders": 300,
+    "App Complete": 229
+  },
+  {
+    "date": "Jun 1, 2025",
+    "Inquiries": 330,
+    "Intenders": 313,
+    "App Complete": 279
+  },
+  {
+    "date": "Jun 2, 2025",
+    "Inquiries": 317,
+    "Intenders": 286,
+    "App Complete": 252
+  },
+  {
+    "date": "Jun 3, 2025",
+    "Inquiries": 726,
+    "Intenders": 706,
+    "App Complete": 604
+  },
+  {
+    "date": "Jun 4, 2025",
+    "Inquiries": 501,
+    "Intenders": 472,
+    "App Complete": 412
+  },
+  {
+    "date": "Jun 5, 2025",
+    "Inquiries": 493,
+    "Intenders": 479,
+    "App Complete": 391
+  },
+  {
+    "date": "Jun 6, 2025",
+    "Inquiries": 385,
+    "Intenders": 366,
+    "App Complete": 299
+  },
+  {
+    "date": "Jun 7, 2025",
+    "Inquiries": 352,
+    "Intenders": 306,
+    "App Complete": 218
+  },
+  {
+    "date": "Jun 8, 2025",
+    "Inquiries": 302,
+    "Intenders": 290,
+    "App Complete": 220
+  },
+  {
+    "date": "Jun 9, 2025",
+    "Inquiries": 489,
+    "Intenders": 475,
+    "App Complete": 375
+  },
+  {
+    "date": "Jun 10, 2025",
+    "Inquiries": 447,
+    "Intenders": 430,
+    "App Complete": 356
+  },
+  {
+    "date": "Jun 11, 2025",
+    "Inquiries": 426,
+    "Intenders": 410,
+    "App Complete": 342
+  },
+  {
+    "date": "Jun 12, 2025",
+    "Inquiries": 424,
+    "Intenders": 396,
+    "App Complete": 320
+  },
+  {
+    "date": "Jun 13, 2025",
+    "Inquiries": 367,
+    "Intenders": 354,
+    "App Complete": 280
+  },
+  {
+    "date": "Jun 14, 2025",
+    "Inquiries": 310,
+    "Intenders": 299,
+    "App Complete": 235
+  },
+  {
+    "date": "Jun 15, 2025",
+    "Inquiries": 295,
+    "Intenders": 288,
+    "App Complete": 225
+  },
+  {
+    "date": "Jun 16, 2025",
+    "Inquiries": 514,
+    "Intenders": 486,
+    "App Complete": 400
+  },
+  {
+    "date": "Jun 17, 2025",
+    "Inquiries": 480,
+    "Intenders": 455,
+    "App Complete": 368
+  },
+  {
+    "date": "Jun 18, 2025",
+    "Inquiries": 488,
+    "Intenders": 468,
+    "App Complete": 378
+  },
+  {
+    "date": "Jun 19, 2025",
+    "Inquiries": 382,
+    "Intenders": 359,
+    "App Complete": 293
+  },
+  {
+    "date": "Jun 20, 2025",
+    "Inquiries": 352,
+    "Intenders": 352,
+    "App Complete": 258
+  },
+  {
+    "date": "Jun 21, 2025",
+    "Inquiries": 295,
+    "Intenders": 275,
+    "App Complete": 209
+  },
+  {
+    "date": "Jun 22, 2025",
+    "Inquiries": 320,
+    "Intenders": 300,
+    "App Complete": 228
+  },
+  {
+    "date": "Jun 23, 2025",
+    "Inquiries": 484,
+    "Intenders": 464,
+    "App Complete": 363
+  },
+  {
+    "date": "Jun 24, 2025",
+    "Inquiries": 469,
+    "Intenders": 448,
+    "App Complete": 357
+  },
+  {
+    "date": "Jun 25, 2025",
+    "Inquiries": 449,
+    "Intenders": 424,
+    "App Complete": 332
+  },
+  {
+    "date": "Jun 26, 2025",
+    "Inquiries": 462,
+    "Intenders": 440,
+    "App Complete": 330
+  },
+  {
+    "date": "Jun 27, 2025",
+    "Inquiries": 401,
+    "Intenders": 390,
+    "App Complete": 280
+  },
+  {
+    "date": "Jun 28, 2025",
+    "Inquiries": 264,
+    "Intenders": 253,
+    "App Complete": 195
+  },
+  {
+    "date": "Jun 29, 2025",
+    "Inquiries": 338,
+    "Intenders": 325,
+    "App Complete": 244
+  },
+  {
+    "date": "Jun 30, 2025",
+    "Inquiries": 488,
+    "Intenders": 475,
+    "App Complete": 379
+  },
+  {
+    "date": "Jul 1, 2025",
+    "Inquiries": 429,
+    "Intenders": 407,
+    "App Complete": 309
+  },
+  {
+    "date": "Jul 2, 2025",
+    "Inquiries": 400,
+    "Intenders": 390,
+    "App Complete": 334
+  },
+  {
+    "date": "Jul 3, 2025",
+    "Inquiries": 343,
+    "Intenders": 330,
+    "App Complete": 269
+  },
+  {
+    "date": "Jul 4, 2025",
+    "Inquiries": 230,
+    "Intenders": 212,
+    "App Complete": 176
+  },
+  {
+    "date": "Jul 5, 2025",
+    "Inquiries": 256,
+    "Intenders": 251,
+    "App Complete": 185
+  },
+  {
+    "date": "Jul 6, 2025",
+    "Inquiries": 288,
+    "Intenders": 278,
+    "App Complete": 229
+  },
+  {
+    "date": "Jul 7, 2025",
+    "Inquiries": 495,
+    "Intenders": 491,
+    "App Complete": 408
+  },
+  {
+    "date": "Jul 8, 2025",
+    "Inquiries": 471,
+    "Intenders": 452,
+    "App Complete": 381
+  },
+  {
+    "date": "Jul 9, 2025",
+    "Inquiries": 471,
+    "Intenders": 452,
+    "App Complete": 381
+  },
+  {
+    "date": "Jul 10, 2025",
+    "Inquiries": 505,
+    "Intenders": 487,
+    "App Complete": 391
+  },
+  {
+    "date": "Jul 11, 2025",
+    "Inquiries": 335,
+    "Intenders": 333,
+    "App Complete": 260
+  },
+  {
+    "date": "Jul 12, 2025",
+    "Inquiries": 288,
+    "Intenders": 281,
+    "App Complete": 216
+  },
+  {
+    "date": "Jul 13, 2025",
+    "Inquiries": 316,
+    "Intenders": 303,
+    "App Complete": 249
+  },
+  {
+    "date": "Jul 14, 2025",
+    "Inquiries": 525,
+    "Intenders": 490,
+    "App Complete": 392
+  },
+  {
+    "date": "Jul 15, 2025",
+    "Inquiries": 475,
+    "Intenders": 446,
+    "App Complete": 370
+  },
+  {
+    "date": "Jul 16, 2025",
+    "Inquiries": 469,
+    "Intenders": 455,
+    "App Complete": 367
+  },
+  {
+    "date": "Jul 17, 2025",
+    "Inquiries": 458,
+    "Intenders": 446,
+    "App Complete": 357
+  },
+  {
+    "date": "Jul 18, 2025",
+    "Inquiries": 383,
+    "Intenders": 368,
+    "App Complete": 271
+  },
+  {
+    "date": "Jul 19, 2025",
+    "Inquiries": 326,
+    "Intenders": 301,
+    "App Complete": 230
+  },
+  {
+    "date": "Jul 20, 2025",
+    "Inquiries": 309,
+    "Intenders": 296,
+    "App Complete": 206
+  },
+  {
+    "date": "Jul 21, 2025",
+    "Inquiries": 490,
+    "Intenders": 470,
+    "App Complete": 359
+  },
+  {
+    "date": "Jul 22, 2025",
+    "Inquiries": 483,
+    "Intenders": 469,
+    "App Complete": 366
+  },
+  {
+    "date": "Jul 23, 2025",
+    "Inquiries": 441,
+    "Intenders": 416,
+    "App Complete": 342
+  },
+  {
+    "date": "Jul 24, 2025",
+    "Inquiries": 425,
+    "Intenders": 404,
+    "App Complete": 318
+  },
+  {
+    "date": "Jul 25, 2025",
+    "Inquiries": 385,
+    "Intenders": 369,
+    "App Complete": 278
+  },
+  {
+    "date": "Jul 26, 2025",
+    "Inquiries": 292,
+    "Intenders": 278,
+    "App Complete": 197
+  },
+  {
+    "date": "Jul 27, 2025",
+    "Inquiries": 343,
+    "Intenders": 325,
+    "App Complete": 260
+  },
+  {
+    "date": "Jul 28, 2025",
+    "Inquiries": 485,
+    "Intenders": 468,
+    "App Complete": 379
+  },
+  {
+    "date": "Jul 29, 2025",
+    "Inquiries": 565,
+    "Intenders": 540,
+    "App Complete": 423
+  },
+  {
+    "date": "Jul 30, 2025",
+    "Inquiries": 515,
+    "Intenders": 506,
+    "App Complete": 378
+  },
+  {
+    "date": "Jul 31, 2025",
+    "Inquiries": 434,
+    "Intenders": 419,
+    "App Complete": 299
+  },
+  {
+    "date": "Aug 2, 2025",
+    "Inquiries": 280,
+    "Intenders": 274,
+    "App Complete": 208
+  },
+  {
+    "date": "Aug 3, 2025",
+    "Inquiries": 370,
+    "Intenders": 352,
+    "App Complete": 262
+  },
+  {
+    "date": "Aug 4, 2025",
+    "Inquiries": 590,
+    "Intenders": 562,
+    "App Complete": 439
+  },
+  {
+    "date": "Aug 5, 2025",
+    "Inquiries": 549,
+    "Intenders": 521,
+    "App Complete": 405
+  },
+  {
+    "date": "Aug 6, 2025",
+    "Inquiries": 498,
+    "Intenders": 449,
+    "App Complete": 346
+  },
+  {
+    "date": "Aug 7, 2025",
+    "Inquiries": 470,
+    "Intenders": 454,
+    "App Complete": 357
+  },
+  {
+    "date": "Aug 8, 2025",
+    "Inquiries": 426,
+    "Intenders": 418,
+    "App Complete": 315
+  },
+  {
+    "date": "Aug 9, 2025",
+    "Inquiries": 317,
+    "Intenders": 304,
+    "App Complete": 218
+  },
+  {
+    "date": "Aug 10, 2025",
+    "Inquiries": 365,
+    "Intenders": 353,
+    "App Complete": 277
+  },
+  {
+    "date": "Aug 11, 2025",
+    "Inquiries": 584,
+    "Intenders": 563,
+    "App Complete": 430
+  },
+  {
+    "date": "Aug 12, 2025",
+    "Inquiries": 596,
+    "Intenders": 576,
+    "App Complete": 438
+  },
+  {
+    "date": "Aug 13, 2025",
+    "Inquiries": 561,
+    "Intenders": 553,
+    "App Complete": 432
+  },
+  {
+    "date": "Aug 14, 2025",
+    "Inquiries": 486,
+    "Intenders": 477,
+    "App Complete": 356
+  },
+  {
+    "date": "Aug 15, 2025",
+    "Inquiries": 436,
+    "Intenders": 428,
+    "App Complete": 321
+  },
+  {
+    "date": "Aug 16, 2025",
+    "Inquiries": 306,
+    "Intenders": 299,
+    "App Complete": 227
+  },
+  {
+    "date": "Aug 17, 2025",
+    "Inquiries": 370,
+    "Intenders": 362,
+    "App Complete": 282
+  },
+  {
+    "date": "Aug 18, 2025",
+    "Inquiries": 529,
+    "Intenders": 515,
+    "App Complete": 424
+  },
+  {
+    "date": "Aug 19, 2025",
+    "Inquiries": 566,
+    "Intenders": 545,
+    "App Complete": 430
+  },
+  {
+    "date": "Aug 20, 2025",
+    "Inquiries": 524,
+    "Intenders": 492,
+    "App Complete": 388
+  },
+  {
+    "date": "Aug 21, 2025",
+    "Inquiries": 560,
+    "Intenders": 534,
+    "App Complete": 416
+  },
+  {
+    "date": "Aug 22, 2025",
+    "Inquiries": 429,
+    "Intenders": 418,
+    "App Complete": 323
+  },
+  {
+    "date": "Aug 23, 2025",
+    "Inquiries": 340,
+    "Intenders": 328,
+    "App Complete": 231
+  },
+  {
+    "date": "Aug 24, 2025",
+    "Inquiries": 342,
+    "Intenders": 323,
+    "App Complete": 245
+  },
+  {
+    "date": "Aug 25, 2025",
+    "Inquiries": 565,
+    "Intenders": 553,
+    "App Complete": 426
+  },
+  {
+    "date": "Aug 26, 2025",
+    "Inquiries": 524,
+    "Intenders": 512,
+    "App Complete": 402
+  },
+  {
+    "date": "Aug 27, 2025",
+    "Inquiries": 466,
+    "Intenders": 442,
+    "App Complete": 353
+  },
+  {
+    "date": "Aug 28, 2025",
+    "Inquiries": 448,
+    "Intenders": 423,
+    "App Complete": 343
+  },
+  {
+    "date": "Aug 29, 2025",
+    "Inquiries": 337,
+    "Intenders": 327,
+    "App Complete": 257
+  },
+  {
+    "date": "Aug 30, 2025",
+    "Inquiries": 241,
+    "Intenders": 230,
+    "App Complete": 159
+  },
+  {
+    "date": "Aug 31, 2025",
+    "Inquiries": 279,
+    "Intenders": 270,
+    "App Complete": 190
+  },
+  {
+    "date": "Sep 1, 2025",
+    "Inquiries": 355,
+    "Intenders": 349,
+    "App Complete": 257
+  },
+  {
+    "date": "Sep 2, 2025",
+    "Inquiries": 509,
+    "Intenders": 504,
+    "App Complete": 378
+  },
+  {
+    "date": "Sep 3, 2025",
+    "Inquiries": 550,
+    "Intenders": 526,
+    "App Complete": 409
+  },
+  {
+    "date": "Sep 4, 2025",
+    "Inquiries": 455,
+    "Intenders": 436,
+    "App Complete": 331
+  },
+  {
+    "date": "Sep 5, 2025",
+    "Inquiries": 374,
+    "Intenders": 359,
+    "App Complete": 283
+  },
+  {
+    "date": "Sep 6, 2025",
+    "Inquiries": 302,
+    "Intenders": 290,
+    "App Complete": 210
+  },
+  {
+    "date": "Sep 7, 2025",
+    "Inquiries": 338,
+    "Intenders": 323,
+    "App Complete": 246
+  },
+  {
+    "date": "Sep 8, 2025",
+    "Inquiries": 494,
+    "Intenders": 477,
+    "App Complete": 378
+  },
+  {
+    "date": "Sep 9, 2025",
+    "Inquiries": 512,
+    "Intenders": 490,
+    "App Complete": 361
+  },
+  {
+    "date": "Sep 10, 2025",
+    "Inquiries": 471,
+    "Intenders": 459,
+    "App Complete": 356
+  },
+  {
+    "date": "Sep 11, 2025",
+    "Inquiries": 379,
+    "Intenders": 378,
+    "App Complete": 299
+  },
+  {
+    "date": "Sep 12, 2025",
+    "Inquiries": 392,
+    "Intenders": 359,
+    "App Complete": 319
+  },
+  {
+    "date": "Sep 13, 2025",
+    "Inquiries": 293,
+    "Intenders": 279,
+    "App Complete": 211
+  },
+  {
+    "date": "Sep 14, 2025",
+    "Inquiries": 497,
+    "Intenders": 486,
+    "App Complete": 374
+  },
+  {
+    "date": "Sep 15, 2025",
+    "Inquiries": 435,
+    "Intenders": 420,
+    "App Complete": 333
+  },
+  {
+    "date": "Sep 16, 2025",
+    "Inquiries": 428,
+    "Intenders": 422,
+    "App Complete": 327
+  },
+  {
+    "date": "Sep 17, 2025",
+    "Inquiries": 438,
+    "Intenders": 417,
+    "App Complete": 307
+  },
+  {
+    "date": "Sep 18, 2025",
+    "Inquiries": 380,
+    "Intenders": 365,
+    "App Complete": 273
+  },
+  {
+    "date": "Sep 19, 2025",
+    "Inquiries": 280,
+    "Intenders": 271,
+    "App Complete": 188
+  },
+  {
+    "date": "Sep 20, 2025",
+    "Inquiries": 284,
+    "Intenders": 277,
+    "App Complete": 193
+  },
+  {
+    "date": "Sep 21, 2025",
+    "Inquiries": 503,
+    "Intenders": 487,
+    "App Complete": 372
+  },
+  {
+    "date": "Sep 22, 2025",
+    "Inquiries": 448,
+    "Intenders": 441,
+    "App Complete": 347
+  },
+  {
+    "date": "Sep 23, 2025",
+    "Inquiries": 462,
+    "Intenders": 444,
+    "App Complete": 335
+  },
+  {
+    "date": "Sep 24, 2025",
+    "Inquiries": 456,
+    "Intenders": 431,
+    "App Complete": 324
+  },
+  {
+    "date": "Sep 25, 2025",
+    "Inquiries": 351,
+    "Intenders": 330,
+    "App Complete": 253
+  },
+  {
+    "date": "Sep 26, 2025",
+    "Inquiries": 255,
+    "Intenders": 242,
+    "App Complete": 186
+  },
+  {
+    "date": "Sep 27, 2025",
+    "Inquiries": 315,
+    "Intenders": 302,
+    "App Complete": 219
+  },
+  {
+    "date": "Sep 28, 2025",
+    "Inquiries": 454,
+    "Intenders": 438,
+    "App Complete": 329
+  },
+  {
+    "date": "Sep 29, 2025",
+    "Inquiries": 481,
+    "Intenders": 466,
+    "App Complete": 337
+  },
+  {
+    "date": "Oct 2, 2025",
+    "Inquiries": 416,
+    "Intenders": 389,
+    "App Complete": 293
+  },
+  {
+    "date": "Oct 3, 2025",
+    "Inquiries": 365,
+    "Intenders": 349,
+    "App Complete": 270
+  },
+  {
+    "date": "Oct 4, 2025",
+    "Inquiries": 296,
+    "Intenders": 281,
+    "App Complete": 200
+  },
+  {
+    "date": "Oct 5, 2025",
+    "Inquiries": 297,
+    "Intenders": 277,
+    "App Complete": 210
+  },
+  {
+    "date": "Oct 6, 2025",
+    "Inquiries": 477,
+    "Intenders": 442,
+    "App Complete": 333
+  },
+  {
+    "date": "Oct 7, 2025",
+    "Inquiries": 475,
+    "Intenders": 436,
+    "App Complete": 413
+  },
+  {
+    "date": "Oct 8, 2025",
+    "Inquiries": 436,
+    "Intenders": 404,
+    "App Complete": 303
+  },
+  {
+    "date": "Oct 9, 2025",
+    "Inquiries": 451,
+    "Intenders": 418,
+    "App Complete": 304
+  },
+  {
+    "date": "Oct 10, 2025",
+    "Inquiries": 308,
+    "Intenders": 274,
+    "App Complete": 222
+  },
+  {
+    "date": "Oct 11, 2025",
+    "Inquiries": 242,
+    "Intenders": 229,
+    "App Complete": 161
+  },
+  {
+    "date": "Oct 12, 2025",
+    "Inquiries": 301,
+    "Intenders": 272,
+    "App Complete": 198
+  },
+  {
+    "date": "Oct 13, 2025",
+    "Inquiries": 367,
+    "Intenders": 353,
+    "App Complete": 288
+  },
+  {
+    "date": "Oct 14, 2025",
+    "Inquiries": 440,
+    "Intenders": 430,
+    "App Complete": 316
+  },
+  {
+    "date": "Oct 15, 2025",
+    "Inquiries": 451,
+    "Intenders": 443,
+    "App Complete": 323
+  },
+  {
+    "date": "Oct 16, 2025",
+    "Inquiries": 400,
+    "Intenders": 381,
+    "App Complete": 282
+  },
+  {
+    "date": "Oct 17, 2025",
+    "Inquiries": 344,
+    "Intenders": 328,
+    "App Complete": 264
+  },
+  {
+    "date": "Oct 18, 2025",
+    "Inquiries": 259,
+    "Intenders": 247,
+    "App Complete": 177
+  },
+  {
+    "date": "Oct 19, 2025",
+    "Inquiries": 313,
+    "Intenders": 298,
+    "App Complete": 192
+  },
+  {
+    "date": "Oct 20, 2025",
+    "Inquiries": 425,
+    "Intenders": 401,
+    "App Complete": 317
+  },
+  {
+    "date": "Oct 21, 2025",
+    "Inquiries": 473,
+    "Intenders": 449,
+    "App Complete": 337
+  },
+  {
+    "date": "Oct 22, 2025",
+    "Inquiries": 463,
+    "Intenders": 445,
+    "App Complete": 350
+  },
+  {
+    "date": "Oct 23, 2025",
+    "Inquiries": 433,
+    "Intenders": 411,
+    "App Complete": 314
+  },
+  {
+    "date": "Oct 24, 2025",
+    "Inquiries": 349,
+    "Intenders": 342,
+    "App Complete": 249
+  },
+  {
+    "date": "Oct 25, 2025",
+    "Inquiries": 330,
+    "Intenders": 313,
+    "App Complete": 227
+  },
+  {
+    "date": "Oct 26, 2025",
+    "Inquiries": 311,
+    "Intenders": 288,
+    "App Complete": 205
+  },
+  {
+    "date": "Oct 27, 2025",
+    "Inquiries": 428,
+    "Intenders": 418,
+    "App Complete": 316
+  },
+  {
+    "date": "Oct 28, 2025",
+    "Inquiries": 458,
+    "Intenders": 426,
+    "App Complete": 328
+  },
+  {
+    "date": "Oct 29, 2025",
+    "Inquiries": 432,
+    "Intenders": 407,
+    "App Complete": 311
+  },
+  {
+    "date": "Oct 30, 2025",
+    "Inquiries": 492,
+    "Intenders": 454,
+    "App Complete": 346
+  },
+  {
+    "date": "Oct 31, 2025",
+    "Inquiries": 345,
+    "Intenders": 325,
+    "App Complete": 230
+  },
+  {
+    "date": "Nov 1, 2025",
+    "Inquiries": 290,
+    "Intenders": 273,
+    "App Complete": 203
+  },
+  {
+    "date": "Nov 2, 2025",
+    "Inquiries": 330,
+    "Intenders": 304,
+    "App Complete": 224
+  },
+  {
+    "date": "Nov 3, 2025",
+    "Inquiries": 481,
+    "Intenders": 445,
+    "App Complete": 340
+  },
+  {
+    "date": "Nov 4, 2025",
+    "Inquiries": 438,
+    "Intenders": 423,
+    "App Complete": 308
+  },
+  {
+    "date": "Nov 5, 2025",
+    "Inquiries": 457,
+    "Intenders": 433,
+    "App Complete": 337
+  },
+  {
+    "date": "Nov 6, 2025",
+    "Inquiries": 389,
+    "Intenders": 369,
+    "App Complete": 287
+  },
+  {
+    "date": "Nov 7, 2025",
+    "Inquiries": 393,
+    "Intenders": 379,
+    "App Complete": 266
+  },
+  {
+    "date": "Nov 8, 2025",
+    "Inquiries": 287,
+    "Intenders": 267,
+    "App Complete": 202
+  },
+  {
+    "date": "Nov 9, 2025",
+    "Inquiries": 300,
+    "Intenders": 268,
+    "App Complete": 205
+  },
+  {
+    "date": "Nov 10, 2025",
+    "Inquiries": 472,
+    "Intenders": 459,
+    "App Complete": 340
+  },
+  {
+    "date": "Nov 11, 2025",
+    "Inquiries": 401,
+    "Intenders": 380,
+    "App Complete": 277
+  },
+  {
+    "date": "Nov 12, 2025",
+    "Inquiries": 487,
+    "Intenders": 458,
+    "App Complete": 357
+  },
+  {
+    "date": "Nov 13, 2025",
+    "Inquiries": 414,
+    "Intenders": 380,
+    "App Complete": 283
+  },
+  {
+    "date": "Nov 14, 2025",
+    "Inquiries": 363,
+    "Intenders": 346,
+    "App Complete": 258
+  },
+  {
+    "date": "Nov 15, 2025",
+    "Inquiries": 315,
+    "Intenders": 299,
+    "App Complete": 200
+  },
+  {
+    "date": "Nov 16, 2025",
+    "Inquiries": 338,
+    "Intenders": 328,
+    "App Complete": 253
+  },
+  {
+    "date": "Nov 17, 2025",
+    "Inquiries": 510,
+    "Intenders": 488,
+    "App Complete": 371
+  },
+  {
+    "date": "Nov 18, 2025",
+    "Inquiries": 472,
+    "Intenders": 451,
+    "App Complete": 334
+  },
+  {
+    "date": "Nov 19, 2025",
+    "Inquiries": 483,
+    "Intenders": 443,
+    "App Complete": 323
+  },
+  {
+    "date": "Nov 20, 2025",
+    "Inquiries": 438,
+    "Intenders": 384,
+    "App Complete": 269
+  },
+  {
+    "date": "Nov 21, 2025",
+    "Inquiries": 408,
+    "Intenders": 390,
+    "App Complete": 298
+  },
+  {
+    "date": "Nov 22, 2025",
+    "Inquiries": 322,
+    "Intenders": 305,
+    "App Complete": 217
+  },
+  {
+    "date": "Nov 23, 2025",
+    "Inquiries": 336,
+    "Intenders": 315,
+    "App Complete": 224
+  },
+  {
+    "date": "Nov 24, 2025",
+    "Inquiries": 427,
+    "Intenders": 402,
+    "App Complete": 299
+  },
+  {
+    "date": "Nov 25, 2025",
+    "Inquiries": 425,
+    "Intenders": 406,
+    "App Complete": 300
+  },
+  {
+    "date": "Nov 26, 2025",
+    "Inquiries": 392,
+    "Intenders": 363,
+    "App Complete": 269
+  },
+  {
+    "date": "Nov 27, 2025",
+    "Inquiries": 296,
+    "Intenders": 257,
+    "App Complete": 192
+  },
+  {
+    "date": "Nov 28, 2025",
+    "Inquiries": 322,
+    "Intenders": 291,
+    "App Complete": 209
+  },
+  {
+    "date": "Nov 29, 2025",
+    "Inquiries": 368,
+    "Intenders": 341,
+    "App Complete": 236
+  },
+  {
+    "date": "Nov 30, 2025",
+    "Inquiries": 352,
+    "Intenders": 343,
+    "App Complete": 237
+  },
+  {
+    "date": "Dec 2, 2025",
+    "Inquiries": 668,
+    "Intenders": 657,
+    "App Complete": 542
+  },
+  {
+    "date": "Dec 3, 2025",
+    "Inquiries": 893,
+    "Intenders": 873,
+    "App Complete": 730
+  },
+  {
+    "date": "Dec 4, 2025",
+    "Inquiries": 680,
+    "Intenders": 655,
+    "App Complete": 532
+  },
+  {
+    "date": "Dec 5, 2025",
+    "Inquiries": 526,
+    "Intenders": 500,
+    "App Complete": 409
+  },
+  {
+    "date": "Dec 6, 2025",
+    "Inquiries": 405,
+    "Intenders": 362,
+    "App Complete": 290
+  },
+  {
+    "date": "Dec 7, 2025",
+    "Inquiries": 371,
+    "Intenders": 343,
+    "App Complete": 284
+  },
+  {
+    "date": "Dec 8, 2025",
+    "Inquiries": 594,
+    "Intenders": 563,
+    "App Complete": 475
+  },
+  {
+    "date": "Dec 9, 2025",
+    "Inquiries": 562,
+    "Intenders": 533,
+    "App Complete": 451
+  },
+  {
+    "date": "Dec 10, 2025",
+    "Inquiries": 557,
+    "Intenders": 518,
+    "App Complete": 402
+  },
+  {
+    "date": "Dec 11, 2025",
+    "Inquiries": 479,
+    "Intenders": 445,
+    "App Complete": 360
+  },
+  {
+    "date": "Dec 12, 2025",
+    "Inquiries": 460,
+    "Intenders": 425,
+    "App Complete": 315
+  },
+  {
+    "date": "Dec 13, 2025",
+    "Inquiries": 405,
+    "Intenders": 369,
+    "App Complete": 283
+  },
+  {
+    "date": "Dec 14, 2025",
+    "Inquiries": 395,
+    "Intenders": 355,
+    "App Complete": 279
+  },
+  {
+    "date": "Dec 15, 2025",
+    "Inquiries": 556,
+    "Intenders": 523,
+    "App Complete": 407
+  },
+  {
+    "date": "Dec 16, 2025",
+    "Inquiries": 501,
+    "Intenders": 470,
+    "App Complete": 391
+  },
+  {
+    "date": "Dec 17, 2025",
+    "Inquiries": 484,
+    "Intenders": 428,
+    "App Complete": 343
+  },
+  {
+    "date": "Dec 18, 2025",
+    "Inquiries": 531,
+    "Intenders": 460,
+    "App Complete": 354
+  },
+  {
+    "date": "Dec 19, 2025",
+    "Inquiries": 466,
+    "Intenders": 420,
+    "App Complete": 332
+  },
+  {
+    "date": "Dec 20, 2025",
+    "Inquiries": 377,
+    "Intenders": 328,
+    "App Complete": 249
+  },
+  {
+    "date": "Dec 21, 2025",
+    "Inquiries": 341,
+    "Intenders": 297,
+    "App Complete": 215
+  },
+  {
+    "date": "Dec 22, 2025",
+    "Inquiries": 485,
+    "Intenders": 447,
+    "App Complete": 352
+  },
+  {
+    "date": "Dec 23, 2025",
+    "Inquiries": 433,
+    "Intenders": 381,
+    "App Complete": 276
+  },
+  {
+    "date": "Dec 24, 2025",
+    "Inquiries": 313,
+    "Intenders": 277,
+    "App Complete": 195
+  },
+  {
+    "date": "Dec 25, 2025",
+    "Inquiries": 273,
+    "Intenders": 229,
+    "App Complete": 164
+  },
+  {
+    "date": "Dec 26, 2025",
+    "Inquiries": 364,
+    "Intenders": 340,
+    "App Complete": 240
+  },
+  {
+    "date": "Dec 27, 2025",
+    "Inquiries": 348,
+    "Intenders": 322,
+    "App Complete": 237
+  },
+  {
+    "date": "Dec 28, 2025",
+    "Inquiries": 402,
+    "Intenders": 365,
+    "App Complete": 259
+  },
+  {
+    "date": "Dec 29, 2025",
+    "Inquiries": 545,
+    "Intenders": 518,
+    "App Complete": 419
+  },
+  {
+    "date": "Dec 30, 2025",
+    "Inquiries": 457,
+    "Intenders": 427,
+    "App Complete": 315
+  },
+  {
+    "date": "Dec 31, 2025",
+    "Inquiries": 366,
+    "Intenders": 353,
+    "App Complete": 226
+  },
+  {
+    "date": "Jan 2, 2026",
+    "Inquiries": 505,
+    "Intenders": 464,
+    "App Complete": 343
+  },
+  {
+    "date": "Jan 3, 2026",
+    "Inquiries": 407,
+    "Intenders": 371,
+    "App Complete": 277
+  },
+  {
+    "date": "Jan 4, 2026",
+    "Inquiries": 446,
+    "Intenders": 420,
+    "App Complete": 303
+  },
+  {
+    "date": "Jan 5, 2026",
+    "Inquiries": 661,
+    "Intenders": 632,
+    "App Complete": 483
+  },
+  {
+    "date": "Jan 6, 2026",
+    "Inquiries": 713,
+    "Intenders": 670,
+    "App Complete": 489
+  },
+  {
+    "date": "Jan 7, 2026",
+    "Inquiries": 673,
+    "Intenders": 643,
+    "App Complete": 485
+  },
+  {
+    "date": "Jan 8, 2026",
+    "Inquiries": 605,
+    "Intenders": 568,
+    "App Complete": 413
+  },
+  {
+    "date": "Jan 9, 2026",
+    "Inquiries": 485,
+    "Intenders": 458,
+    "App Complete": 351
+  },
+  {
+    "date": "Jan 10, 2026",
+    "Inquiries": 443,
+    "Intenders": 414,
+    "App Complete": 305
+  },
+  {
+    "date": "Jan 11, 2026",
+    "Inquiries": 476,
+    "Intenders": 448,
+    "App Complete": 320
+  },
+  {
+    "date": "Jan 12, 2026",
+    "Inquiries": 590,
+    "Intenders": 569,
+    "App Complete": 397
+  },
+  {
+    "date": "Jan 13, 2026",
+    "Inquiries": 656,
+    "Intenders": 601,
+    "App Complete": 475
+  },
+  {
+    "date": "Jan 14, 2026",
+    "Inquiries": 628,
+    "Intenders": 585,
+    "App Complete": 436
+  },
+  {
+    "date": "Jan 15, 2026",
+    "Inquiries": 532,
+    "Intenders": 497,
+    "App Complete": 374
+  },
+  {
+    "date": "Jan 16, 2026",
+    "Inquiries": 461,
+    "Intenders": 436,
+    "App Complete": 305
+  },
+  {
+    "date": "Jan 17, 2026",
+    "Inquiries": 363,
+    "Intenders": 339,
+    "App Complete": 259
+  },
+  {
+    "date": "Jan 18, 2026",
+    "Inquiries": 386,
+    "Intenders": 372,
+    "App Complete": 259
+  },
+  {
+    "date": "Jan 19, 2026",
+    "Inquiries": 484,
+    "Intenders": 442,
+    "App Complete": 305
+  },
+  {
+    "date": "Jan 20, 2026",
+    "Inquiries": 728,
+    "Intenders": 687,
+    "App Complete": 547
+  },
+  {
+    "date": "Jan 21, 2026",
+    "Inquiries": 610,
+    "Intenders": 582,
+    "App Complete": 432
+  },
+  {
+    "date": "Jan 22, 2026",
+    "Inquiries": 546,
+    "Intenders": 543,
+    "App Complete": 386
+  },
+  {
+    "date": "Jan 23, 2026",
+    "Inquiries": 445,
+    "Intenders": 417,
+    "App Complete": 323
+  },
+  {
+    "date": "Jan 24, 2026",
+    "Inquiries": 364,
+    "Intenders": 345,
+    "App Complete": 233
+  },
+  {
+    "date": "Jan 25, 2026",
+    "Inquiries": 426,
+    "Intenders": 409,
+    "App Complete": 318
+  },
+  {
+    "date": "Jan 26, 2026",
+    "Inquiries": 540,
+    "Intenders": 516,
+    "App Complete": 390
+  },
+  {
+    "date": "Jan 27, 2026",
+    "Inquiries": 559,
+    "Intenders": 523,
+    "App Complete": 387
+  },
+  {
+    "date": "Jan 28, 2026",
+    "Inquiries": 558,
+    "Intenders": 538,
+    "App Complete": 417
+  },
+  {
+    "date": "Jan 29, 2026",
+    "Inquiries": 523,
+    "Intenders": 493,
+    "App Complete": 384
+  },
+  {
+    "date": "Jan 30, 2026",
+    "Inquiries": 485,
+    "Intenders": 466,
+    "App Complete": 349
+  },
+  {
+    "date": "Jan 31, 2026",
+    "Inquiries": 393,
+    "Intenders": 385,
+    "App Complete": 242
+  },
+  {
+    "date": "Feb 1, 2026",
+    "Inquiries": 415,
+    "Intenders": 414,
+    "App Complete": 304
+  },
+  {
+    "date": "Feb 2, 2026",
+    "Inquiries": 538,
+    "Intenders": 526,
+    "App Complete": 384
+  },
+  {
+    "date": "Feb 3, 2026",
+    "Inquiries": 493,
+    "Intenders": 477,
+    "App Complete": 355
+  },
+  {
+    "date": "Feb 4, 2026",
+    "Inquiries": 586,
+    "Intenders": 569,
+    "App Complete": 387
+  },
+  {
+    "date": "Feb 5, 2026",
+    "Inquiries": 500,
+    "Intenders": 476,
+    "App Complete": 345
+  },
+  {
+    "date": "Feb 6, 2026",
+    "Inquiries": 444,
+    "Intenders": 418,
+    "App Complete": 278
+  },
+  {
+    "date": "Feb 7, 2026",
+    "Inquiries": 336,
+    "Intenders": 326,
+    "App Complete": 216
+  },
+  {
+    "date": "Feb 8, 2026",
+    "Inquiries": 379,
+    "Intenders": 371,
+    "App Complete": 247
+  },
+  {
+    "date": "Feb 9, 2026",
+    "Inquiries": 544,
+    "Intenders": 523,
+    "App Complete": 374
+  },
+  {
+    "date": "Feb 10, 2026",
+    "Inquiries": 541,
+    "Intenders": 517,
+    "App Complete": 378
+  },
+  {
+    "date": "Feb 11, 2026",
+    "Inquiries": 534,
+    "Intenders": 502,
+    "App Complete": 339
+  },
+  {
+    "date": "Feb 12, 2026",
+    "Inquiries": 515,
+    "Intenders": 491,
+    "App Complete": 343
+  },
+  {
+    "date": "Feb 13, 2026",
+    "Inquiries": 383,
+    "Intenders": 363,
+    "App Complete": 256
+  },
+  {
+    "date": "Feb 14, 2026",
+    "Inquiries": 320,
+    "Intenders": 309,
+    "App Complete": 197
+  },
+  {
+    "date": "Feb 15, 2026",
+    "Inquiries": 361,
+    "Intenders": 348,
+    "App Complete": 237
+  },
+  {
+    "date": "Feb 16, 2026",
+    "Inquiries": 467,
+    "Intenders": 446,
+    "App Complete": 319
+  },
+  {
+    "date": "Feb 17, 2026",
+    "Inquiries": 525,
+    "Intenders": 502,
+    "App Complete": 368
+  },
+  {
+    "date": "Feb 18, 2026",
+    "Inquiries": 491,
+    "Intenders": 477,
+    "App Complete": 353
+  },
+  {
+    "date": "Feb 19, 2026",
+    "Inquiries": 462,
+    "Intenders": 442,
+    "App Complete": 333
+  },
+  {
+    "date": "Feb 20, 2026",
+    "Inquiries": 413,
+    "Intenders": 395,
+    "App Complete": 278
+  },
+  {
+    "date": "Feb 21, 2026",
+    "Inquiries": 299,
+    "Intenders": 282,
+    "App Complete": 189
+  },
+  {
+    "date": "Feb 22, 2026",
+    "Inquiries": 373,
+    "Intenders": 358,
+    "App Complete": 247
+  },
+  {
+    "date": "Feb 23, 2026",
+    "Inquiries": 524,
+    "Intenders": 509,
+    "App Complete": 375
+  },
+  {
+    "date": "Feb 24, 2026",
+    "Inquiries": 499,
+    "Intenders": 490,
+    "App Complete": 368
+  },
+  {
+    "date": "Feb 25, 2026",
+    "Inquiries": 530,
+    "Intenders": 512,
+    "App Complete": 412
+  },
+  {
+    "date": "Feb 26, 2026",
+    "Inquiries": 520,
+    "Intenders": 510,
+    "App Complete": 393
+  },
+  {
+    "date": "Feb 27, 2026",
+    "Inquiries": 487,
+    "Intenders": 471,
+    "App Complete": 358
+  },
+  {
+    "date": "Feb 28, 2026",
+    "Inquiries": 334,
+    "Intenders": 328,
+    "App Complete": 223
+  },
+  {
+    "date": "Mar 2, 2026",
+    "Inquiries": 478,
+    "Intenders": 462,
+    "App Complete": 345
+  },
+  {
+    "date": "Mar 3, 2026",
+    "Inquiries": 506,
+    "Intenders": 481,
+    "App Complete": 355
+  },
+  {
+    "date": "Mar 4, 2026",
+    "Inquiries": 417,
+    "Intenders": 407,
+    "App Complete": 298
+  },
+  {
+    "date": "Mar 5, 2026",
+    "Inquiries": 443,
+    "Intenders": 426,
+    "App Complete": 329
+  },
+  {
+    "date": "Mar 6, 2026",
+    "Inquiries": 389,
+    "Intenders": 380,
+    "App Complete": 284
+  },
+  {
+    "date": "Mar 7, 2026",
+    "Inquiries": 370,
+    "Intenders": 369,
+    "App Complete": 260
+  },
+  {
+    "date": "Mar 8, 2026",
+    "Inquiries": 358,
+    "Intenders": 346,
+    "App Complete": 259
+  },
+  {
+    "date": "Mar 9, 2026",
+    "Inquiries": 453,
+    "Intenders": 436,
+    "App Complete": 311
+  },
+  {
+    "date": "Mar 10, 2026",
+    "Inquiries": 468,
+    "Intenders": 461,
+    "App Complete": 343
+  },
+  {
+    "date": "Mar 11, 2026",
+    "Inquiries": 522,
+    "Intenders": 491,
+    "App Complete": 363
+  },
+  {
+    "date": "Mar 12, 2026",
+    "Inquiries": 462,
+    "Intenders": 439,
+    "App Complete": 331
+  },
+  {
+    "date": "Mar 13, 2026",
+    "Inquiries": 487,
+    "Intenders": 468,
+    "App Complete": 371
+  },
+  {
+    "date": "Mar 14, 2026",
+    "Inquiries": 344,
+    "Intenders": 337,
+    "App Complete": 244
+  },
+  {
+    "date": "Mar 15, 2026",
+    "Inquiries": 374,
+    "Intenders": 358,
+    "App Complete": 270
+  },
+  {
+    "date": "Mar 16, 2026",
+    "Inquiries": 474,
+    "Intenders": 460,
+    "App Complete": 350
+  },
+  {
+    "date": "Mar 17, 2026",
+    "Inquiries": 483,
+    "Intenders": 467,
+    "App Complete": 355
+  },
+  {
+    "date": "Mar 18, 2026",
+    "Inquiries": 478,
+    "Intenders": 457,
+    "App Complete": 357
+  },
+  {
+    "date": "Mar 19, 2026",
+    "Inquiries": 429,
+    "Intenders": 406,
+    "App Complete": 317
+  },
+  {
+    "date": "Mar 20, 2026",
+    "Inquiries": 395,
+    "Intenders": 377,
+    "App Complete": 283
+  },
+  {
+    "date": "Mar 21, 2026",
+    "Inquiries": 289,
+    "Intenders": 278,
+    "App Complete": 196
+  },
+  {
+    "date": "Mar 22, 2026",
+    "Inquiries": 339,
+    "Intenders": 329,
+    "App Complete": 226
+  },
+  {
+    "date": "Mar 23, 2026",
+    "Inquiries": 513,
+    "Intenders": 497,
+    "App Complete": 390
+  },
+  {
+    "date": "Mar 24, 2026",
+    "Inquiries": 472,
+    "Intenders": 461,
+    "App Complete": 345
+  },
+  {
+    "date": "Mar 25, 2026",
+    "Inquiries": 485,
+    "Intenders": 473,
+    "App Complete": 354
+  },
+  {
+    "date": "Mar 26, 2026",
+    "Inquiries": 465,
+    "Intenders": 448,
+    "App Complete": 332
+  },
+  {
+    "date": "Mar 27, 2026",
+    "Inquiries": 452,
+    "Intenders": 447,
+    "App Complete": 330
+  },
+  {
+    "date": "Mar 28, 2026",
+    "Inquiries": 377,
+    "Intenders": 369,
+    "App Complete": 249
+  },
+  {
+    "date": "Mar 29, 2026",
+    "Inquiries": 358,
+    "Intenders": 342,
+    "App Complete": 232
+  },
+  {
+    "date": "Mar 30, 2026",
+    "Inquiries": 630,
+    "Intenders": 615,
+    "App Complete": 467
+  },
+  {
+    "date": "Mar 31, 2026",
+    "Inquiries": 531,
+    "Intenders": 528,
+    "App Complete": 367
+  },
+  {
+    "date": "Apr 1, 2026",
+    "Inquiries": 437,
+    "Intenders": 425,
+    "App Complete": 335
+  },
+  {
+    "date": "Apr 2, 2026",
+    "Inquiries": 407,
+    "Intenders": 400,
+    "App Complete": 319
+  },
+  {
+    "date": "Apr 3, 2026",
+    "Inquiries": 426,
+    "Intenders": 423,
+    "App Complete": 318
+  },
+  {
+    "date": "Apr 4, 2026",
+    "Inquiries": 289,
+    "Intenders": 281,
+    "App Complete": 192
+  },
+  {
+    "date": "Apr 5, 2026",
+    "Inquiries": 324,
+    "Intenders": 316,
+    "App Complete": 210
+  },
+  {
+    "date": "Apr 6, 2026",
+    "Inquiries": 480,
+    "Intenders": 458,
+    "App Complete": 389
+  },
+  {
+    "date": "Apr 7, 2026",
+    "Inquiries": 455,
+    "Intenders": 446,
+    "App Complete": 324
+  },
+  {
+    "date": "Apr 8, 2026",
+    "Inquiries": 478,
+    "Intenders": 458,
+    "App Complete": 371
+  },
+  {
+    "date": "Apr 9, 2026",
+    "Inquiries": 493,
+    "Intenders": 465,
+    "App Complete": 357
+  },
+  {
+    "date": "Apr 10, 2026",
+    "Inquiries": 365,
+    "Intenders": 350,
+    "App Complete": 278
+  },
+  {
+    "date": "Apr 11, 2026",
+    "Inquiries": 259,
+    "Intenders": 253,
+    "App Complete": 193
+  },
+  {
+    "date": "Apr 12, 2026",
+    "Inquiries": 328,
+    "Intenders": 318,
+    "App Complete": 211
+  },
+  {
+    "date": "Apr 13, 2026",
+    "Inquiries": 476,
+    "Intenders": 467,
+    "App Complete": 371
+  },
+  {
+    "date": "Apr 14, 2026",
+    "Inquiries": 439,
+    "Intenders": 414,
+    "App Complete": 337
+  },
+  {
+    "date": "Apr 15, 2026",
+    "Inquiries": 449,
+    "Intenders": 433,
+    "App Complete": 352
+  },
+  {
+    "date": "Apr 16, 2026",
+    "Inquiries": 420,
+    "Intenders": 423,
+    "App Complete": 338
+  },
+  {
+    "date": "Apr 17, 2026",
+    "Inquiries": 383,
+    "Intenders": 368,
+    "App Complete": 284
+  },
+  {
+    "date": "Apr 18, 2026",
+    "Inquiries": 299,
+    "Intenders": 274,
+    "App Complete": 206
+  },
+  {
+    "date": "Apr 19, 2026",
+    "Inquiries": 356,
+    "Intenders": 349,
+    "App Complete": 247
+  },
+  {
+    "date": "Apr 20, 2026",
+    "Inquiries": 507,
+    "Intenders": 490,
+    "App Complete": 386
+  },
+  {
+    "date": "Apr 21, 2026",
+    "Inquiries": 526,
+    "Intenders": 515,
+    "App Complete": 402
+  },
+  {
+    "date": "Apr 22, 2026",
+    "Inquiries": 511,
+    "Intenders": 491,
+    "App Complete": 399
+  },
+  {
+    "date": "Apr 23, 2026",
+    "Inquiries": 455,
+    "Intenders": 437,
+    "App Complete": 355
+  },
+  {
+    "date": "Apr 24, 2026",
+    "Inquiries": 376,
+    "Intenders": 365,
+    "App Complete": 268
+  },
+  {
+    "date": "Apr 25, 2026",
+    "Inquiries": 312,
+    "Intenders": 308,
+    "App Complete": 222
+  },
+  {
+    "date": "Apr 26, 2026",
+    "Inquiries": 368,
+    "Intenders": 354,
+    "App Complete": 268
+  },
+  {
+    "date": "Apr 27, 2026",
+    "Inquiries": 583,
+    "Intenders": 573,
+    "App Complete": 449
+  },
+  {
+    "date": "Apr 28, 2026",
+    "Inquiries": 574,
+    "Intenders": 551,
+    "App Complete": 487
+  },
+  {
+    "date": "Apr 29, 2026",
+    "Inquiries": 603,
+    "Intenders": 589,
+    "App Complete": 477
+  },
+  {
+    "date": "Apr 30, 2026",
+    "Inquiries": 621,
+    "Intenders": 600,
+    "App Complete": 464
+  },
+  {
+    "date": "May 1, 2026",
+    "Inquiries": 336,
+    "Intenders": 327,
+    "App Complete": 260
+  },
+  {
+    "date": "May 2, 2026",
+    "Inquiries": 302,
+    "Intenders": 293,
+    "App Complete": 220
+  },
+  {
+    "date": "May 3, 2026",
+    "Inquiries": 350,
+    "Intenders": 323,
+    "App Complete": 228
+  },
+  {
+    "date": "May 4, 2026",
+    "Inquiries": 515,
+    "Intenders": 508,
+    "App Complete": 384
+  },
+  {
+    "date": "May 5, 2026",
+    "Inquiries": 488,
+    "Intenders": 468,
+    "App Complete": 384
+  },
+  {
+    "date": "May 6, 2026",
+    "Inquiries": 518,
+    "Intenders": 515,
+    "App Complete": 387
+  },
+  {
+    "date": "May 7, 2026",
+    "Inquiries": 428,
+    "Intenders": 413,
+    "App Complete": 313
+  },
+  {
+    "date": "May 8, 2026",
+    "Inquiries": 388,
+    "Intenders": 381,
+    "App Complete": 286
+  },
+  {
+    "date": "May 9, 2026",
+    "Inquiries": 321,
+    "Intenders": 312,
+    "App Complete": 233
+  },
+  {
+    "date": "May 10, 2026",
+    "Inquiries": 300,
+    "Intenders": 287,
+    "App Complete": 216
+  },
+  {
+    "date": "May 11, 2026",
+    "Inquiries": 540,
+    "Intenders": 515,
+    "App Complete": 450
+  },
+  {
+    "date": "May 12, 2026",
+    "Inquiries": 494,
+    "Intenders": 469,
+    "App Complete": 381
+  },
+  {
+    "date": "May 13, 2026",
+    "Inquiries": 522,
+    "Intenders": 505,
+    "App Complete": 414
+  },
+  {
+    "date": "May 14, 2026",
+    "Inquiries": 467,
+    "Intenders": 455,
+    "App Complete": 372
+  },
+  {
+    "date": "May 15, 2026",
+    "Inquiries": 390,
+    "Intenders": 376,
+    "App Complete": 280
+  },
+  {
+    "date": "May 16, 2026",
+    "Inquiries": 274,
+    "Intenders": 265,
+    "App Complete": 201
+  },
+  {
+    "date": "May 17, 2026",
+    "Inquiries": 332,
+    "Intenders": 318,
+    "App Complete": 231
+  },
+  {
+    "date": "May 18, 2026",
+    "Inquiries": 535,
+    "Intenders": 519,
+    "App Complete": 437
+  },
+  {
+    "date": "May 19, 2026",
+    "Inquiries": 532,
+    "Intenders": 521,
+    "App Complete": 416
+  },
+  {
+    "date": "May 20, 2026",
+    "Inquiries": 475,
+    "Intenders": 478,
+    "App Complete": 380
+  },
+  {
+    "date": "May 21, 2026",
+    "Inquiries": 465,
+    "Intenders": 461,
+    "App Complete": 380
+  },
+  {
+    "date": "May 22, 2026",
+    "Inquiries": 362,
+    "Intenders": 359,
+    "App Complete": 254
+  },
+  {
+    "date": "May 23, 2026",
+    "Inquiries": 302,
+    "Intenders": 296,
+    "App Complete": 222
+  },
+  {
+    "date": "May 24, 2026",
+    "Inquiries": 334,
+    "Intenders": 325,
+    "App Complete": 249
+  },
+  {
+    "date": "May 25, 2026",
+    "Inquiries": 369,
+    "Intenders": 359,
+    "App Complete": 300
+  },
+  {
+    "date": "May 26, 2026",
+    "Inquiries": 541,
+    "Intenders": 532,
+    "App Complete": 449
+  },
+  {
+    "date": "May 27, 2026",
+    "Inquiries": 454,
+    "Intenders": 466,
+    "App Complete": 350
+  },
+  {
+    "date": "May 28, 2026",
+    "Inquiries": 431,
+    "Intenders": 439,
+    "App Complete": 342
+  },
+  {
+    "date": "May 29, 2026",
+    "Inquiries": 453,
+    "Intenders": 446,
+    "App Complete": 372
+  },
+  {
+    "date": "May 30, 2026",
+    "Inquiries": 338,
+    "Intenders": 326,
+    "App Complete": 269
+  },
+  {
+    "date": "May 31, 2026",
+    "Inquiries": 339,
+    "Intenders": 337,
+    "App Complete": 240
+  },
+  {
+    "date": "Jun 1, 2026",
+    "Inquiries": 476,
+    "Intenders": 474,
+    "App Complete": 357
+  },
+  {
+    "date": "Jun 2, 2026",
+    "Inquiries": 471,
+    "Intenders": 474,
+    "App Complete": 384
+  },
+  {
+    "date": "Jun 3, 2026",
+    "Inquiries": 435,
+    "Intenders": 420,
+    "App Complete": 314
+  },
+  {
+    "date": "Jun 4, 2026",
+    "Inquiries": 425,
+    "Intenders": 416,
+    "App Complete": 314
+  },
+  {
+    "date": "Jun 5, 2026",
+    "Inquiries": 337,
+    "Intenders": 330,
+    "App Complete": 263
+  },
+  {
+    "date": "Jun 6, 2026",
+    "Inquiries": 274,
+    "Intenders": 270,
+    "App Complete": 173
+  },
+  {
+    "date": "Jun 7, 2026",
+    "Inquiries": 352,
+    "Intenders": 342,
+    "App Complete": 251
+  },
+  {
+    "date": "Jun 8, 2026",
+    "Inquiries": 476,
+    "Intenders": 475,
+    "App Complete": 355
+  },
+  {
+    "date": "Jun 9, 2026",
+    "Inquiries": 508,
+    "Intenders": 490,
+    "App Complete": 381
+  },
+  {
+    "date": "Jun 10, 2026",
+    "Inquiries": 444,
+    "Intenders": 448,
+    "App Complete": 315
+  },
+  {
+    "date": "Jun 11, 2026",
+    "Inquiries": 412,
+    "Intenders": 420,
+    "App Complete": 303
+  },
+  {
+    "date": "Jun 12, 2026",
+    "Inquiries": 379,
+    "Intenders": 371,
+    "App Complete": 276
+  },
+  {
+    "date": "Jun 13, 2026",
+    "Inquiries": 322,
+    "Intenders": 306,
+    "App Complete": 218
+  },
+  {
+    "date": "Jun 14, 2026",
+    "Inquiries": 347,
+    "Intenders": 336,
+    "App Complete": 233
+  },
+  {
+    "date": "Jun 15, 2026",
+    "Inquiries": 493,
+    "Intenders": 474,
+    "App Complete": 362
+  },
+  {
+    "date": "Jun 16, 2026",
+    "Inquiries": 489,
+    "Intenders": 494,
+    "App Complete": 381
+  },
+  {
+    "date": "Jun 17, 2026",
+    "Inquiries": 496,
+    "Intenders": 493,
+    "App Complete": 382
+  },
+  {
+    "date": "Jun 18, 2026",
+    "Inquiries": 464,
+    "Intenders": 451,
+    "App Complete": 309
+  },
+  {
+    "date": "Jun 19, 2026",
+    "Inquiries": 337,
+    "Intenders": 320,
+    "App Complete": 232
+  },
+  {
+    "date": "Jun 20, 2026",
+    "Inquiries": 292,
+    "Intenders": 293,
+    "App Complete": 204
+  },
+  {
+    "date": "Jun 21, 2026",
+    "Inquiries": 329,
+    "Intenders": 322,
+    "App Complete": 215
+  },
+  {
+    "date": "Jun 22, 2026",
+    "Inquiries": 550,
+    "Intenders": 547,
+    "App Complete": 404
+  },
+  {
+    "date": "Jun 23, 2026",
+    "Inquiries": 530,
+    "Intenders": 525,
+    "App Complete": 398
+  },
+  {
+    "date": "Jun 24, 2026",
+    "Inquiries": 487,
+    "Intenders": 478,
+    "App Complete": 355
+  },
+  {
+    "date": "Jun 25, 2026",
+    "Inquiries": 438,
+    "Intenders": 430,
+    "App Complete": 297
+  },
+  {
+    "date": "Jun 26, 2026",
+    "Inquiries": 390,
+    "Intenders": 384,
+    "App Complete": 266
+  },
+  {
+    "date": "Jun 27, 2026",
+    "Inquiries": 337,
+    "Intenders": 333,
+    "App Complete": 218
+  },
+  {
+    "date": "Jun 28, 2026",
+    "Inquiries": 332,
+    "Intenders": 326,
+    "App Complete": 220
+  },
+  {
+    "date": "Jun 29, 2026",
+    "Inquiries": 417,
+    "Intenders": 429,
+    "App Complete": 307
+  },
+  {
+    "date": "Jun 30, 2026",
+    "Inquiries": 480,
+    "Intenders": 486,
+    "App Complete": 347
+  },
+  {
+    "date": "Jul 1, 2026",
+    "Inquiries": 460,
+    "Intenders": 463,
+    "App Complete": 365
+  },
+  {
+    "date": "Jul 2, 2026",
+    "Inquiries": 399,
+    "Intenders": 404,
+    "App Complete": 300
+  },
+  {
+    "date": "Jul 3, 2026",
+    "Inquiries": 307,
+    "Intenders": 297,
+    "App Complete": 205
+  },
+  {
+    "date": "Jul 4, 2026",
+    "Inquiries": 243,
+    "Intenders": 242,
+    "App Complete": 156
+  },
+  {
+    "date": "Jul 5, 2026",
+    "Inquiries": 326,
+    "Intenders": 330,
+    "App Complete": 226
+  },
+  {
+    "date": "Jul 6, 2026",
+    "Inquiries": 505,
+    "Intenders": 497,
+    "App Complete": 367
+  },
+  {
+    "date": "Jul 7, 2026",
+    "Inquiries": 491,
+    "Intenders": 484,
+    "App Complete": 364
+  },
+  {
+    "date": "Jul 8, 2026",
+    "Inquiries": 402,
+    "Intenders": 405,
+    "App Complete": 312
+  },
+  {
+    "date": "Jul 9, 2026",
+    "Inquiries": 360,
+    "Intenders": 365,
+    "App Complete": 280
+  },
+  {
+    "date": "Jul 10, 2026",
+    "Inquiries": 340,
+    "Intenders": 329,
+    "App Complete": 243
+  },
+  {
+    "date": "Jul 11, 2026",
+    "Inquiries": 246,
+    "Intenders": 246,
+    "App Complete": 183
+  },
+  {
+    "date": "Jul 12, 2026",
+    "Inquiries": 282,
+    "Intenders": 278,
+    "App Complete": 199
+  },
+  {
+    "date": "Jul 13, 2026",
+    "Inquiries": 445,
+    "Intenders": 455,
+    "App Complete": 383
+  },
+  {
+    "date": "Jul 14, 2026",
+    "Inquiries": 388,
+    "Intenders": 376,
+    "App Complete": 308
+  },
+  {
+    "date": "Jul 15, 2026",
+    "Inquiries": 359,
+    "Intenders": 378,
+    "App Complete": 326
+  },
+  {
+    "date": "Jul 16, 2026",
+    "Inquiries": 406,
+    "Intenders": 409,
+    "App Complete": 340
+  },
+  {
+    "date": "Jul 17, 2026",
+    "Inquiries": 364,
+    "Intenders": 359,
+    "App Complete": 279
+  },
+  {
+    "date": "Jul 18, 2026",
+    "Inquiries": 291,
+    "Intenders": 274,
+    "App Complete": 206
+  },
+  {
+    "date": "Jul 19, 2026",
+    "Inquiries": 309,
+    "Intenders": 288,
+    "App Complete": 213
+  },
+  {
+    "date": "Jul 20, 2026",
+    "Inquiries": 422,
+    "Intenders": 396,
+    "App Complete": 336
+  },
+  {
+    "date": "Jul 21, 2026",
+    "Inquiries": 488,
+    "Intenders": 465,
+    "App Complete": 419
+  },
+  {
+    "date": "Jul 22, 2026",
+    "Inquiries": 403,
+    "Intenders": 383,
+    "App Complete": 322
+  },
+  {
+    "date": "Jul 23, 2026",
+    "Inquiries": 399,
+    "Intenders": 391,
+    "App Complete": 295
+  },
+  {
+    "date": "Jul 24, 2026",
+    "Inquiries": 368,
+    "Intenders": 360,
+    "App Complete": 257
+  },
+  {
+    "date": "Jul 25, 2026",
+    "Inquiries": 270,
+    "Intenders": 263,
+    "App Complete": 186
+  },
+  {
+    "date": "Jul 26, 2026",
+    "Inquiries": 266,
+    "Intenders": 266,
+    "App Complete": 195
+  },
+  {
+    "date": "Jul 27, 2026",
+    "Inquiries": 452,
+    "Intenders": 431,
+    "App Complete": 334
+  },
+  {
+    "date": "Jul 28, 2026",
+    "Inquiries": 448,
+    "Intenders": 443,
+    "App Complete": 359
+  },
+  {
+    "date": "Jul 29, 2026",
+    "Inquiries": 422,
+    "Intenders": 414,
+    "App Complete": 323
+  },
+  {
+    "date": "Jul 30, 2026",
+    "Inquiries": 395,
+    "Intenders": 373,
+    "App Complete": 285
+  },
+  {
+    "date": "Aug 1, 2026",
+    "Inquiries": 260,
+    "Intenders": 250,
+    "App Complete": 189
+  },
+  {
+    "date": "Aug 2, 2026",
+    "Inquiries": 275,
+    "Intenders": 268,
+    "App Complete": 197
+  },
+  {
+    "date": "Aug 3, 2026",
+    "Inquiries": 427,
+    "Intenders": 412,
+    "App Complete": 327
+  },
+  {
+    "date": "Aug 4, 2026",
+    "Inquiries": 412,
+    "Intenders": 402,
+    "App Complete": 322
+  },
+  {
+    "date": "Aug 5, 2026",
+    "Inquiries": 465,
+    "Intenders": 443,
+    "App Complete": 347
+  },
+  {
+    "date": "Aug 6, 2026",
+    "Inquiries": 402,
+    "Intenders": 396,
+    "App Complete": 298
+  },
+  {
+    "date": "Aug 7, 2026",
+    "Inquiries": 346,
+    "Intenders": 335,
+    "App Complete": 253
+  },
+  {
+    "date": "Aug 8, 2026",
+    "Inquiries": 244,
+    "Intenders": 247,
+    "App Complete": 193
+  },
+  {
+    "date": "Aug 9, 2026",
+    "Inquiries": 328,
+    "Intenders": 329,
+    "App Complete": 235
+  },
+  {
+    "date": "Aug 10, 2026",
+    "Inquiries": 478,
+    "Intenders": 480,
+    "App Complete": 408
+  },
+  {
+    "date": "Aug 11, 2026",
+    "Inquiries": 495,
+    "Intenders": 492,
+    "App Complete": 397
+  },
+  {
+    "date": "Aug 12, 2026",
+    "Inquiries": 416,
+    "Intenders": 413,
+    "App Complete": 327
+  },
+  {
+    "date": "Aug 13, 2026",
+    "Inquiries": 420,
+    "Intenders": 425,
+    "App Complete": 347
+  },
+  {
+    "date": "Aug 14, 2026",
+    "Inquiries": 358,
+    "Intenders": 369,
+    "App Complete": 299
+  },
+  {
+    "date": "Aug 15, 2026",
+    "Inquiries": 243,
+    "Intenders": 241,
+    "App Complete": 175
+  },
+  {
+    "date": "Aug 16, 2026",
+    "Inquiries": 323,
+    "Intenders": 328,
+    "App Complete": 228
+  },
+  {
+    "date": "Aug 17, 2026",
+    "Inquiries": 457,
+    "Intenders": 456,
+    "App Complete": 353
+  },
+  {
+    "date": "Aug 18, 2026",
+    "Inquiries": 422,
+    "Intenders": 424,
+    "App Complete": 336
+  },
+  {
+    "date": "Aug 19, 2026",
+    "Inquiries": 434,
+    "Intenders": 418,
+    "App Complete": 318
+  },
+  {
+    "date": "Aug 20, 2026",
+    "Inquiries": 370,
+    "Intenders": 382,
+    "App Complete": 295
+  },
+  {
+    "date": "Aug 21, 2026",
+    "Inquiries": 346,
+    "Intenders": 342,
+    "App Complete": 275
+  },
+  {
+    "date": "Aug 22, 2026",
+    "Inquiries": 289,
+    "Intenders": 286,
+    "App Complete": 210
+  },
+  {
+    "date": "Aug 23, 2026",
+    "Inquiries": 310,
+    "Intenders": 303,
+    "App Complete": 222
+  },
+  {
+    "date": "Aug 24, 2026",
+    "Inquiries": 506,
+    "Intenders": 505,
+    "App Complete": 419
+  },
+  {
+    "date": "Aug 25, 2026",
+    "Inquiries": 420,
+    "Intenders": 412,
+    "App Complete": 338
+  },
+  {
+    "date": "Aug 26, 2026",
+    "Inquiries": 326,
+    "Intenders": 335,
+    "App Complete": 270
+  },
+  {
+    "date": "Aug 27, 2026",
+    "Inquiries": 326,
+    "Intenders": 333,
+    "App Complete": 254
+  },
+  {
+    "date": "Aug 28, 2026",
+    "Inquiries": 333,
+    "Intenders": 318,
+    "App Complete": 254
+  },
+  {
+    "date": "Aug 29, 2026",
+    "Inquiries": 247,
+    "Intenders": 243,
+    "App Complete": 191
+  },
+  {
+    "date": "Aug 30, 2026",
+    "Inquiries": 279,
+    "Intenders": 267,
+    "App Complete": 184
+  },
+  {
+    "date": "Sep 1, 2026",
+    "Inquiries": 369,
+    "Intenders": 350,
+    "App Complete": 286
+  },
+  {
+    "date": "Sep 2, 2026",
+    "Inquiries": 377,
+    "Intenders": 376,
+    "App Complete": 281
+  },
+  {
+    "date": "Sep 3, 2026",
+    "Inquiries": 421,
+    "Intenders": 405,
+    "App Complete": 291
+  },
+  {
+    "date": "Sep 4, 2026",
+    "Inquiries": 291,
+    "Intenders": 292,
+    "App Complete": 219
+  },
+  {
+    "date": "Sep 5, 2026",
+    "Inquiries": 249,
+    "Intenders": 255,
+    "App Complete": 167
+  },
+  {
+    "date": "Sep 6, 2026",
+    "Inquiries": 237,
+    "Intenders": 235,
+    "App Complete": 162
+  },
+  {
+    "date": "Sep 7, 2026",
+    "Inquiries": 303,
+    "Intenders": 313,
+    "App Complete": 221
+  },
+  {
+    "date": "Sep 8, 2026",
+    "Inquiries": 431,
+    "Intenders": 451,
+    "App Complete": 350
+  },
+  {
+    "date": "Sep 9, 2026",
+    "Inquiries": 372,
+    "Intenders": 367,
+    "App Complete": 317
+  },
+  {
+    "date": "Sep 10, 2026",
+    "Inquiries": 320,
+    "Intenders": 311,
+    "App Complete": 248
+  },
+  {
+    "date": "Sep 11, 2026",
+    "Inquiries": 246,
+    "Intenders": 252,
+    "App Complete": 190
+  },
+  {
+    "date": "Sep 12, 2026",
+    "Inquiries": 190,
+    "Intenders": 183,
+    "App Complete": 137
+  },
+  {
+    "date": "Sep 13, 2026",
+    "Inquiries": 246,
+    "Intenders": 249,
+    "App Complete": 180
+  },
+  {
+    "date": "Sep 14, 2026",
+    "Inquiries": 365,
+    "Intenders": 368,
+    "App Complete": 307
+  },
+  {
+    "date": "Sep 15, 2026",
+    "Inquiries": 382,
+    "Intenders": 389,
+    "App Complete": 303
+  },
+  {
+    "date": "Sep 16, 2026",
+    "Inquiries": 332,
+    "Intenders": 342,
+    "App Complete": 270
+  },
+  {
+    "date": "Sep 17, 2026",
+    "Inquiries": 378,
+    "Intenders": 375,
+    "App Complete": 303
+  },
+  {
+    "date": "Sep 18, 2026",
+    "Inquiries": 266,
+    "Intenders": 258,
+    "App Complete": 195
+  },
+  {
+    "date": "Sep 19, 2026",
+    "Inquiries": 213,
+    "Intenders": 205,
+    "App Complete": 148
+  },
+  {
+    "date": "Sep 20, 2026",
+    "Inquiries": 248,
+    "Intenders": 254,
+    "App Complete": 182
+  },
+  {
+    "date": "Sep 21, 2026",
+    "Inquiries": 405,
+    "Intenders": 397,
+    "App Complete": 308
+  },
+  {
+    "date": "Sep 22, 2026",
+    "Inquiries": 448,
+    "Intenders": 458,
+    "App Complete": 320
+  },
+  {
+    "date": "Sep 23, 2026",
+    "Inquiries": 389,
+    "Intenders": 388,
+    "App Complete": 305
+  },
+  {
+    "date": "Sep 24, 2026",
+    "Inquiries": 419,
+    "Intenders": 421,
+    "App Complete": 295
+  },
+  {
+    "date": "Sep 25, 2026",
+    "Inquiries": 403,
+    "Intenders": 410,
+    "App Complete": 285
+  },
+  {
+    "date": "Sep 26, 2026",
+    "Inquiries": 288,
+    "Intenders": 295,
+    "App Complete": 190
+  },
+  {
+    "date": "Sep 27, 2026",
+    "Inquiries": 351,
+    "Intenders": 350,
+    "App Complete": 198
+  },
+  {
+    "date": "Sep 28, 2026",
+    "Inquiries": 436,
+    "Intenders": 444,
+    "App Complete": 329
+  },
+  {
+    "date": "Sep 29, 2026",
+    "Inquiries": 421,
+    "Intenders": 406,
+    "App Complete": 298
+  },
+  {
+    "date": "Sep 30, 2026",
+    "Inquiries": 411,
+    "Intenders": 400,
+    "App Complete": 260
+  },
+  {
+    "date": "Oct 1, 2026",
+    "Inquiries": 351,
+    "Intenders": 365,
+    "App Complete": 240
+  },
+  {
+    "date": "Oct 2, 2026",
+    "Inquiries": 339,
+    "Intenders": 344,
+    "App Complete": 220
+  },
+  {
+    "date": "Oct 3, 2026",
+    "Inquiries": 269,
+    "Intenders": 267,
+    "App Complete": 158
+  },
+  {
+    "date": "Oct 4, 2026",
+    "Inquiries": 328,
+    "Intenders": 330,
+    "App Complete": 193
+  },
+  {
+    "date": "Oct 5, 2026",
+    "Inquiries": 457,
+    "Intenders": 470,
+    "App Complete": 299
+  },
+  {
+    "date": "Oct 6, 2026",
+    "Inquiries": 419,
+    "Intenders": 419,
+    "App Complete": 300
+  },
+  {
+    "date": "Oct 7, 2026",
+    "Inquiries": 395,
+    "Intenders": 393,
+    "App Complete": 249
+  },
+  {
+    "date": "Oct 8, 2026",
+    "Inquiries": 414,
+    "Intenders": 407,
+    "App Complete": 266
+  },
+  {
+    "date": "Oct 9, 2026",
+    "Inquiries": 379,
+    "Intenders": 378,
+    "App Complete": 252
+  }
+]
