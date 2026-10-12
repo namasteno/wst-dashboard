@@ -31,6 +31,26 @@
   .best { background: #e9f9ed; font-weight: 700; }
   canvas { max-height: 320px; }
   footer { padding: 10px 20px; font-size: 10.5px; color: var(--grey); border-top: 1px solid var(--light-grey); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 14px; }
+  .control-group { display: flex; gap: 6px; align-items: center; }
+  .control-group label { font-size: 11px; color: var(--grey); font-weight: 700; margin-right: 4px; }
+  .seg-btn {
+    padding: 5px 12px; font-size: 12px; font-weight: 700; border-radius: 4px; border: none;
+    background: var(--light-grey); color: var(--grey); cursor: pointer; text-transform: capitalize;
+  }
+  .seg-btn.active { background: var(--blue); color: white; }
+  select {
+    font-size: 12px; padding: 5px 8px; border: 1px solid var(--light-grey); border-radius: 4px;
+    background: white; color: #001731;
+  }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .bar-label { width: 110px; font-size: 12px; font-weight: 600; }
+  .bar-track { flex: 1; height: 14px; background: var(--light-grey); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--med-blue); }
+  .bar-value { width: 70px; text-align: right; font-size: 12px; font-weight: 700; }
+  .bar-pct { width: 36px; text-align: right; font-size: 11px; color: var(--grey); }
+  .note { font-size: 10px; color: var(--grey); margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -47,13 +67,53 @@
   </div>
 
   <div class="section">
-    <h2>TREND — ACTUAL VS. RECOMMENDED MODEL</h2>
+    <h2>INTENDER → APP CONVERSION (last 30 actual days)</h2>
+    <canvas id="conversionChart" style="max-height:90px"></canvas>
+    <div class="note">App Complete ÷ Intenders, %</div>
+  </div>
+
+  <div class="section">
+    <div class="controls">
+      <div class="control-group" id="granularityButtons"></div>
+      <div class="control-group">
+        <label for="modelSelect">Model</label>
+        <select id="modelSelect"></select>
+      </div>
+      <div class="control-group">
+        <label for="channelSelect">Channel</label>
+        <select id="channelSelect"></select>
+      </div>
+    </div>
+    <h2>TREND — ACTUAL VS. MODEL VS. TARGET</h2>
     <canvas id="trendChart"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>CHANNEL PACING (projected share of Oct–Dec budget)</h2>
+    <div id="channelBars"></div>
+    <div class="note">
+      Scaled by each channel's % of the official budget plan. No channel-level
+      actuals are wired into this automated feed yet — these are projection
+      shares only, not measured results.
+    </div>
   </div>
 
   <footer id="footer-note">Loading…</footer>
 
 <script>
+const channelPercents = {
+  Total: 100, Direct: 24, "PS-TM": 21, "PS-NTM": 19, SEO: 13, Email: 8,
+  Unknown: 7, Display: 5, "Digital Video": 2, "Paid Other": 2,
+  "Unpaid Other": 1, "Paid Social": 0,
+};
+
+let DAILY = [];
+let MODEL_OUTPUT = null;
+let trendChartInstance = null;
+let currentGranularity = 'daily';
+let currentModelKey = null;
+let currentChannel = 'Total';
+
 async function loadData() {
   const [daily, modelOutput] = await Promise.all([
     fetch('data/daily.json').then(r => r.json()),
@@ -62,14 +122,18 @@ async function loadData() {
   return { daily, modelOutput };
 }
 
+function fmt(n) { return (n === null || n === undefined) ? '—' : n.toLocaleString('en-US'); }
+
+function bestModelKey(modelOutput) {
+  return Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
+}
+
 function renderKpis(daily, modelOutput) {
   const last = daily[daily.length - 1];
   const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
-  const bestKey = sorted[0][0];
   const bestLabel = sorted[0][1].label;
 
-  const kpiDiv = document.getElementById('kpis');
-  kpiDiv.innerHTML = `
+  document.getElementById('kpis').innerHTML = `
     <div class="kpi">
       <div class="label">LAST ACTUAL DAY</div>
       <div class="value">${last['App Complete']}</div>
@@ -93,8 +157,7 @@ function renderKpis(daily, modelOutput) {
 
 function renderBacktest(modelOutput) {
   const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
-  const table = document.getElementById('backtest-table');
-  table.innerHTML = `
+  document.getElementById('backtest-table').innerHTML = `
     <tr><th>Model</th><th>Total error</th><th>Over N days</th></tr>
     ${sorted.map(([key, b], i) => `
       <tr class="${i === 0 ? 'best' : ''}">
@@ -106,49 +169,116 @@ function renderBacktest(modelOutput) {
   `;
 }
 
-function renderTrend(daily, modelOutput) {
-  const bestKey = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
-  const targets = modelOutput.daily_targets || {};
+function renderConversion(daily) {
+  const recent = daily.slice(-30).filter(d => d.Intenders > 0);
+  const labels = recent.map(d => d.date);
+  const rates = recent.map(d => Number(((d['App Complete'] / d.Intenders) * 100).toFixed(1)));
 
-  // Build one merged, date-ordered map so Actual / Model / Target can each
-  // be present or absent independently for any given date.
-  const recentActualRows = daily.slice(-60);
+  new Chart(document.getElementById('conversionChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{ data: rates, borderColor: '#97E152', borderWidth: 2, pointRadius: 0, tension: 0.3 }],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}%` } } },
+      scales: { y: { min: 40, max: 80, display: false }, x: { display: false } },
+    },
+  });
+}
+
+// --- Date helpers for granularity aggregation ---
+function weekStart(dt) {
+  const d = new Date(dt);
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+function fiscalYear(dt) { return dt.getMonth() >= 6 ? dt.getFullYear() + 1 : dt.getFullYear(); }
+
+// Build one merged list of {dateObj, dateLabel, actual, model, target}
+// covering every date that has ANY of the three, using the selected model.
+function buildMergedRows(daily, modelOutput, modelKey) {
+  const targets = modelOutput.daily_targets || {};
   const byDate = new Map();
 
-  recentActualRows.forEach(d => {
-    byDate.set(d.date, { date: d.date, actual: d['App Complete'] });
+  daily.forEach(d => {
+    byDate.set(d.date, { date: d.date, dt: new Date(d.date), actual: d['App Complete'] });
   });
-
   modelOutput.projections.forEach(p => {
-    const row = byDate.get(p.date) || { date: p.date };
-    row.model = p[bestKey];
+    const row = byDate.get(p.date) || { date: p.date, dt: new Date(p.date) };
+    row.model = p[modelKey];
     byDate.set(p.date, row);
   });
-
-  // Targets are independent of actual/projection status — attach to any
-  // date already in view, and add target-only dates that fall within the
-  // recent/projection window even if there's no actual or model for them.
   byDate.forEach((row, dateStr) => {
     if (targets[dateStr] !== undefined) row.target = targets[dateStr];
   });
+  // anchor model line at the last actual day for visual continuity
+  if (daily.length) {
+    const lastDate = daily[daily.length - 1].date;
+    const lastRow = byDate.get(lastDate);
+    if (lastRow && lastRow.model === undefined) lastRow.model = lastRow.actual;
+  }
+  return Array.from(byDate.values()).sort((a, b) => a.dt - b.dt);
+}
 
-  // Anchor the model line visually at the last actual point so the dashed
-  // projection connects to the solid actual line instead of leaving a gap.
-  if (recentActualRows.length) {
-    const lastActualDate = recentActualRows[recentActualRows.length - 1].date;
-    const lastActualRow = byDate.get(lastActualDate);
-    if (lastActualRow && lastActualRow.model === undefined) {
-      lastActualRow.model = lastActualRow.actual;
-    }
+function aggregateRows(rows, granularity) {
+  if (granularity === 'daily') return rows;
+
+  let keyFn, labelFn, sortFn;
+  if (granularity === 'weekly') {
+    keyFn = r => weekStart(r.dt).toISOString().slice(0, 10);
+    labelFn = r => {
+      const s = weekStart(r.dt); const e = new Date(s); e.setDate(e.getDate() + 6);
+      return `${s.toLocaleDateString('en-US',{month:'short',day:'numeric'})}–${e.toLocaleDateString('en-US',{month:'short',day:'numeric'})}`;
+    };
+    sortFn = r => weekStart(r.dt).getTime();
+  } else if (granularity === 'monthly') {
+    keyFn = r => `${r.dt.getFullYear()}-${r.dt.getMonth()}`;
+    labelFn = r => r.dt.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+    sortFn = r => r.dt.getFullYear() * 12 + r.dt.getMonth();
+  } else { // yearly (fiscal)
+    keyFn = r => `FY${fiscalYear(r.dt)}`;
+    labelFn = r => `FY${fiscalYear(r.dt)}`;
+    sortFn = r => fiscalYear(r.dt);
   }
 
-  const rows = Array.from(byDate.values());
-  const labels = rows.map(r => r.date);
-  const actualSeries = rows.map(r => r.actual ?? null);
-  const modelSeries = rows.map(r => r.model ?? null);
-  const targetSeries = rows.map(r => r.target ?? null);
+  const buckets = new Map();
+  rows.forEach(r => {
+    const key = keyFn(r);
+    if (!buckets.has(key)) {
+      buckets.set(key, { label: labelFn(r), sortKey: sortFn(r), actual: 0, model: 0, target: 0, hasA: false, hasM: false, hasT: false });
+    }
+    const b = buckets.get(key);
+    if (typeof r.actual === 'number') { b.actual += r.actual; b.hasA = true; }
+    if (typeof r.model === 'number') { b.model += r.model; b.hasM = true; }
+    if (typeof r.target === 'number') { b.target += r.target; b.hasT = true; }
+  });
 
-  new Chart(document.getElementById('trendChart'), {
+  return Array.from(buckets.values())
+    .sort((a, b) => a.sortKey - b.sortKey)
+    .map(b => ({
+      date: b.label,
+      actual: b.hasA ? b.actual : undefined,
+      model: b.hasM ? b.model : undefined,
+      target: b.hasT ? b.target : undefined,
+    }));
+}
+
+function renderTrend(daily, modelOutput) {
+  const pct = channelPercents[currentChannel] / 100;
+  const merged = buildMergedRows(daily, modelOutput, currentModelKey);
+  const aggregated = aggregateRows(merged, currentGranularity);
+
+  const labels = aggregated.map(r => r.date);
+  const actualSeries = aggregated.map(r => r.actual ?? null); // actuals never scaled by channel — no channel actuals exist
+  const modelSeries = aggregated.map(r => (r.model === undefined || r.model === null) ? null : Math.round(r.model * pct));
+  const targetSeries = aggregated.map(r => (r.target === undefined || r.target === null) ? null : Math.round(r.target * pct));
+
+  if (trendChartInstance) trendChartInstance.destroy();
+  trendChartInstance = new Chart(document.getElementById('trendChart'), {
     type: 'line',
     data: {
       labels,
@@ -164,23 +294,93 @@ function renderTrend(daily, modelOutput) {
       scales: { x: { ticks: { maxTicksLimit: 12, font: { size: 9 } } } },
       plugins: {
         tooltip: {
-          callbacks: {
-            // Only list datasets that actually have a value for this date,
-            // so you never see a blank "Target: " line on days with no target.
-            label: (ctx) => ctx.parsed.y === null ? null : `${ctx.dataset.label}: ${ctx.parsed.y}`,
-          },
+          callbacks: { label: (ctx) => ctx.parsed.y === null ? null : `${ctx.dataset.label}: ${fmt(ctx.parsed.y)}` },
         },
       },
     },
   });
 }
 
+function renderChannelBars(modelOutput) {
+  const merged = buildMergedRows(DAILY, modelOutput, currentModelKey);
+  const totalProjected = merged.reduce((sum, r) => sum + (typeof r.model === 'number' ? r.model : 0), 0);
+
+  const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total');
+  const maxPct = Math.max(...entries.map(([, p]) => p));
+
+  document.getElementById('channelBars').innerHTML = entries
+    .sort((a, b) => b[1] - a[1])
+    .map(([ch, pct]) => {
+      const projected = Math.round((totalProjected * pct) / 100);
+      const widthPct = maxPct > 0 ? (pct / maxPct) * 100 : 0;
+      const isSelected = ch === currentChannel;
+      return `
+        <div class="bar-row">
+          <div class="bar-label" style="${isSelected ? 'font-weight:800;color:var(--blue)' : ''}">${ch}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.max(2, widthPct)}%; background:${isSelected ? 'var(--lime)' : 'var(--med-blue)'}"></div></div>
+          <div class="bar-value">${fmt(projected)}</div>
+          <div class="bar-pct">${pct}%</div>
+        </div>
+      `;
+    }).join('');
+}
+
+function renderGranularityButtons() {
+  const container = document.getElementById('granularityButtons');
+  const modes = ['daily', 'weekly', 'monthly', 'yearly'];
+  container.innerHTML = modes.map(m =>
+    `<button class="seg-btn ${m === currentGranularity ? 'active' : ''}" data-mode="${m}">${m}</button>`
+  ).join('');
+  container.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentGranularity = btn.dataset.mode;
+      renderGranularityButtons();
+      renderTrend(DAILY, MODEL_OUTPUT);
+    });
+  });
+}
+
+function renderModelSelect(modelOutput) {
+  const select = document.getElementById('modelSelect');
+  const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
+  select.innerHTML = sorted.map(([key, b]) => `<option value="${key}">${b.label}</option>`).join('');
+  select.value = currentModelKey;
+  select.addEventListener('change', () => {
+    currentModelKey = select.value;
+    renderTrend(DAILY, MODEL_OUTPUT);
+    renderChannelBars(MODEL_OUTPUT);
+  });
+}
+
+function renderChannelSelect() {
+  const select = document.getElementById('channelSelect');
+  select.innerHTML = Object.entries(channelPercents)
+    .map(([ch, pct]) => `<option value="${ch}">${ch === 'Total' ? 'All channels' : `${ch} (${pct}%)`}</option>`)
+    .join('');
+  select.value = currentChannel;
+  select.addEventListener('change', () => {
+    currentChannel = select.value;
+    renderTrend(DAILY, MODEL_OUTPUT);
+    renderChannelBars(MODEL_OUTPUT);
+  });
+}
+
 loadData().then(({ daily, modelOutput }) => {
+  DAILY = daily;
+  MODEL_OUTPUT = modelOutput;
+  currentModelKey = bestModelKey(modelOutput);
+
   renderKpis(daily, modelOutput);
   renderBacktest(modelOutput);
+  renderConversion(daily);
+  renderGranularityButtons();
+  renderModelSelect(modelOutput);
+  renderChannelSelect();
   renderTrend(daily, modelOutput);
+  renderChannelBars(modelOutput);
+
   document.getElementById('footer-note').textContent =
-    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day.`;
+    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
 }).catch(err => {
   document.getElementById('footer-note').textContent = 'Error loading data: ' + err.message;
 });
