@@ -156,7 +156,7 @@ def main():
         "generated": datetime.now(tz=__import__("datetime").timezone.utc).isoformat(),
         "last_actual_date": last_actual.strftime("%b %-d, %Y"),
         "dow_baselines": dow_baselines,
-        "regression_models": {k: {"r2": v["r2"], "n": v["n"], "coefs": v["coefs"]} for k, v in models.items()},
+        "regression_models": {k: {"r2": v["r2"], "n": v["n"], "coefs": v["coefs"], "t0": v["t0"]} for k, v in models.items()},
         "projections": projections,
         "backtest": backtest,
         # Official daily targets, independent of actual/projection status —
