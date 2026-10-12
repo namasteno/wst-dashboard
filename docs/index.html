@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <title>WST Enrollment Funnel</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
 <style>
   :root {
     --blue: #002855;
@@ -71,19 +72,59 @@
   .range-track-fill { position: absolute; top: 16px; height: 3px; background: var(--med-blue); border-radius: 2px; }
   .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--grey); font-weight: 600; margin-top: 2px; }
   .range-preset { margin-left: auto; }
+
+  .month-tabs { display: flex; gap: 6px; }
+  .month-tabs button {
+    padding: 7px 16px; border-radius: 4px; font-weight: 700; font-size: 13px;
+    border: 1px solid rgba(255,255,255,0.3); background: transparent; color: white; cursor: pointer;
+  }
+  .month-tabs button.active { background: white; color: var(--blue); }
+  .pace-bar { height: 6px; border-radius: 3px; background: var(--light-grey); overflow: hidden; margin-top: 8px; }
+  .pace-fill { height: 100%; }
+  .export-btn {
+    font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 4px; border: 1px solid var(--light-grey);
+    background: white; color: var(--blue); cursor: pointer; margin-left: auto;
+  }
+  .export-btn:hover { background: var(--light-grey); }
+
+  @media (max-width: 700px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .kpi { border-right: none; border-bottom: 1px solid var(--light-grey); }
+    .controls { flex-direction: column; align-items: stretch; }
+    .control-group { justify-content: space-between; }
+    .range-preset { margin-left: 0; }
+    .bar-label { width: 70px; font-size: 11px; }
+    .bar-value { width: 55px; font-size: 11px; }
+    header h1 { font-size: 18px; }
+    .export-btn { margin-left: 0; }
+  }
 </style>
 </head>
 <body>
-  <header>
-    <div class="eyebrow">WGU · SCHOOL OF TECHNOLOGY</div>
-    <h1>WST Enrollment Funnel — Forecast &amp; Pacing</h1>
+  <header style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+    <div>
+      <div class="eyebrow">WGU · SCHOOL OF TECHNOLOGY</div>
+      <h1>WST Enrollment Funnel — Forecast &amp; Pacing</h1>
+    </div>
+    <div class="month-tabs" id="monthTabs"></div>
   </header>
+
+  <div class="section" style="border-top:none;">
+    <h2>MONTHLY PACING</h2>
+    <div class="kpis" id="pacingKpis" style="border:1px solid var(--light-grey);"></div>
+  </div>
 
   <div class="kpis" id="kpis"></div>
 
   <div class="section">
     <h2>MODEL CONFIDENCE (backtest, last 14 actual days)</h2>
     <table id="backtest-table"></table>
+  </div>
+
+  <div class="section">
+    <h2>MODEL ERROR OVER TIME (weekly, last 8 weeks)</h2>
+    <canvas id="errorOverTimeChart" style="max-height:180px"></canvas>
+    <div class="note">Total absolute error per model, summed Mon–Sun. Lower is better.</div>
   </div>
 
   <div class="section">
@@ -103,7 +144,7 @@
         <label for="channelSelect">Channel</label>
         <select id="channelSelect"></select>
       </div>
-      <div class="control-group range-preset">
+      <div class="control-group">
         <label for="rangePreset">Range</label>
         <select id="rangePreset">
           <option value="30">Last 30 days</option>
@@ -114,6 +155,7 @@
           <option value="custom">Custom</option>
         </select>
       </div>
+      <button class="export-btn" id="exportCsvBtn">⬇ Export CSV</button>
     </div>
 
     <div class="range-labels">
@@ -150,12 +192,40 @@ const channelPercents = {
   "Unpaid Other": 1, "Paid Social": 0,
 };
 
+const monthGoals = { Oct: 9369, Nov: 11199, Dec: 10727 };
+const monthMeta = {
+  Oct: { num: 10, year: 2026, label: 'October 2026' },
+  Nov: { num: 11, year: 2026, label: 'November 2026' },
+  Dec: { num: 12, year: 2026, label: 'December 2026' },
+};
+// Same holiday set the Python regression models were fit with, used here
+// only to decide where to draw vertical markers on the daily trend chart.
+const HOLIDAY_DATES = new Set([
+  '2025-05-26', '2025-07-04', '2025-09-01', '2025-11-27', '2025-12-25',
+  '2026-01-01', '2026-05-25', '2026-07-04', '2026-09-07',
+  '2026-11-26', '2026-12-25', '2027-01-01',
+]);
+function isoDate(dt) { return dt.toISOString().slice(0, 10); }
+
+// The annotation plugin is a separate CDN script — register it defensively
+// so a blocked/failed CDN load degrades to "no holiday markers" rather
+// than breaking the whole chart.
+let ANNOTATION_AVAILABLE = false;
+try {
+  if (window['chartjs-plugin-annotation']) {
+    Chart.register(window['chartjs-plugin-annotation']);
+    ANNOTATION_AVAILABLE = true;
+  }
+} catch (e) { /* plugin not available — charts still work without it */ }
+
 let DAILY = [];
 let MODEL_OUTPUT = null;
 let trendChartInstance = null;
+let errorChartInstance = null;
 let currentGranularity = 'daily';
 let currentModelKey = null;
 let currentChannel = 'Total';
+let currentMonth = 'Oct';
 let ALL_ROWS = []; // full merged Actual/Model/Target rows, built once per model change
 let rangeStartIdx = 0;
 let rangeEndIdx = 0;
@@ -172,6 +242,77 @@ function fmt(n) { return (n === null || n === undefined) ? '—' : n.toLocaleStr
 
 function bestModelKey(modelOutput) {
   return Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
+}
+
+function renderMonthTabs() {
+  const container = document.getElementById('monthTabs');
+  container.innerHTML = Object.keys(monthMeta).map(m =>
+    `<button class="${m === currentMonth ? 'active' : ''}" data-month="${m}">${m}</button>`
+  ).join('');
+  container.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentMonth = btn.dataset.month;
+      renderMonthTabs();
+      renderPacingKpis();
+    });
+  });
+}
+
+function renderPacingKpis() {
+  const meta = monthMeta[currentMonth];
+  const goal = monthGoals[currentMonth];
+  const targets = MODEL_OUTPUT.daily_targets || {};
+
+  const monthRows = DAILY.filter(d => {
+    const dt = new Date(d.date);
+    return dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year;
+  });
+
+  let mtdActual = 0, mtdTargetToDate = 0;
+  monthRows.forEach(d => {
+    mtdActual += d['App Complete'];
+    if (targets[d.date] !== undefined) mtdTargetToDate += targets[d.date];
+  });
+
+  // Projected total = actual-so-far + model projection for remaining days in the month
+  let projectedTotal = mtdActual;
+  const monthRowDates = new Set(monthRows.map(d => d.date));
+  MODEL_OUTPUT.projections.forEach(p => {
+    const dt = new Date(p.date);
+    if (dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year && !monthRowDates.has(p.date)) {
+      projectedTotal += p[currentModelKey] || 0;
+    }
+  });
+
+  const gap = goal - projectedTotal;
+  const gapPct = goal > 0 ? (gap / goal) * 100 : 0;
+  const onPace = gap <= 0;
+  const mtdVariance = mtdActual - mtdTargetToDate;
+  const pacePctWidth = Math.min(100, Math.max(0, (projectedTotal / goal) * 100));
+
+  document.getElementById('pacingKpis').innerHTML = `
+    <div class="kpi">
+      <div class="label">MTD ACTUAL (${meta.label.toUpperCase()})</div>
+      <div class="value">${fmt(mtdActual)}</div>
+      <div style="font-size:12px;font-weight:600;margin-top:2px;color:${mtdVariance >= 0 ? '#2f8f3e' : '#D64545'}">
+        ${mtdVariance >= 0 ? '+' : ''}${fmt(mtdVariance)} vs. target-to-date
+      </div>
+    </div>
+    <div class="kpi">
+      <div class="label">PROJECTED TOTAL</div>
+      <div class="value">${fmt(projectedTotal)}</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:2px;">via ${MODEL_OUTPUT.backtest[currentModelKey].label}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">MONTHLY GOAL</div>
+      <div class="value">${fmt(goal)}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">PACE VS. GOAL</div>
+      <div class="value" style="color:${onPace ? '#2f8f3e' : '#D64545'}">${onPace ? '+' : '−'}${Math.abs(gapPct).toFixed(1)}%</div>
+      <div class="pace-bar"><div class="pace-fill" style="width:${pacePctWidth}%;background:${onPace ? 'var(--lime)' : '#D64545'}"></div></div>
+    </div>
+  `;
 }
 
 function renderKpis(daily, modelOutput) {
@@ -213,6 +354,88 @@ function renderBacktest(modelOutput) {
       </tr>
     `).join('')}
   `;
+}
+
+const WEEKDAY_IDX = { Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7 };
+function weekdayAbbrev(dt) { return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()]; }
+
+function predictDow(baselines, dt) { return baselines[weekdayAbbrev(dt)] ?? 0; }
+
+function predictRegression(modelInfo, dt) {
+  const t0 = new Date(modelInfo.t0);
+  const t = Math.round((dt - t0) / 86400000) + 1;
+  const wd = weekdayAbbrev(dt);
+  let val = modelInfo.coefs[0] + modelInfo.coefs[1] * t;
+  if (WEEKDAY_IDX[wd] !== undefined) val += modelInfo.coefs[WEEKDAY_IDX[wd]];
+  if (HOLIDAY_DATES.has(isoDate(dt))) val += modelInfo.coefs[8];
+  return Math.max(Math.round(val), 0);
+}
+
+function predictAllModels(modelOutput, dt) {
+  const out = { 'Proj: Day-of-Week': predictDow(modelOutput.dow_baselines, dt) };
+  Object.entries(modelOutput.regression_models).forEach(([key, info]) => {
+    out[`Proj: Regr-${key}`] = predictRegression(info, dt);
+  });
+  return out;
+}
+
+function renderErrorOverTime(daily, modelOutput) {
+  const actualRows = daily.slice(-56); // 8 weeks of lookback
+  const weekBuckets = new Map();
+
+  actualRows.forEach(d => {
+    const dt = new Date(d.date);
+    const ws = weekStart(dt);
+    const key = ws.toISOString().slice(0, 10);
+    if (!weekBuckets.has(key)) {
+      weekBuckets.set(key, { sortKey: ws.getTime(), label: ws.toLocaleDateString('en-US',{month:'short',day:'numeric'}), errors: {} });
+    }
+    const bucket = weekBuckets.get(key);
+    const preds = predictAllModels(modelOutput, dt);
+    Object.entries(preds).forEach(([modelKey, predVal]) => {
+      bucket.errors[modelKey] = (bucket.errors[modelKey] || 0) + Math.abs(d['App Complete'] - predVal);
+    });
+  });
+
+  const weeks = Array.from(weekBuckets.values()).sort((a, b) => a.sortKey - b.sortKey);
+  const labels = weeks.map(w => w.label);
+  const modelKeys = Object.keys(modelOutput.backtest);
+  const colors = { 'Proj: Day-of-Week': '#A7A7A7', 'Proj: Regr-3mo': '#0070F0', 'Proj: Regr-6mo': '#46B1EF', 'Proj: Regr-12mo': '#D64545' };
+
+  if (errorChartInstance) errorChartInstance.destroy();
+  errorChartInstance = new Chart(document.getElementById('errorOverTimeChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: modelKeys.map(key => ({
+        label: modelOutput.backtest[key].label,
+        data: weeks.map(w => w.errors[key] ?? null),
+        borderColor: colors[key] || '#001731',
+        borderWidth: 2, pointRadius: 2, tension: 0.2,
+      })),
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+      scales: { x: { ticks: { font: { size: 9 } } }, y: { ticks: { font: { size: 10 } } } },
+    },
+  });
+}
+
+function downloadCsv(daily) {
+  const headers = ['date', 'Inquiries', 'Intenders', 'App Complete'];
+  const rows = daily.map(d => [d.date, d.Inquiries, d.Intenders, d['App Complete']].join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `wst-daily-${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 function renderConversion(daily) {
@@ -337,6 +560,22 @@ function renderTrend(daily, modelOutput) {
   const modelSeries = aggregated.map(r => (r.model === undefined || r.model === null) ? null : Math.round(r.model * pct));
   const targetSeries = aggregated.map(r => (r.target === undefined || r.target === null) ? null : Math.round(r.target * pct));
 
+  // Holiday markers: only meaningful in daily view, where each label is a
+  // real calendar date rather than an aggregated week/month/year bucket.
+  const annotations = {};
+  if (ANNOTATION_AVAILABLE && currentGranularity === 'daily') {
+    sliced.forEach((r, i) => {
+      if (HOLIDAY_DATES.has(isoDate(r.dt))) {
+        annotations[`holiday-${i}`] = {
+          type: 'line',
+          xMin: labels[i], xMax: labels[i],
+          borderColor: '#D64545', borderWidth: 1, borderDash: [3, 3],
+          label: { display: true, content: 'Holiday', position: 'start', font: { size: 9 }, color: '#D64545', backgroundColor: 'rgba(255,255,255,0.85)' },
+        };
+      }
+    });
+  }
+
   if (trendChartInstance) trendChartInstance.destroy();
   trendChartInstance = new Chart(document.getElementById('trendChart'), {
     type: 'line',
@@ -356,6 +595,7 @@ function renderTrend(daily, modelOutput) {
         tooltip: {
           callbacks: { label: (ctx) => ctx.parsed.y === null ? null : `${ctx.dataset.label}: ${fmt(ctx.parsed.y)}` },
         },
+        annotation: { annotations },
       },
     },
   });
@@ -472,6 +712,7 @@ function renderModelSelect(modelOutput) {
     currentModelKey = select.value;
     renderTrend(DAILY, MODEL_OUTPUT);
     renderChannelBars(MODEL_OUTPUT);
+    renderPacingKpis();
   });
 }
 
@@ -493,8 +734,11 @@ loadData().then(({ daily, modelOutput }) => {
   MODEL_OUTPUT = modelOutput;
   currentModelKey = bestModelKey(modelOutput);
 
+  renderMonthTabs();
+  renderPacingKpis();
   renderKpis(daily, modelOutput);
   renderBacktest(modelOutput);
+  renderErrorOverTime(daily, modelOutput);
   renderConversion(daily);
   renderGranularityButtons();
   renderModelSelect(modelOutput);
@@ -504,6 +748,8 @@ loadData().then(({ daily, modelOutput }) => {
   initRangeSlider();
   renderTrend(daily, modelOutput);
   renderChannelBars(modelOutput);
+
+  document.getElementById('exportCsvBtn').addEventListener('click', () => downloadCsv(daily));
 
   document.getElementById('footer-note').textContent =
     `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
