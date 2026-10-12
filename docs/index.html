@@ -73,7 +73,7 @@
   .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--grey); font-weight: 600; margin-top: 2px; }
   .range-preset { margin-left: auto; }
 
-  .month-tabs { display: flex; gap: 6px; }
+  .month-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .month-tabs button {
     padding: 7px 16px; border-radius: 4px; font-weight: 700; font-size: 13px;
     border: 1px solid rgba(255,255,255,0.3); background: transparent; color: white; cursor: pointer;
@@ -192,11 +192,20 @@ const channelPercents = {
   "Unpaid Other": 1, "Paid Social": 0,
 };
 
-const monthGoals = { Oct: 9369, Nov: 11199, Dec: 10727 };
+const monthGoals = {
+  Oct: 9369, Nov: 11199, Dec: 10727,
+  Jan: 12037, Feb: 11952, Mar: 11692,
+};
+// Intenders goals given alongside App Complete for Jan-Mar 2027, kept for
+// reference even though no Intenders pacing view exists yet.
+const intendersGoals = { Jan: 14421, Feb: 15567, Mar: 14538 };
 const monthMeta = {
   Oct: { num: 10, year: 2026, label: 'October 2026' },
   Nov: { num: 11, year: 2026, label: 'November 2026' },
   Dec: { num: 12, year: 2026, label: 'December 2026' },
+  Jan: { num: 1, year: 2027, label: 'January 2027' },
+  Feb: { num: 2, year: 2027, label: 'February 2027' },
+  Mar: { num: 3, year: 2027, label: 'March 2027' },
 };
 // Same holiday set the Python regression models were fit with, used here
 // only to decide where to draw vertical markers on the daily trend chart.
@@ -204,6 +213,8 @@ const HOLIDAY_DATES = new Set([
   '2025-05-26', '2025-07-04', '2025-09-01', '2025-11-27', '2025-12-25',
   '2026-01-01', '2026-05-25', '2026-07-04', '2026-09-07',
   '2026-11-26', '2026-12-25', '2027-01-01',
+  '2027-05-31', '2027-07-04', '2027-09-06',
+  '2027-11-25', '2027-12-25', '2028-01-01',
 ]);
 function isoDate(dt) { return dt.toISOString().slice(0, 10); }
 
