@@ -108,30 +108,69 @@ function renderBacktest(modelOutput) {
 
 function renderTrend(daily, modelOutput) {
   const bestKey = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
-  const recent = daily.slice(-60);
-  const labels = recent.map(d => d.date);
-  const actuals = recent.map(d => d['App Complete']);
+  const targets = modelOutput.daily_targets || {};
 
-  const projLabels = modelOutput.projections.map(p => p.date);
-  const projValues = modelOutput.projections.map(p => p[bestKey]);
+  // Build one merged, date-ordered map so Actual / Model / Target can each
+  // be present or absent independently for any given date.
+  const recentActualRows = daily.slice(-60);
+  const byDate = new Map();
 
-  const allLabels = [...labels, ...projLabels];
-  const actualSeries = [...actuals, ...projLabels.map(() => null)];
-  const projSeries = [...labels.map(() => null), recent.length ? actuals[actuals.length-1] : null, ...projValues.slice(1)];
+  recentActualRows.forEach(d => {
+    byDate.set(d.date, { date: d.date, actual: d['App Complete'] });
+  });
+
+  modelOutput.projections.forEach(p => {
+    const row = byDate.get(p.date) || { date: p.date };
+    row.model = p[bestKey];
+    byDate.set(p.date, row);
+  });
+
+  // Targets are independent of actual/projection status — attach to any
+  // date already in view, and add target-only dates that fall within the
+  // recent/projection window even if there's no actual or model for them.
+  byDate.forEach((row, dateStr) => {
+    if (targets[dateStr] !== undefined) row.target = targets[dateStr];
+  });
+
+  // Anchor the model line visually at the last actual point so the dashed
+  // projection connects to the solid actual line instead of leaving a gap.
+  if (recentActualRows.length) {
+    const lastActualDate = recentActualRows[recentActualRows.length - 1].date;
+    const lastActualRow = byDate.get(lastActualDate);
+    if (lastActualRow && lastActualRow.model === undefined) {
+      lastActualRow.model = lastActualRow.actual;
+    }
+  }
+
+  const rows = Array.from(byDate.values());
+  const labels = rows.map(r => r.date);
+  const actualSeries = rows.map(r => r.actual ?? null);
+  const modelSeries = rows.map(r => r.model ?? null);
+  const targetSeries = rows.map(r => r.target ?? null);
 
   new Chart(document.getElementById('trendChart'), {
     type: 'line',
     data: {
-      labels: allLabels,
+      labels,
       datasets: [
-        { label: 'Actual', data: actualSeries, borderColor: '#0070F0', backgroundColor: 'rgba(0,112,240,0.1)', fill: true, tension: 0.2, pointRadius: 0 },
-        { label: 'Projection', data: projSeries, borderColor: '#46B1EF', borderDash: [5,3], tension: 0.2, pointRadius: 0 },
+        { label: 'Actual', data: actualSeries, borderColor: '#0070F0', backgroundColor: 'rgba(0,112,240,0.1)', fill: true, tension: 0.2, pointRadius: 0, spanGaps: false },
+        { label: 'Model', data: modelSeries, borderColor: '#46B1EF', borderDash: [5,3], tension: 0.2, pointRadius: 0, spanGaps: false },
+        { label: 'Target', data: targetSeries, borderColor: '#A7A7A7', borderDash: [2,2], tension: 0.2, pointRadius: 0, spanGaps: false },
       ],
     },
     options: {
       responsive: true,
       interaction: { mode: 'index', intersect: false },
       scales: { x: { ticks: { maxTicksLimit: 12, font: { size: 9 } } } },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            // Only list datasets that actually have a value for this date,
+            // so you never see a blank "Target: " line on days with no target.
+            label: (ctx) => ctx.parsed.y === null ? null : `${ctx.dataset.label}: ${ctx.parsed.y}`,
+          },
+        },
+      },
     },
   });
 }
