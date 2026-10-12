@@ -178,11 +178,24 @@ function renderConversion(daily) {
     type: 'line',
     data: {
       labels,
-      datasets: [{ data: rates, borderColor: '#97E152', borderWidth: 2, pointRadius: 0, tension: 0.3 }],
+      datasets: [{
+        data: rates, borderColor: '#97E152', borderWidth: 2,
+        pointRadius: 0, pointHoverRadius: 4, pointHitRadius: 10,
+        tension: 0.3,
+      }],
     },
     options: {
       responsive: true,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}%` } } },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: (items) => items[0].label,
+            label: (ctx) => `Conversion: ${ctx.parsed.y}%`,
+          },
+        },
+      },
       scales: { y: { min: 40, max: 80, display: false }, x: { display: false } },
     },
   });
