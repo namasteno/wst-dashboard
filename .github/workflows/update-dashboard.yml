@@ -4,10 +4,6 @@ on:
   push:
     paths:
       - "incoming/report.pdf"
-  schedule:
-    # Safety-net run every weekday morning in case the email/Zapier step
-    # is late or misses a day — re-parses whatever PDF is already there.
-    - cron: "0 14 * * 1-5"
   workflow_dispatch: {} # lets you trigger it manually from the Actions tab
 
 permissions:
@@ -26,12 +22,13 @@ jobs:
       - name: Install dependencies
         run: pip install pdfplumber numpy
 
-      - name: Parse latest report PDF
+      - name: Parse report PDF
         run: |
           if [ -f "incoming/report.pdf" ]; then
             python scripts/parse_report.py incoming/report.pdf docs/data/daily.json
           else
-            echo "No incoming/report.pdf found yet — skipping parse step."
+            echo "No incoming/report.pdf found — nothing to parse."
+            exit 1
           fi
 
       - name: Refit models and generate projections
