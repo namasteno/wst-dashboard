@@ -220,6 +220,7 @@ try {
 
 let DAILY = [];
 let MODEL_OUTPUT = null;
+let CHANNEL_ACTUALS = {};
 let trendChartInstance = null;
 let errorChartInstance = null;
 let currentGranularity = 'daily';
@@ -231,11 +232,12 @@ let rangeStartIdx = 0;
 let rangeEndIdx = 0;
 
 async function loadData() {
-  const [daily, modelOutput] = await Promise.all([
+  const [daily, modelOutput, channelActuals] = await Promise.all([
     fetch('data/daily.json').then(r => r.json()),
     fetch('data/model_output.json').then(r => r.json()),
+    fetch('data/channel_actuals.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
   ]);
-  return { daily, modelOutput };
+  return { daily, modelOutput, channelActuals };
 }
 
 function fmt(n) { return (n === null || n === undefined) ? '—' : n.toLocaleString('en-US'); }
@@ -254,6 +256,7 @@ function renderMonthTabs() {
       currentMonth = btn.dataset.month;
       renderMonthTabs();
       renderPacingKpis();
+      renderChannelBars(MODEL_OUTPUT);
     });
   });
 }
@@ -604,6 +607,7 @@ function renderTrend(daily, modelOutput) {
 function renderChannelBars(modelOutput) {
   const merged = buildMergedRows(DAILY, modelOutput, currentModelKey);
   const totalProjected = merged.reduce((sum, r) => sum + (typeof r.model === 'number' ? r.model : 0), 0);
+  const actualsForMonth = CHANNEL_ACTUALS[currentMonth]; // may be undefined
 
   const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total');
   const maxPct = Math.max(...entries.map(([, p]) => p));
@@ -614,15 +618,36 @@ function renderChannelBars(modelOutput) {
       const projected = Math.round((totalProjected * pct) / 100);
       const widthPct = maxPct > 0 ? (pct / maxPct) * 100 : 0;
       const isSelected = ch === currentChannel;
+      const actual = actualsForMonth ? actualsForMonth[ch] : undefined;
+      const hasActual = actual !== undefined;
+
+      const valueCell = hasActual
+        ? `<div class="bar-value">${fmt(actual)}</div>
+           <div style="width:60px;text-align:right;font-size:11px;font-weight:700;color:${actual - projected >= 0 ? '#2f8f3e' : '#D64545'}">
+             ${actual - projected >= 0 ? '+' : ''}${fmt(actual - projected)}
+           </div>`
+        : `<div class="bar-value" style="color:var(--grey);font-weight:600;">${fmt(projected)} proj.</div><div style="width:60px"></div>`;
+
+      const actualOverlay = hasActual && projected > 0
+        ? `<div class="bar-fill" style="position:absolute;top:0;left:0;height:100%;width:${Math.min(100, (actual / projected) * Math.max(2, widthPct))}%;background:${isSelected ? 'var(--lime)' : 'var(--med-blue)'};"></div>`
+        : `<div class="bar-fill" style="width:${Math.max(2, widthPct)}%; background:${isSelected ? '#cfead6' : '#cfe0fb'};"></div>`;
+
       return `
         <div class="bar-row">
           <div class="bar-label" style="${isSelected ? 'font-weight:800;color:var(--blue)' : ''}">${ch}</div>
-          <div class="bar-track"><div class="bar-fill" style="width:${Math.max(2, widthPct)}%; background:${isSelected ? 'var(--lime)' : 'var(--med-blue)'}"></div></div>
-          <div class="bar-value">${fmt(projected)}</div>
+          <div class="bar-track" style="position:relative;">${actualOverlay}</div>
+          ${valueCell}
           <div class="bar-pct">${pct}%</div>
         </div>
       `;
     }).join('');
+
+  const noteEl = document.querySelector('#channelBars + .note');
+  if (noteEl) {
+    noteEl.textContent = actualsForMonth
+      ? `Showing real ${currentMonth} MTD actuals vs. projected share (+/− = actual minus projected). Update docs/data/channel_actuals.json to refresh these numbers.`
+      : `No channel actuals on file for ${currentMonth} yet — showing projected share of the official budget plan only. Add a "${currentMonth}" entry to docs/data/channel_actuals.json to show real numbers here.`;
+  }
 }
 
 function formatShortDate(dt) {
@@ -729,9 +754,10 @@ function renderChannelSelect() {
   });
 }
 
-loadData().then(({ daily, modelOutput }) => {
+loadData().then(({ daily, modelOutput, channelActuals }) => {
   DAILY = daily;
   MODEL_OUTPUT = modelOutput;
+  CHANNEL_ACTUALS = channelActuals || {};
   currentModelKey = bestModelKey(modelOutput);
 
   renderMonthTabs();
