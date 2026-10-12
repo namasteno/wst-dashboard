@@ -13,6 +13,12 @@ import numpy as np
 from datetime import datetime, date, timedelta
 from pathlib import Path
 
+# Official day-by-day adaptive budget (App Complete), provided by WGU for
+# Oct-Dec 2026. Keyed by "Mon D, YYYY" to match the date format used
+# throughout this pipeline. Add more months here as WGU provides them.
+_TARGETS_PATH = Path(__file__).parent / "daily_targets.json"
+DAILY_TARGETS = json.loads(_TARGETS_PATH.read_text()) if _TARGETS_PATH.exists() else {}
+
 IDX = {"Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6, "Sun": 7}
 
 # Add/adjust known holidays here as the calendar rolls forward
@@ -153,6 +159,9 @@ def main():
         "regression_models": {k: {"r2": v["r2"], "n": v["n"], "coefs": v["coefs"]} for k, v in models.items()},
         "projections": projections,
         "backtest": backtest,
+        # Official daily targets, independent of actual/projection status —
+        # plottable for ANY date in range, including past actual days.
+        "daily_targets": DAILY_TARGETS,
     }
 
     Path(out_path).write_text(json.dumps(output, indent=2))
