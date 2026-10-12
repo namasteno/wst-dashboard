@@ -51,6 +51,26 @@
   .bar-value { width: 70px; text-align: right; font-size: 12px; font-weight: 700; }
   .bar-pct { width: 36px; text-align: right; font-size: 11px; color: var(--grey); }
   .note { font-size: 10px; color: var(--grey); margin-top: 8px; }
+
+  .range-wrap { position: relative; height: 36px; margin: 6px 0 14px; }
+  .range-wrap input[type="range"] {
+    position: absolute; left: 0; top: 10px; width: 100%; margin: 0;
+    -webkit-appearance: none; appearance: none; background: transparent; pointer-events: none;
+  }
+  .range-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; pointer-events: auto;
+    width: 14px; height: 14px; border-radius: 50%; background: var(--blue);
+    cursor: pointer; margin-top: -6px;
+  }
+  .range-wrap input[type="range"]::-moz-range-thumb {
+    pointer-events: auto; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--blue); cursor: pointer; border: none;
+  }
+  .range-wrap input[type="range"]::-webkit-slider-runnable-track { height: 3px; background: transparent; }
+  .range-track-bg { position: absolute; left: 0; right: 0; top: 16px; height: 3px; background: var(--light-grey); border-radius: 2px; }
+  .range-track-fill { position: absolute; top: 16px; height: 3px; background: var(--med-blue); border-radius: 2px; }
+  .range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--grey); font-weight: 600; margin-top: 2px; }
+  .range-preset { margin-left: auto; }
 </style>
 </head>
 <body>
@@ -83,7 +103,30 @@
         <label for="channelSelect">Channel</label>
         <select id="channelSelect"></select>
       </div>
+      <div class="control-group range-preset">
+        <label for="rangePreset">Range</label>
+        <select id="rangePreset">
+          <option value="30">Last 30 days</option>
+          <option value="60" selected>Last 60 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="180">Last 6 months</option>
+          <option value="all">All data</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
     </div>
+
+    <div class="range-labels">
+      <span id="rangeStartLabel"></span>
+      <span id="rangeEndLabel"></span>
+    </div>
+    <div class="range-wrap">
+      <div class="range-track-bg"></div>
+      <div class="range-track-fill" id="rangeTrackFill"></div>
+      <input type="range" id="rangeStart" />
+      <input type="range" id="rangeEnd" />
+    </div>
+
     <h2>TREND — ACTUAL VS. MODEL VS. TARGET</h2>
     <canvas id="trendChart"></canvas>
   </div>
@@ -113,6 +156,9 @@ let trendChartInstance = null;
 let currentGranularity = 'daily';
 let currentModelKey = null;
 let currentChannel = 'Total';
+let ALL_ROWS = []; // full merged Actual/Model/Target rows, built once per model change
+let rangeStartIdx = 0;
+let rangeEndIdx = 0;
 
 async function loadData() {
   const [daily, modelOutput] = await Promise.all([
@@ -282,8 +328,9 @@ function aggregateRows(rows, granularity) {
 
 function renderTrend(daily, modelOutput) {
   const pct = channelPercents[currentChannel] / 100;
-  const merged = buildMergedRows(daily, modelOutput, currentModelKey);
-  const aggregated = aggregateRows(merged, currentGranularity);
+  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey);
+  const sliced = ALL_ROWS.slice(rangeStartIdx, rangeEndIdx + 1);
+  const aggregated = aggregateRows(sliced, currentGranularity);
 
   const labels = aggregated.map(r => r.date);
   const actualSeries = aggregated.map(r => r.actual ?? null); // actuals never scaled by channel — no channel actuals exist
@@ -338,6 +385,69 @@ function renderChannelBars(modelOutput) {
     }).join('');
 }
 
+function formatShortDate(dt) {
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function applyRangePreset(preset, actualCount, totalCount) {
+  if (preset === 'all') return [0, totalCount - 1];
+  if (preset === 'custom') return [rangeStartIdx, rangeEndIdx]; // leave as-is
+  const n = parseInt(preset, 10);
+  return [Math.max(0, actualCount - n), totalCount - 1];
+}
+
+function updateRangeUI() {
+  const total = ALL_ROWS.length;
+  document.getElementById('rangeStartLabel').textContent = formatShortDate(ALL_ROWS[rangeStartIdx].dt);
+  document.getElementById('rangeEndLabel').textContent = formatShortDate(ALL_ROWS[rangeEndIdx].dt);
+  const fill = document.getElementById('rangeTrackFill');
+  const startPct = (rangeStartIdx / (total - 1)) * 100;
+  const endPct = (rangeEndIdx / (total - 1)) * 100;
+  fill.style.left = startPct + '%';
+  fill.style.width = (endPct - startPct) + '%';
+}
+
+function initRangeSlider() {
+  const total = ALL_ROWS.length;
+  const startInput = document.getElementById('rangeStart');
+  const endInput = document.getElementById('rangeEnd');
+  const presetSelect = document.getElementById('rangePreset');
+
+  [startInput, endInput].forEach(inp => {
+    inp.min = 0;
+    inp.max = total - 1;
+  });
+
+  const [s, e] = applyRangePreset(presetSelect.value, DAILY.length, total);
+  rangeStartIdx = s;
+  rangeEndIdx = e;
+  startInput.value = rangeStartIdx;
+  endInput.value = rangeEndIdx;
+  updateRangeUI();
+
+  startInput.addEventListener('input', () => {
+    rangeStartIdx = Math.min(parseInt(startInput.value, 10), rangeEndIdx);
+    startInput.value = rangeStartIdx;
+    presetSelect.value = 'custom';
+    updateRangeUI();
+    renderTrend(DAILY, MODEL_OUTPUT);
+  });
+  endInput.addEventListener('input', () => {
+    rangeEndIdx = Math.max(parseInt(endInput.value, 10), rangeStartIdx);
+    endInput.value = rangeEndIdx;
+    presetSelect.value = 'custom';
+    updateRangeUI();
+    renderTrend(DAILY, MODEL_OUTPUT);
+  });
+  presetSelect.addEventListener('change', () => {
+    const [ns, ne] = applyRangePreset(presetSelect.value, DAILY.length, total);
+    rangeStartIdx = ns; rangeEndIdx = ne;
+    startInput.value = rangeStartIdx; endInput.value = rangeEndIdx;
+    updateRangeUI();
+    renderTrend(DAILY, MODEL_OUTPUT);
+  });
+}
+
 function renderGranularityButtons() {
   const container = document.getElementById('granularityButtons');
   const modes = ['daily', 'weekly', 'monthly', 'yearly'];
@@ -389,6 +499,9 @@ loadData().then(({ daily, modelOutput }) => {
   renderGranularityButtons();
   renderModelSelect(modelOutput);
   renderChannelSelect();
+
+  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey);
+  initRangeSlider();
   renderTrend(daily, modelOutput);
   renderChannelBars(modelOutput);
 
