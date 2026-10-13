@@ -34,10 +34,13 @@ jobs:
       - name: Refit models and generate projections
         run: python scripts/update_models.py docs/data/daily.json docs/data/model_output.json
 
+      - name: Freeze monthly forecast
+        run: python scripts/freeze_forecast.py
+
       - name: Commit updated dashboard data
         run: |
           git config user.name "wst-dashboard-bot"
           git config user.email "actions@github.com"
-          git add docs/data/daily.json docs/data/model_output.json
+          git add docs/data/daily.json docs/data/model_output.json docs/data/frozen_forecast.json
           git diff --cached --quiet || git commit -m "Update dashboard data: $(date -u +%Y-%m-%d)"
           git push
