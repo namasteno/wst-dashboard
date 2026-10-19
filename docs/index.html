@@ -87,8 +87,28 @@
   }
   .export-btn:hover { background: var(--light-grey); }
 
+  /* Intender -> App conversion panel */
+  .kpis.three { grid-template-columns: repeat(3, 1fr); border: 1px solid var(--light-grey); }
+  .kpis.three .value { font-size: 26px; }
+  .kpis.three .sub { font-size: 12px; font-weight: 600; color: var(--grey); margin-top: 2px; }
+  .heat { display: grid; grid-template-columns: 58px repeat(7, 1fr) 54px; gap: 3px; align-items: stretch; }
+  .heat .hh { font-size: 10px; font-weight: 700; color: var(--grey); text-align: center; padding-bottom: 2px; }
+  .heat .wk { font-size: 11px; font-weight: 600; color: var(--grey); display: flex; align-items: center; }
+  .heat .cell { height: 30px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #001731; }
+  .heat .cell.prov { outline: 1.5px dashed var(--blue); outline-offset: -2px; }
+  .heat .cell.none { background: repeating-linear-gradient(45deg, #fff, #fff 4px, var(--light-grey) 4px, var(--light-grey) 8px); color: var(--grey); font-weight: 600; }
+  .heat .cell.wkavg { font-size: 12px; border: 1px solid rgba(0,40,85,0.25); }
+  .heat-legend { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 10px; color: var(--grey); font-weight: 600; flex-wrap: wrap; }
+  .heat-legend .ramp { width: 140px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #D64545, #F1F1F1 50%, #97E152); }
+
   @media (max-width: 700px) {
     .kpis { grid-template-columns: repeat(2, 1fr); }
+    .kpis.three { grid-template-columns: repeat(3, 1fr); }
+    .kpis.three .kpi { border-right: 1px solid var(--light-grey); border-bottom: none; padding: 12px 10px; }
+    .kpis.three .kpi:last-child { border-right: none; }
+    .kpis.three .value { font-size: 20px; }
+    .heat { grid-template-columns: 44px repeat(7, 1fr) 44px; gap: 2px; }
+    .heat .cell { height: 26px; font-size: 10px; }
     .kpi { border-right: none; border-bottom: 1px solid var(--light-grey); }
     .controls { flex-direction: column; align-items: stretch; }
     .control-group { justify-content: space-between; }
@@ -128,9 +148,23 @@
   </div>
 
   <div class="section">
-    <h2>INTENDER → APP CONVERSION (last 30 actual days)</h2>
-    <canvas id="conversionChart" style="max-height:90px"></canvas>
-    <div class="note">App Complete ÷ Intenders, %</div>
+    <h2>INTENDER → APP CONVERSION</h2>
+    <div class="controls" style="margin-bottom:10px;">
+      <div class="control-group">
+        <label>Days</label>
+        <div class="control-group" id="convSegButtons"></div>
+      </div>
+    </div>
+    <div class="kpis three" id="convKpis"></div>
+    <canvas id="conversionChart" style="max-height:240px;margin-top:14px"></canvas>
+    <div class="note" id="convNote"></div>
+
+    <h2 style="margin-top:22px;">CONVERSION BY DAY (last 10 weeks)</h2>
+    <div class="heat" id="convHeatmap"></div>
+    <div class="heat-legend">
+      <span>58%</span><span class="ramp"></span><span>78%</span>
+      <span style="margin-left:10px;">Dashed outline: latest days, still being revised in later reports. Striped: no data in the source.</span>
+    </div>
   </div>
 
   <div class="section">
@@ -452,36 +486,221 @@ function downloadCsv(daily) {
   URL.revokeObjectURL(url);
 }
 
-function renderConversion(daily) {
-  const recent = daily.slice(-30).filter(d => d.Intenders > 0);
-  const labels = recent.map(d => d.date);
-  const rates = recent.map(d => Number(((d['App Complete'] / d.Intenders) * 100).toFixed(1)));
+// --- Intender → App conversion panel ---
+// Conversion = App Complete ÷ Intenders for the same day (not a cohort rate).
+let conversionChartInstance = null;
+let convSegment = 'all'; // 'all' | 'weekday' | 'weekend'
+const PROVISIONAL_DAYS = 5;    // newest days get revised upward in later report pulls
+const CONV_TREND_WEEKS = 26;   // weeks shown on the trend line
+const CONV_BASELINE_WEEKS = 13; // average of the weeks before each week
+const CONV_FLAG_PTS = 5;       // flag a week this many points under its baseline
+const HEAT_LO = 58, HEAT_HI = 78; // fixed colour scale so colours mean the same thing over time
 
-  new Chart(document.getElementById('conversionChart'), {
+function localKey(dt) {
+  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+}
+
+function convRows(daily) {
+  return daily
+    .map(d => ({ dt: new Date(d.date), date: d.date, i: d.Intenders, a: d['App Complete'] }))
+    .filter(r => r.i > 0)
+    .sort((x, y) => x.dt - y.dt);
+}
+
+function buildWeeklyConversion(rows, segment) {
+  const expected = segment === 'all' ? 7 : segment === 'weekday' ? 5 : 2;
+  const prov = new Set(rows.slice(-PROVISIONAL_DAYS).map(r => localKey(r.dt)));
+  const buckets = new Map();
+  rows.forEach(r => {
+    const wd = r.dt.getDay();
+    const isWeekend = wd === 0 || wd === 6;
+    if (segment === 'weekday' && isWeekend) return;
+    if (segment === 'weekend' && !isWeekend) return;
+    const start = weekStart(r.dt);
+    const key = localKey(start);
+    if (!buckets.has(key)) buckets.set(key, { start, i: 0, a: 0, n: 0, prov: false });
+    const b = buckets.get(key);
+    b.i += r.i; b.a += r.a; b.n += 1;
+    if (prov.has(localKey(r.dt))) b.prov = true;
+  });
+  const all = Array.from(buckets.values()).sort((x, y) => x.start - y.start);
+  // Keep full weeks (tolerating one missing day in the source) plus the in-progress latest week.
+  const weeks = all.filter((w, idx) => w.n >= Math.max(1, expected - 1) || idx === all.length - 1);
+  weeks.forEach((w, idx) => {
+    w.rate = (w.a / w.i) * 100;
+    w.partial = w.n < expected;
+    const prior = weeks.slice(Math.max(0, idx - CONV_BASELINE_WEEKS), idx);
+    w.baseline = prior.length >= 4 ? prior.reduce((sum, p) => sum + p.rate, 0) / prior.length : null;
+    w.flag = w.baseline !== null && w.rate < w.baseline - CONV_FLAG_PTS;
+  });
+  return weeks;
+}
+
+function renderConversionKpis(weeks) {
+  const el = document.getElementById('convKpis');
+  const last = weeks[weeks.length - 1];
+  if (!last) { el.innerHTML = ''; return; }
+  const label = last.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const gap = last.baseline === null ? null : last.rate - last.baseline;
+  const gapColor = gap === null ? 'var(--grey)' : gap <= -2 ? '#D64545' : gap >= 2 ? '#2f8f3e' : 'var(--grey)';
+  const notes = [];
+  if (last.partial) notes.push(`${last.n} days so far`);
+  if (last.prov) notes.push('still being revised');
+  let streak = 0;
+  for (let k = weeks.length - 1; k >= 0 && weeks[k].flag; k--) streak++;
+  const streakText = streak > 0
+    ? `${streak} week${streak > 1 ? 's' : ''} in a row ${CONV_FLAG_PTS}+ pts below`
+    : 'within the usual range';
+
+  el.innerHTML = `
+    <div class="kpi">
+      <div class="label">WEEK OF ${label.toUpperCase()}</div>
+      <div class="value">${last.rate.toFixed(1)}%</div>
+      <div class="sub">${notes.length ? notes.join(', ') : 'complete week'}</div>
+    </div>
+    <div class="kpi">
+      <div class="label">${CONV_BASELINE_WEEKS}-WEEK AVERAGE</div>
+      <div class="value">${last.baseline === null ? '—' : last.baseline.toFixed(1) + '%'}</div>
+      <div class="sub">the weeks before this one</div>
+    </div>
+    <div class="kpi">
+      <div class="label">VS. AVERAGE</div>
+      <div class="value" style="color:${gapColor}">${gap === null ? '—' : (gap >= 0 ? '+' : '−') + Math.abs(gap).toFixed(1) + ' pts'}</div>
+      <div class="sub">${streakText}</div>
+    </div>
+  `;
+}
+
+function renderConversionChart(weeks) {
+  const shown = weeks.slice(-CONV_TREND_WEEKS);
+  if (conversionChartInstance) { conversionChartInstance.destroy(); conversionChartInstance = null; }
+  if (!shown.length) return;
+  const labels = shown.map(w => w.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+  const rates = shown.map(w => Number(w.rate.toFixed(1)));
+  const base = shown.map(w => w.baseline === null ? null : Number(w.baseline.toFixed(1)));
+  const vals = rates.concat(base.filter(v => v !== null));
+  const yMin = Math.floor((Math.min(...vals) - 3) / 5) * 5;
+  const yMax = Math.ceil((Math.max(...vals) + 2) / 5) * 5;
+
+  conversionChartInstance = new Chart(document.getElementById('conversionChart'), {
     type: 'line',
     data: {
       labels,
-      datasets: [{
-        data: rates, borderColor: '#97E152', borderWidth: 2,
-        pointRadius: 0, pointHoverRadius: 4, pointHitRadius: 10,
-        tension: 0.3,
-      }],
+      datasets: [
+        {
+          label: 'Weekly conversion', data: rates,
+          borderColor: '#0070F0', borderWidth: 2, tension: 0.2,
+          pointRadius: shown.map(w => (w.flag ? 5 : 3)),
+          pointBackgroundColor: shown.map(w => (w.prov ? '#fff' : (w.flag ? '#D64545' : '#0070F0'))),
+          pointBorderColor: shown.map(w => (w.flag ? '#D64545' : '#0070F0')),
+          pointBorderWidth: 2,
+          segment: { borderDash: ctx => (shown[ctx.p1DataIndex].prov ? [4, 3] : undefined) },
+        },
+        {
+          label: `${CONV_BASELINE_WEEKS}-week average`, data: base,
+          borderColor: '#A7A7A7', borderWidth: 1.5, borderDash: [2, 2],
+          pointRadius: 0, tension: 0.2, spanGaps: true,
+        },
+      ],
     },
     options: {
       responsive: true,
       interaction: { mode: 'index', intersect: false },
       plugins: {
-        legend: { display: false },
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
         tooltip: {
           callbacks: {
-            title: (items) => items[0].label,
-            label: (ctx) => `Conversion: ${ctx.parsed.y}%`,
+            title: items => `Week of ${items[0].label}`,
+            label: ctx => (ctx.parsed.y === null ? null : `${ctx.dataset.label}: ${ctx.parsed.y}%`),
+            afterLabel: ctx => {
+              if (ctx.datasetIndex !== 0) return undefined;
+              const w = shown[ctx.dataIndex];
+              return `${w.a.toLocaleString('en-US')} App Completes from ${w.i.toLocaleString('en-US')} Intenders` +
+                (w.prov ? ' (still being revised)' : '');
+            },
           },
         },
       },
-      scales: { y: { min: 40, max: 80, display: false }, x: { display: false } },
+      scales: {
+        y: { min: yMin, max: yMax, ticks: { callback: v => v + '%', font: { size: 10 } } },
+        x: { ticks: { font: { size: 9 }, maxRotation: 0, autoSkipPadding: 8 } },
+      },
     },
   });
+}
+
+function heatColor(v) {
+  const t = Math.min(1, Math.max(0, (v - HEAT_LO) / (HEAT_HI - HEAT_LO)));
+  const lo = [214, 69, 69], mid = [241, 241, 241], hi = [151, 225, 82];
+  const [from, to, u] = t < 0.5 ? [lo, mid, t * 2] : [mid, hi, (t - 0.5) * 2];
+  return `rgb(${from.map((c, k) => Math.round(c + (to[k] - c) * u)).join(',')})`;
+}
+
+function renderConversionHeatmap(rows) {
+  const el = document.getElementById('convHeatmap');
+  if (!rows.length) { el.innerHTML = ''; return; }
+  const byKey = new Map(rows.map(r => [localKey(r.dt), r]));
+  const lastDt = rows[rows.length - 1].dt;
+  const prov = new Set(rows.slice(-PROVISIONAL_DAYS).map(r => localKey(r.dt)));
+  const thisWeek = weekStart(lastDt);
+  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  let html = '<div class="hh"></div>' + dayNames.map(n => `<div class="hh">${n}</div>`).join('') + '<div class="hh">Week</div>';
+
+  for (let w = 9; w >= 0; w--) {
+    const start = new Date(thisWeek);
+    start.setDate(start.getDate() - 7 * w);
+    let wi = 0, wa = 0, rowProv = false, cells = '';
+    for (let k = 0; k < 7; k++) {
+      const day = new Date(start);
+      day.setDate(day.getDate() + k);
+      const key = localKey(day);
+      const r = byKey.get(key);
+      if (r) {
+        const rate = (r.a / r.i) * 100;
+        wi += r.i; wa += r.a;
+        if (prov.has(key)) rowProv = true;
+        cells += `<div class="cell${prov.has(key) ? ' prov' : ''}" style="background:${heatColor(rate)}" ` +
+          `title="${r.date}: ${rate.toFixed(1)}% (${r.a.toLocaleString('en-US')} of ${r.i.toLocaleString('en-US')} Intenders)">${Math.round(rate)}</div>`;
+      } else if (day > lastDt) {
+        cells += '<div></div>';
+      } else {
+        cells += `<div class="cell none" title="${formatShortDate(day)}: no data in the source">–</div>`;
+      }
+    }
+    const weekRate = wi > 0 ? (wa / wi) * 100 : null;
+    html += `<div class="wk">${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>` + cells +
+      (weekRate === null
+        ? '<div></div>'
+        : `<div class="cell wkavg${rowProv ? ' prov' : ''}" style="background:${heatColor(weekRate)}">${weekRate.toFixed(1)}</div>`);
+  }
+  el.innerHTML = html;
+}
+
+function renderConversionSegmentButtons() {
+  const container = document.getElementById('convSegButtons');
+  const modes = [['all', 'All days'], ['weekday', 'Weekdays'], ['weekend', 'Weekends']];
+  container.innerHTML = modes.map(([key, label]) =>
+    `<button class="seg-btn ${key === convSegment ? 'active' : ''}" style="text-transform:none" data-seg="${key}">${label}</button>`
+  ).join('');
+  container.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      convSegment = btn.dataset.seg;
+      renderConversionSegmentButtons();
+      renderConversionPanel();
+    });
+  });
+}
+
+function renderConversionPanel() {
+  const rows = convRows(DAILY);
+  const weeks = buildWeeklyConversion(rows, convSegment);
+  renderConversionKpis(weeks);
+  renderConversionChart(weeks);
+  renderConversionHeatmap(rows);
+  document.getElementById('convNote').textContent =
+    `App Complete ÷ Intenders for the same day, grouped Mon–Sun. Red points are weeks more than ${CONV_FLAG_PTS} points ` +
+    `below the average of the ${CONV_BASELINE_WEEKS} weeks before them. Hollow points and dashed lines include the latest ` +
+    `${PROVISIONAL_DAYS} days, which tend to be revised upward in later reports.`;
 }
 
 // --- Date helpers for granularity aggregation ---
@@ -617,7 +836,8 @@ function renderTrend(daily, modelOutput) {
 
 function renderChannelBars(modelOutput) {
   const merged = buildMergedRows(DAILY, modelOutput, currentModelKey);
-  const totalProjected = merged.reduce((sum, r) => sum + (typeof r.model === 'number' ? r.model : 0), 0);
+  // The frozen forecast also covers days that already have actuals, so only sum days still ahead of us.
+  const totalProjected = merged.reduce((sum, r) => sum + (typeof r.model === 'number' && r.actual === undefined ? r.model : 0), 0);
   const actualsForMonth = CHANNEL_ACTUALS[currentMonth]; // may be undefined
 
   const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total');
@@ -776,7 +996,8 @@ loadData().then(({ daily, modelOutput, channelActuals }) => {
   renderKpis(daily, modelOutput);
   renderBacktest(modelOutput);
   renderErrorOverTime(daily, modelOutput);
-  renderConversion(daily);
+  renderConversionSegmentButtons();
+  renderConversionPanel();
   renderGranularityButtons();
   renderModelSelect(modelOutput);
   renderChannelSelect();
@@ -789,7 +1010,7 @@ loadData().then(({ daily, modelOutput, channelActuals }) => {
   document.getElementById('exportCsvBtn').addEventListener('click', () => downloadCsv(daily));
 
   document.getElementById('footer-note').textContent =
-    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
+    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day; the Model line in the trend and pacing views is each month's forecast frozen at the prior month-end, while the backtest and error charts keep refitting. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
 }).catch(err => {
   document.getElementById('footer-note').textContent = 'Error loading data: ' + err.message;
 });
