@@ -101,8 +101,35 @@
   .heat-legend { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 10px; color: var(--grey); font-weight: 600; flex-wrap: wrap; }
   .heat-legend .ramp { width: 140px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #D64545, #F1F1F1 50%, #97E152); }
 
+  /* Channel performance */
+  .stamp { font-size: 11px; font-weight: 600; color: var(--grey); }
+  .stamp.stale { color: #B26B00; }
+  .chtable { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .chtable th { padding: 6px 8px; font-size: 11px; font-weight: 700; color: var(--grey); text-align: right; white-space: nowrap; border-bottom: 1px solid var(--light-grey); }
+  .chtable th:first-child, .chtable td:first-child { text-align: left; }
+  .chtable th button { background: none; border: none; padding: 0; font: inherit; color: inherit; cursor: pointer; }
+  .chtable th button:hover, .chtable th.sorted button { color: var(--blue); }
+  .chtable th button:focus-visible { outline: 2px solid var(--med-blue); outline-offset: 2px; border-radius: 2px; }
+  .chtable td { padding: 7px 8px; text-align: right; border-bottom: 1px solid var(--light-grey); font-variant-numeric: tabular-nums; }
+  .chtable tr.sel td:first-child { font-weight: 800; color: var(--blue); }
+  .chtable tr.low td { color: var(--grey); }
+  .chtable .lowtag { font-size: 9px; font-weight: 600; color: var(--grey); }
+  .chtable tfoot td { font-weight: 800; color: var(--blue); border-top: 2px solid var(--blue); border-bottom: none; }
+  .rate-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-end; min-width: 170px; }
+  .rate-track { position: relative; flex: 1; height: 10px; background: var(--light-grey); border-radius: 2px; }
+  .rate-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; }
+  .rate-mark { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--blue); }
+  .rate-val { width: 46px; text-align: right; font-weight: 700; }
+  .mix-muted { color: var(--grey); }
+
   @media (max-width: 700px) {
     .kpis { grid-template-columns: repeat(2, 1fr); }
+    .chtable { font-size: 11px; }
+    .chtable th, .chtable td { padding: 6px 4px; }
+    .chtable th { white-space: normal; }
+    .rate-cell { min-width: 96px; gap: 4px; }
+    .rate-track { min-width: 36px; }
+    .rate-val { width: 38px; }
     .kpis.three { grid-template-columns: repeat(3, 1fr); }
     .kpis.three .kpi { border-right: 1px solid var(--light-grey); border-bottom: none; padding: 12px 10px; }
     .kpis.three .kpi:last-child { border-right: none; }
@@ -208,13 +235,12 @@
   </div>
 
   <div class="section">
-    <h2>CHANNEL PACING (projected share of Oct–Dec budget)</h2>
-    <div id="channelBars"></div>
-    <div class="note">
-      Scaled by each channel's % of the official budget plan. No channel-level
-      actuals are wired into this automated feed yet — these are projection
-      shares only, not measured results.
+    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;">
+      <h2 id="channelTitle">CHANNEL PERFORMANCE</h2>
+      <div class="stamp" id="channelStamp"></div>
     </div>
+    <div id="channelView"></div>
+    <div class="note" id="channelNote"></div>
   </div>
 
   <footer id="footer-note">Loading…</footer>
@@ -301,7 +327,7 @@ function renderMonthTabs() {
       currentMonth = btn.dataset.month;
       renderMonthTabs();
       renderPacingKpis();
-      renderChannelBars(MODEL_OUTPUT);
+      renderChannelView();
     });
   });
 }
@@ -834,51 +860,208 @@ function renderTrend(daily, modelOutput) {
   });
 }
 
-function renderChannelBars(modelOutput) {
-  const merged = buildMergedRows(DAILY, modelOutput, currentModelKey);
-  // The frozen forecast also covers days that already have actuals, so only sum days still ahead of us.
-  const totalProjected = merged.reduce((sum, r) => sum + (typeof r.model === 'number' && r.actual === undefined ? r.model : 0), 0);
-  const actualsForMonth = CHANNEL_ACTUALS[currentMonth]; // may be undefined
+// --- Channel performance ---
+// Channel data is pulled weekly and lives in docs/data/channel_actuals.json, with its own
+// "updated" date, separate from the daily report feed.
+const CHANNEL_ALIASES = {
+  'Paid Search (Trademark)': 'PS-TM',
+  'Paid Search (Non-Trademark)': 'PS-NTM',
+  'Paid Search': 'Paid Search (other)',
+};
+const CHANNEL_FULL_NAMES = { 'PS-TM': 'Paid Search (Trademark)', 'PS-NTM': 'Paid Search (Non-Trademark)' };
+const CHANNEL_LOW_VOLUME = 30;  // under this many Intenders a rate is mostly noise
+const CHANNEL_STALE_DAYS = 8;   // the pull is weekly; flag it once it is more than a week old
+let channelSort = { key: 'intenders', dir: 'desc' };
 
-  const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total');
-  const maxPct = Math.max(...entries.map(([, p]) => p));
+function parseIsoLocal(str) { return str ? new Date(`${str}T00:00:00`) : null; }
 
-  document.getElementById('channelBars').innerHTML = entries
-    .sort((a, b) => b[1] - a[1])
-    .map(([ch, pct]) => {
-      const projected = Math.round((totalProjected * pct) / 100);
-      const widthPct = maxPct > 0 ? (pct / maxPct) * 100 : 0;
-      const isSelected = ch === currentChannel;
-      const actual = actualsForMonth ? actualsForMonth[ch] : undefined;
-      const hasActual = actual !== undefined;
+// Accepts { updated, through, channels: { Direct: { intenders, converted } } } and the older
+// flat shape { Direct: 719 } (converted only). Channel names may use the long report names.
+function parseChannelMonth(raw) {
+  if (!raw) return null;
+  const channels = raw.channels || raw;
+  const merged = new Map();
+  Object.entries(channels).forEach(([name, v]) => {
+    if (v === null || v === undefined) return;
+    const key = CHANNEL_ALIASES[name] || name;
+    const cur = merged.get(key) || { key, intenders: null, converted: 0 };
+    cur.converted += (typeof v === 'number' ? v : v.converted) || 0;
+    if (typeof v === 'object' && v.intenders !== undefined && v.intenders !== null) {
+      cur.intenders = (cur.intenders || 0) + v.intenders;
+    }
+    merged.set(key, cur);
+  });
+  return { updated: raw.updated || null, through: raw.through || null, rows: Array.from(merged.values()) };
+}
 
-      const valueCell = hasActual
-        ? `<div class="bar-value">${fmt(actual)}</div>
-           <div style="width:60px;text-align:right;font-size:11px;font-weight:700;color:${actual - projected >= 0 ? '#2f8f3e' : '#D64545'}">
-             ${actual - projected >= 0 ? '+' : ''}${fmt(actual - projected)}
-           </div>`
-        : `<div class="bar-value" style="color:var(--grey);font-weight:600;">${fmt(projected)} proj.</div><div style="width:60px"></div>`;
-
-      const actualOverlay = hasActual && projected > 0
-        ? `<div class="bar-fill" style="position:absolute;top:0;left:0;height:100%;width:${Math.min(100, (actual / projected) * Math.max(2, widthPct))}%;background:${isSelected ? 'var(--lime)' : 'var(--med-blue)'};"></div>`
-        : `<div class="bar-fill" style="width:${Math.max(2, widthPct)}%; background:${isSelected ? '#cfead6' : '#cfe0fb'};"></div>`;
-
-      return `
-        <div class="bar-row">
-          <div class="bar-label" style="${isSelected ? 'font-weight:800;color:var(--blue)' : ''}">${ch}</div>
-          <div class="bar-track" style="position:relative;">${actualOverlay}</div>
-          ${valueCell}
-          <div class="bar-pct">${pct}%</div>
-        </div>
-      `;
-    }).join('');
-
-  const noteEl = document.querySelector('#channelBars + .note');
-  if (noteEl) {
-    noteEl.textContent = actualsForMonth
-      ? `Showing real ${currentMonth} MTD actuals vs. projected share (+/− = actual minus projected). Update docs/data/channel_actuals.json to refresh these numbers.`
-      : `No channel actuals on file for ${currentMonth} yet — showing projected share of the official budget plan only. Add a "${currentMonth}" entry to docs/data/channel_actuals.json to show real numbers here.`;
+function renderChannelStamp(data) {
+  const el = document.getElementById('channelStamp');
+  el.classList.remove('stale');
+  if (!data) { el.textContent = ''; return; }
+  const upd = parseIsoLocal(data.updated);
+  if (!upd) { el.textContent = 'Update date not set in channel_actuals.json'; return; }
+  let text = `Channel data updated ${formatShortDate(upd)}`;
+  if (data.through) text += ` (through ${formatShortDate(parseIsoLocal(data.through))})`;
+  // Only nag about age for the month we are in; older months are final.
+  const meta = monthMeta[currentMonth];
+  const lastDaily = DAILY.length ? new Date(DAILY[DAILY.length - 1].date) : new Date();
+  const isCurrent = meta.num === lastDaily.getMonth() + 1 && meta.year === lastDaily.getFullYear();
+  const ageDays = Math.floor((Date.now() - upd.getTime()) / 86400000);
+  if (isCurrent && ageDays >= CHANNEL_STALE_DAYS) {
+    text += ` — ${ageDays} days old`;
+    el.classList.add('stale');
   }
+  el.textContent = text;
+}
+
+function channelRateCell(rate, low, overall, converted, intenders) {
+  if (rate === null) return '<span class="rate-val">—</span>';
+  let color = 'var(--med-blue)';
+  if (low) color = '#C9C9C9';
+  else if (overall !== null && rate <= overall - 10) color = '#D64545';
+  else if (overall !== null && rate >= overall + 10) color = 'var(--lime)';
+  const mark = overall !== null ? `<div class="rate-mark" style="left:${Math.min(100, overall)}%"></div>` : '';
+  const tip = intenders !== null ? `${fmt(converted)} converted of ${fmt(intenders)} Intenders` : '';
+  return `<div class="rate-cell" title="${tip}"><div class="rate-track"><div class="rate-fill" style="width:${Math.min(100, rate)}%;background:${color}"></div>${mark}</div><span class="rate-val">${rate.toFixed(1)}%</span></div>`;
+}
+
+function monthProjectedTotal(monthKey) {
+  const meta = monthMeta[monthKey];
+  const inMonth = d => { const dt = new Date(d.date); return dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year; };
+  const actualRows = DAILY.filter(inMonth);
+  const have = new Set(actualRows.map(d => d.date));
+  let total = actualRows.reduce((sum, d) => sum + d['App Complete'], 0);
+  MODEL_OUTPUT.projections.forEach(p => {
+    if (inMonth(p) && !have.has(p.date)) total += p[currentModelKey] || 0;
+  });
+  return total;
+}
+
+function renderChannelPlan() {
+  const meta = monthMeta[currentMonth];
+  const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').sort((a, b) => b[1] - a[1]);
+  const budgetSum = entries.reduce((sum, [, pct]) => sum + pct, 0);
+  const total = monthProjectedTotal(currentMonth);
+  document.getElementById('channelTitle').textContent = `CHANNEL PLAN (${meta.label.toUpperCase()}, PROJECTED)`;
+  document.getElementById('channelView').innerHTML = `
+    <table class="chtable">
+      <thead><tr><th>Channel</th><th>Budget share</th><th>Projected App Completes</th></tr></thead>
+      <tbody>
+        ${entries.map(([ch, pct]) => `
+          <tr class="${ch === currentChannel ? 'sel' : ''}">
+            <td title="${CHANNEL_FULL_NAMES[ch] || ch}">${ch}</td>
+            <td>${((pct / budgetSum) * 100).toFixed(1)}%</td>
+            <td>${fmt(Math.round((total * pct) / budgetSum))}</td>
+          </tr>`).join('')}
+      </tbody>
+      <tfoot><tr><td>All channels</td><td>100%</td><td>${fmt(total)}</td></tr></tfoot>
+    </table>`;
+  document.getElementById('channelNote').textContent =
+    `No channel data for ${currentMonth} yet. Showing each channel's share of the official budget plan applied to the ` +
+    `${meta.label} projection (budget shares normalized to 100%). Add a "${currentMonth}" entry to docs/data/channel_actuals.json to show real results.`;
+}
+
+function renderChannelView(focusSortKey) {
+  const meta = monthMeta[currentMonth];
+  const data = parseChannelMonth(CHANNEL_ACTUALS[currentMonth]);
+  renderChannelStamp(data);
+  if (!data || !data.rows.length) { renderChannelPlan(); return; }
+
+  const budgetSum = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').reduce((sum, [, pct]) => sum + pct, 0);
+  const totalI = data.rows.reduce((sum, r) => sum + (r.intenders || 0), 0);
+  const totalC = data.rows.reduce((sum, r) => sum + r.converted, 0);
+  const hasRates = data.rows.every(r => r.intenders !== null) && totalI > 0;
+  const overall = hasRates ? (totalC / totalI) * 100 : null;
+
+  const rows = data.rows.map(r => {
+    const pct = channelPercents[r.key];
+    const share = totalC > 0 ? (r.converted / totalC) * 100 : 0;
+    const budgetShare = pct === undefined ? null : (pct / budgetSum) * 100;
+    return {
+      ...r,
+      rate: r.intenders > 0 ? (r.converted / r.intenders) * 100 : null,
+      share, budgetShare,
+      mix: budgetShare === null ? null : share - budgetShare,
+      low: r.intenders !== null && r.intenders < CHANNEL_LOW_VOLUME,
+    };
+  });
+
+  const keyFns = {
+    channel: r => r.key.toLowerCase(),
+    intenders: r => (r.intenders === null ? -1 : r.intenders),
+    converted: r => r.converted,
+    rate: r => (r.rate === null ? -1 : r.rate),
+    mix: r => (r.mix === null ? -999 : r.mix),
+  };
+  const dir = channelSort.dir === 'asc' ? 1 : -1;
+  const cmp = (x, y) => {
+    const a = keyFns[channelSort.key](x), b = keyFns[channelSort.key](y);
+    return ((a < b ? -1 : a > b ? 1 : 0) * dir) || x.key.localeCompare(y.key);
+  };
+  let ordered;
+  if (channelSort.key === 'rate') {
+    // Keep thin-volume channels below the rest so a 107% on 15 Intenders never tops the list.
+    ordered = rows.filter(r => !r.low).sort(cmp).concat(rows.filter(r => r.low).sort(cmp));
+  } else {
+    ordered = rows.sort(cmp);
+  }
+
+  const cols = [['channel', 'Channel'], ['intenders', 'Intenders'], ['converted', 'Converted'], ['rate', 'Conversion rate'], ['mix', 'Mix vs. budget']];
+  const head = cols.map(([key, label]) => {
+    const active = channelSort.key === key;
+    const arrow = active ? (channelSort.dir === 'asc' ? ' ▲' : ' ▼') : '';
+    return `<th class="${active ? 'sorted' : ''}" aria-sort="${active ? (channelSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}">` +
+      `<button type="button" data-sort="${key}">${label}${arrow}</button></th>`;
+  }).join('');
+
+  const body = ordered.map(r => {
+    const mixText = r.mix === null
+      ? '<span class="mix-muted">—</span>'
+      : `<span class="${Math.abs(r.mix) < 1 ? 'mix-muted' : ''}">${r.mix >= 0 ? '+' : '−'}${Math.abs(r.mix).toFixed(1)} pts</span>`;
+    const mixTip = r.mix === null ? 'No budget share for this channel'
+      : `${r.share.toFixed(1)}% of App Completes vs. ${r.budgetShare.toFixed(1)}% of budget`;
+    return `
+      <tr class="${r.key === currentChannel ? 'sel' : ''}${r.low ? ' low' : ''}">
+        <td title="${CHANNEL_FULL_NAMES[r.key] || r.key}">${r.key}${r.low ? '<div class="lowtag">low volume</div>' : ''}</td>
+        <td>${fmt(r.intenders)}</td>
+        <td>${fmt(r.converted)}</td>
+        <td>${channelRateCell(r.rate, r.low, overall, r.converted, r.intenders)}</td>
+        <td title="${mixTip}">${mixText}</td>
+      </tr>`;
+  }).join('');
+
+  const foot = `
+    <tr>
+      <td>All channels</td>
+      <td>${hasRates ? fmt(totalI) : '—'}</td>
+      <td>${fmt(totalC)}</td>
+      <td>${channelRateCell(overall, false, null, totalC, hasRates ? totalI : null)}</td>
+      <td></td>
+    </tr>`;
+
+  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()}, MONTH TO DATE)`;
+  const view = document.getElementById('channelView');
+  view.innerHTML = `<table class="chtable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table>`;
+  view.querySelectorAll('button[data-sort]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.sort;
+      channelSort = channelSort.key === key
+        ? { key, dir: channelSort.dir === 'asc' ? 'desc' : 'asc' }
+        : { key, dir: key === 'channel' ? 'asc' : 'desc' };
+      renderChannelView(key);
+    });
+  });
+  if (focusSortKey) {
+    const btn = view.querySelector(`button[data-sort="${focusSortKey}"]`);
+    if (btn) btn.focus();
+  }
+
+  document.getElementById('channelNote').textContent =
+    `Conversion rate = Converted ÷ Intenders for the same period, not a cohort, so a channel with few Intenders can pass 100% ` +
+    `(channels under ${CHANNEL_LOW_VOLUME} Intenders are dimmed and stay at the bottom when sorting by rate). The blue tick marks the all-channel rate; ` +
+    `bars are red or green when a channel is 10+ points under or over it. Mix vs. budget compares each channel's share of ` +
+    `App Completes with its share of the official budget (budget shares normalized to 100%). Channel figures come from a ` +
+    `separate weekly pull, so their totals can differ from the daily report.`;
 }
 
 function formatShortDate(dt) {
@@ -967,7 +1150,7 @@ function renderModelSelect(modelOutput) {
   select.addEventListener('change', () => {
     currentModelKey = select.value;
     renderTrend(DAILY, MODEL_OUTPUT);
-    renderChannelBars(MODEL_OUTPUT);
+    renderChannelView();
     renderPacingKpis();
   });
 }
@@ -981,7 +1164,7 @@ function renderChannelSelect() {
   select.addEventListener('change', () => {
     currentChannel = select.value;
     renderTrend(DAILY, MODEL_OUTPUT);
-    renderChannelBars(MODEL_OUTPUT);
+    renderChannelView();
   });
 }
 
@@ -1005,7 +1188,7 @@ loadData().then(({ daily, modelOutput, channelActuals }) => {
   ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey);
   initRangeSlider();
   renderTrend(daily, modelOutput);
-  renderChannelBars(modelOutput);
+  renderChannelView();
 
   document.getElementById('exportCsvBtn').addEventListener('click', () => downloadCsv(daily));
 
