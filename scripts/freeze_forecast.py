@@ -18,6 +18,10 @@ are model-quality checks and should keep using the latest data.
 Usage:
   python scripts/freeze_forecast.py                    # normal daily run
   python scripts/freeze_forecast.py --refreeze 2026-10 # deliberately re-lock a month
+  python scripts/freeze_forecast.py --backfill-from 2026-04
+      # one-time: rebuild frozen forecasts for every earlier month from Apr 2026 on, each
+      # using only the data that existed before that month began. Lets the dashboard's
+      # month filter score the models on past months. Months already frozen are left alone.
 """
 import argparse
 import calendar
@@ -113,6 +117,8 @@ def build_month(actuals, vintage, first, last_day):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--refreeze", metavar="YYYY-MM", help="discard and rebuild this month's freeze")
+    ap.add_argument("--backfill-from", metavar="YYYY-MM",
+                    help="freeze every not-yet-frozen month from here up to the current one")
     args = ap.parse_args()
 
     actuals = {parse(r["date"]): r["App Complete"] for r in json.loads(DAILY.read_text())}
@@ -120,23 +126,34 @@ def main():
     last = max(actuals)
     frozen = json.loads(FROZEN.read_text()) if FROZEN.exists() else {"months": {}}
 
-    candidates = {month_key(last), month_key(last + dt.timedelta(1))}
-    if args.refreeze:
-        candidates.add(args.refreeze)
-        frozen["months"].pop(args.refreeze, None)
-
-    for key in sorted(candidates):
-        if key in frozen["months"]:
-            continue
+    def freeze(key, backfilled=False):
         y, m = map(int, key.split("-"))
         first = dt.date(y, m, 1)
         prior = [d for d in actuals if d < first]
         if not prior:
-            continue
+            return
         vintage = max(prior)  # last available day before the month starts
-        frozen["months"][key] = build_month(
-            actuals, vintage, first, dt.date(y, m, calendar.monthrange(y, m)[1]))
-        print(f"Froze {key} using data through {fmt(vintage)}")
+        info = build_month(actuals, vintage, first, dt.date(y, m, calendar.monthrange(y, m)[1]))
+        if backfilled:
+            info["backfilled"] = True
+        frozen["months"][key] = info
+        print(f"Froze {key} using data through {fmt(vintage)}" + (" (backfill)" if backfilled else ""))
+
+    candidates = {month_key(last), month_key(last + dt.timedelta(1))}
+    if args.refreeze:
+        candidates.add(args.refreeze)
+        frozen["months"].pop(args.refreeze, None)
+    for key in sorted(candidates):
+        if key not in frozen["months"]:
+            freeze(key)
+
+    if args.backfill_from:
+        y, m = map(int, args.backfill_from.split("-"))
+        while f"{y}-{m:02d}" < month_key(last):
+            key = f"{y}-{m:02d}"
+            if key not in frozen["months"]:
+                freeze(key, backfilled=True)
+            y, m = (y + 1, 1) if m == 12 else (y, m + 1)
 
     FROZEN.write_text(json.dumps(frozen, indent=2))
 
