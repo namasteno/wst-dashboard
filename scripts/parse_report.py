@@ -5,8 +5,11 @@ Non-Funnel Daily Report rows (Inquiries, Intenders, App Complete).
 Usage:
     python parse_report.py incoming/report.pdf data/daily.json
 
-Appends any new dates found in the PDF to data/daily.json (skips
-dates already present, so it's safe to re-run on the same file).
+Adds any new dates found in the PDF to data/daily.json AND applies WGU's
+later revisions to dates already stored (the report restates earlier days
+as late applications are attributed, usually upward by a few percent). The
+newest PDF is always treated as the source of truth, so it is safe to
+re-run on the same file.
 """
 import sys
 import json
@@ -19,6 +22,9 @@ MONTHS = {
     "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
 }
 
+FIELDS = ("Inquiries", "Intenders", "App Complete")
+MAX_REVISION = 0.10  # October revisions topped out near 5%; anything past 10% is treated as a parse error
+
 DATE_RE = re.compile(
     r"([A-Za-z]{3})\s+(\d{1,2}),\s*(\d{4})\s+(Mon|Tue|Wed|Thu|Fri|Sat|Sun)"
 )
@@ -26,16 +32,21 @@ DATE_RE = re.compile(
 
 def find_wst_rows(pdf_path):
     """
-    Scan every table on every page for the 'Non - Funnel Daily Report'
-    section and pull out each date row's WST columns (7th/8th/9th
-    numeric group: WSB, LSH, WST, WSE each have 3 columns).
+    Pull each date row's WST columns (7th/8th/9th number: WSB, LSH, WST, WSE
+    each have 3 columns) from the 'Non - Funnel Daily Report - College' table.
+
+    The Region table later in the PDF repeats the same dates with a different
+    column layout, so it must never be read as WST. If no page is labelled
+    'College' (older layouts), fall back to the first row seen per date.
     """
-    rows = []
+    college_rows, other_rows = [], []
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
             text = page.extract_text() or ""
             if "Non - Funnel Daily Report" not in text and "Non-Funnel Daily Report" not in text:
                 continue
+            is_college = ("Funnel Daily Report - College" in text
+                          or "Funnel Daily Report \u2013 College" in text)
             for line in text.split("\n"):
                 m = DATE_RE.match(line.strip())
                 if not m:
@@ -52,13 +63,20 @@ def find_wst_rows(pdf_path):
                 if len(nums) < 9:
                     continue
                 wst_inq, wst_int, wst_app = nums[6], nums[7], nums[8]
-                date_str = f"{mon.title()} {int(day)}, {year}"
-                rows.append({
-                    "date": date_str,
+                row = {
+                    "date": f"{mon.title()} {int(day)}, {year}",
                     "Inquiries": wst_inq,
                     "Intenders": wst_int,
                     "App Complete": wst_app,
-                })
+                }
+                (college_rows if is_college else other_rows).append(row)
+
+    chosen = college_rows if college_rows else other_rows
+    seen, rows = set(), []
+    for r in chosen:  # first occurrence per date wins
+        if r["date"] not in seen:
+            seen.add(r["date"])
+            rows.append(r)
     return rows
 
 
@@ -73,15 +91,30 @@ def main():
     existing = []
     if json_path.exists():
         existing = json.loads(json_path.read_text())
-    existing_dates = {r["date"] for r in existing}
+    by_date = {r["date"]: r for r in existing}
 
     new_rows = find_wst_rows(pdf_path)
-    added = 0
+    added = revised = 0
+    app_delta = 0
     for r in new_rows:
-        if r["date"] not in existing_dates:
+        cur = by_date.get(r["date"])
+        if cur is None:
             existing.append(r)
-            existing_dates.add(r["date"])
+            by_date[r["date"]] = r
             added += 1
+            continue
+        if all(cur.get(k) == r[k] for k in FIELDS):
+            continue
+        # Real revisions are a few percent. A big swing means the PDF layout shifted
+        # and a different column was read, so keep what we have and say so.
+        old_app = cur.get("App Complete") or 0
+        if old_app and abs(r["App Complete"] - old_app) / old_app > MAX_REVISION:
+            print(f"WARNING: {r['date']} App Complete {old_app} -> {r['App Complete']} "
+                  f"looks like a parse error, not a revision; keeping {old_app}.")
+            continue
+        app_delta += r["App Complete"] - old_app
+        cur.update({k: r[k] for k in FIELDS})
+        revised += 1
 
     # keep chronological order
     from datetime import datetime
@@ -89,7 +122,8 @@ def main():
 
     json_path.parent.mkdir(parents=True, exist_ok=True)
     json_path.write_text(json.dumps(existing, indent=2))
-    print(f"Parsed {len(new_rows)} rows from PDF, added {added} new date(s).")
+    print(f"Parsed {len(new_rows)} rows from PDF, added {added} new date(s), "
+          f"revised {revised} earlier date(s) (App Complete {app_delta:+d}).")
     print(f"Total rows in {json_path}: {len(existing)}")
 
 
