@@ -240,6 +240,7 @@
       <div class="stamp" id="channelStamp"></div>
     </div>
     <div id="channelView"></div>
+    <div class="note" id="channelCheck"></div>
     <div class="note" id="channelNote"></div>
   </div>
 
@@ -937,7 +938,34 @@ function monthProjectedTotal(monthKey) {
   return total;
 }
 
+// Reconcile the weekly channel total against the daily report up to the same date, so a
+// mismatch is visible (and explained) instead of silently confusing.
+function renderChannelCheck(data, totalC) {
+  const el = document.getElementById('channelCheck');
+  el.textContent = '';
+  el.style.color = '';
+  if (!data || !data.through) return;
+  const through = parseIsoLocal(data.through);
+  const meta = monthMeta[currentMonth];
+  let daily = 0, days = 0;
+  DAILY.forEach(d => {
+    const dt = new Date(d.date);
+    if (dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year && dt <= through) {
+      daily += d['App Complete'];
+      days++;
+    }
+  });
+  if (!days) return;
+  const diff = totalC - daily;
+  const off = daily > 0 && Math.abs(diff) / daily > 0.02;
+  el.textContent = `Check: the daily report shows ${fmt(daily)} App Completes through ${formatShortDate(through)}; ` +
+    `this table totals ${fmt(totalC)} (${diff >= 0 ? '+' : '−'}${fmt(Math.abs(diff))}).` +
+    (off ? ' That is a gap of more than 2%, so confirm the pull dates and that the daily report is current.' : '');
+  if (off) el.style.color = '#B26B00';
+}
+
 function renderChannelPlan() {
+  renderChannelCheck(null, 0);
   const meta = monthMeta[currentMonth];
   const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').sort((a, b) => b[1] - a[1]);
   const budgetSum = entries.reduce((sum, [, pct]) => sum + pct, 0);
@@ -972,6 +1000,7 @@ function renderChannelView(focusSortKey) {
   const totalC = data.rows.reduce((sum, r) => sum + r.converted, 0);
   const hasRates = data.rows.every(r => r.intenders !== null) && totalI > 0;
   const overall = hasRates ? (totalC / totalI) * 100 : null;
+  renderChannelCheck(data, totalC);
 
   const rows = data.rows.map(r => {
     const pct = channelPercents[r.key];
@@ -1061,7 +1090,7 @@ function renderChannelView(focusSortKey) {
     `(channels under ${CHANNEL_LOW_VOLUME} Intenders are dimmed and stay at the bottom when sorting by rate). The blue tick marks the all-channel rate; ` +
     `bars are red or green when a channel is 10+ points under or over it. Mix vs. budget compares each channel's share of ` +
     `App Completes with its share of the official budget (budget shares normalized to 100%). Channel figures come from a ` +
-    `separate weekly pull, so their totals can differ from the daily report.`;
+    `separate weekly pull and stop at the date shown, so their totals trail the daily report.`;
 }
 
 function formatShortDate(dt) {
