@@ -79,6 +79,12 @@
     border: 1px solid rgba(255,255,255,0.3); background: transparent; color: white; cursor: pointer;
   }
   .month-tabs button.active { background: white; color: var(--blue); }
+  .month-tabs select {
+    padding: 7px 10px; border-radius: 4px; font-weight: 700; font-size: 13px;
+    border: 1px solid rgba(255,255,255,0.3); background: transparent; color: white; cursor: pointer;
+  }
+  .month-tabs select option { color: #001731; background: white; }
+  .month-tabs select.active { background: white; color: var(--blue); }
   .pace-bar { height: 6px; border-radius: 3px; background: var(--light-grey); overflow: hidden; margin-top: 8px; }
   .pace-fill { height: 100%; }
   .export-btn {
@@ -95,6 +101,7 @@
   .heat .hh { font-size: 10px; font-weight: 700; color: var(--grey); text-align: center; padding-bottom: 2px; }
   .heat .wk { font-size: 11px; font-weight: 600; color: var(--grey); display: flex; align-items: center; }
   .heat .cell { height: 30px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #001731; }
+  .heat .cell.out { opacity: 0.35; }
   .heat .cell.prov { outline: 1.5px dashed var(--blue); outline-offset: -2px; }
   .heat .cell.none { background: repeating-linear-gradient(45deg, #fff, #fff 4px, var(--light-grey) 4px, var(--light-grey) 8px); color: var(--grey); font-weight: 600; }
   .heat .cell.wkavg { font-size: 12px; border: 1px solid rgba(0,40,85,0.25); }
@@ -164,14 +171,15 @@
   <div class="kpis" id="kpis"></div>
 
   <div class="section">
-    <h2>MODEL CONFIDENCE (backtest, last 14 actual days)</h2>
+    <h2 id="backtestTitle">MODEL CONFIDENCE</h2>
     <table id="backtest-table"></table>
+    <div class="note" id="backtestNote"></div>
   </div>
 
   <div class="section">
-    <h2>MODEL ERROR OVER TIME (weekly, last 8 weeks)</h2>
+    <h2 id="errorTitle">MODEL ERROR OVER TIME</h2>
     <canvas id="errorOverTimeChart" style="max-height:180px"></canvas>
-    <div class="note">Total absolute error per model, summed Mon–Sun. Lower is better.</div>
+    <div class="note" id="errorNote"></div>
   </div>
 
   <div class="section">
@@ -186,11 +194,11 @@
     <canvas id="conversionChart" style="max-height:240px;margin-top:14px"></canvas>
     <div class="note" id="convNote"></div>
 
-    <h2 style="margin-top:22px;">CONVERSION BY DAY (last 10 weeks)</h2>
+    <h2 id="heatTitle" style="margin-top:22px;">CONVERSION BY DAY</h2>
     <div class="heat" id="convHeatmap"></div>
     <div class="heat-legend">
       <span>58%</span><span class="ramp"></span><span>78%</span>
-      <span style="margin-left:10px;">Dashed outline: latest days, still being revised in later reports. Striped: no data in the source.</span>
+      <span style="margin-left:10px;">Dashed outline: latest days, still being revised in later reports. Faded: days from the neighboring month. Striped: no data in the source.</span>
     </div>
   </div>
 
@@ -208,8 +216,9 @@
       <div class="control-group">
         <label for="rangePreset">Range</label>
         <select id="rangePreset">
+          <option value="month" selected>Selected month</option>
           <option value="30">Last 30 days</option>
-          <option value="60" selected>Last 60 days</option>
+          <option value="60">Last 60 days</option>
           <option value="90">Last 90 days</option>
           <option value="180">Last 6 months</option>
           <option value="all">All data</option>
@@ -230,7 +239,7 @@
       <input type="range" id="rangeEnd" />
     </div>
 
-    <h2>TREND — ACTUAL VS. MODEL VS. TARGET</h2>
+    <h2 id="trendTitle">TREND — ACTUAL VS. MODEL VS. TARGET</h2>
     <canvas id="trendChart"></canvas>
   </div>
 
@@ -260,14 +269,40 @@ const monthGoals = {
 // Intenders goals given alongside App Complete for Jan-Mar 2027, kept for
 // reference even though no Intenders pacing view exists yet.
 const intendersGoals = { Jan: 14421, Feb: 15567, Mar: 14538 };
-const monthMeta = {
-  Oct: { num: 10, year: 2026, label: 'October 2026' },
-  Nov: { num: 11, year: 2026, label: 'November 2026' },
-  Dec: { num: 12, year: 2026, label: 'December 2026' },
-  Jan: { num: 1, year: 2027, label: 'January 2027' },
-  Feb: { num: 2, year: 2027, label: 'February 2027' },
-  Mar: { num: 3, year: 2027, label: 'March 2027' },
-};
+// Month filter. Every month with data, plus the FY27 months that have a budget, is selectable.
+// FY27 months (Jul 2026 - Mar 2027) get a header tab; anything earlier lives in the "Earlier" menu.
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const TAB_FIRST = { year: 2026, num: 7 }, TAB_LAST = { year: 2027, num: 3 };
+let monthMeta = {}; // keyed 'YYYY-MM', built from the data once it loads
+
+function monthIdx(year, num) { return year * 12 + (num - 1); }
+function buildMonthMeta(daily) {
+  const first = new Date(daily[0].date);
+  const startIdx = Math.min(monthIdx(first.getFullYear(), first.getMonth() + 1), monthIdx(TAB_FIRST.year, TAB_FIRST.num));
+  const endIdx = monthIdx(TAB_LAST.year, TAB_LAST.num);
+  monthMeta = {};
+  for (let i = startIdx; i <= endIdx; i++) {
+    const year = Math.floor(i / 12), num = (i % 12) + 1;
+    const key = `${year}-${String(num).padStart(2, '0')}`;
+    monthMeta[key] = {
+      key, year, num, short: MONTH_SHORT[num - 1], label: `${MONTH_NAMES[num - 1]} ${year}`,
+      tab: i >= monthIdx(TAB_FIRST.year, TAB_FIRST.num),
+    };
+  }
+}
+function inMonth(dt, meta) { return dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year; }
+function daysIn(meta) { return new Date(meta.year, meta.num, 0).getDate(); }
+// 'complete' = the data runs past month-end, 'inprogress' = month has started, 'future' = not yet
+function monthStatus(meta) {
+  const last = new Date(DAILY[DAILY.length - 1].date);
+  if (last >= new Date(meta.year, meta.num, 0)) return 'complete';
+  if (last >= new Date(meta.year, meta.num - 1, 1)) return 'inprogress';
+  return 'future';
+}
+function goalFor(meta) { return meta.tab ? monthGoals[meta.short] : undefined; }
+// Channel data is keyed 'Oct' (FY27 months) or 'YYYY-MM' (any month).
+function channelRawFor(meta) { return CHANNEL_ACTUALS[meta.key] || (meta.tab ? CHANNEL_ACTUALS[meta.short] : undefined); }
 // Same holiday set the Python regression models were fit with, used here
 // only to decide where to draw vertical markers on the daily trend chart.
 const HOLIDAY_DATES = new Set([
@@ -298,7 +333,7 @@ let errorChartInstance = null;
 let currentGranularity = 'daily';
 let currentModelKey = null;
 let currentChannel = 'Total';
-let currentMonth = 'Oct';
+let currentMonth = null; // 'YYYY-MM' key into monthMeta
 let ALL_ROWS = []; // full merged Actual/Model/Target rows, built once per model change
 let rangeStartIdx = 0;
 let rangeEndIdx = 0;
@@ -318,88 +353,154 @@ function bestModelKey(modelOutput) {
   return Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError)[0][0];
 }
 
+function setMonth(key) {
+  if (!monthMeta[key] || key === currentMonth) return;
+  currentMonth = key;
+  try {
+    const url = new URL(location.href);
+    url.searchParams.set('month', key);
+    history.replaceState(null, '', url);
+  } catch (e) { /* not fatal, the link just won't carry the month */ }
+  renderForMonth();
+}
+
+// Everything on the page follows the selected month.
+function renderForMonth() {
+  renderMonthTabs();
+  renderPacingKpis();
+  renderKpis();
+  renderBacktest();
+  renderErrorOverTime();
+  renderConversionPanel();
+  syncTrendToMonth();
+  renderChannelView();
+}
+
 function renderMonthTabs() {
   const container = document.getElementById('monthTabs');
-  container.innerHTML = Object.keys(monthMeta).map(m =>
-    `<button class="${m === currentMonth ? 'active' : ''}" data-month="${m}">${m}</button>`
-  ).join('');
-  container.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentMonth = btn.dataset.month;
-      renderMonthTabs();
-      renderPacingKpis();
-      renderChannelView();
-    });
+  const focused = document.activeElement;
+  const refocus = focused && container.contains(focused) ? (focused.id || focused.dataset.month) : null;
+  const all = Object.values(monthMeta);
+  const tabs = all.filter(m => m.tab);
+  const earlier = all.filter(m => !m.tab).reverse();
+  const inEarlier = earlier.some(m => m.key === currentMonth);
+  container.innerHTML = tabs.map(m =>
+    `<button class="${m.key === currentMonth ? 'active' : ''}" data-month="${m.key}" aria-pressed="${m.key === currentMonth}" title="${m.label}">${m.short}</button>`
+  ).join('') + (earlier.length
+    ? `<select id="earlierMonth" class="${inEarlier ? 'active' : ''}" aria-label="Earlier months"><option value="">Earlier</option>` +
+      earlier.map(m => `<option value="${m.key}" ${m.key === currentMonth ? 'selected' : ''}>${m.label}</option>`).join('') + '</select>'
+    : '');
+  container.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => setMonth(btn.dataset.month)));
+  const sel = container.querySelector('#earlierMonth');
+  if (sel) sel.addEventListener('change', () => { if (sel.value) setMonth(sel.value); });
+  if (refocus) {
+    const target = container.querySelector(`#${CSS.escape(refocus)}`) || container.querySelector(`button[data-month="${refocus}"]`);
+    if (target) target.focus();
+  }
+}
+
+function dailyAvgFor(year, num) {
+  let total = 0, n = 0;
+  DAILY.forEach(d => {
+    const dt = new Date(d.date);
+    if (dt.getFullYear() === year && dt.getMonth() + 1 === num) { total += d['App Complete']; n++; }
   });
+  return n ? { avg: total / n, n, total } : null;
 }
 
 function renderPacingKpis() {
   const meta = monthMeta[currentMonth];
-  const goal = monthGoals[currentMonth];
+  const goal = goalFor(meta);
+  const status = monthStatus(meta);
   const targets = MODEL_OUTPUT.daily_targets || {};
+  const days = daysIn(meta);
 
-  const monthRows = DAILY.filter(d => {
-    const dt = new Date(d.date);
-    return dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year;
-  });
-
-  let mtdActual = 0, mtdTargetToDate = 0;
+  const monthRows = DAILY.filter(d => inMonth(new Date(d.date), meta));
+  let actual = 0, targetToDate = 0, haveTargets = false;
   monthRows.forEach(d => {
-    mtdActual += d['App Complete'];
-    if (targets[d.date] !== undefined) mtdTargetToDate += targets[d.date];
+    actual += d['App Complete'];
+    if (targets[d.date] !== undefined) { targetToDate += targets[d.date]; haveTargets = true; }
   });
 
-  // Projected total = actual-so-far + model projection for remaining days in the month
-  let projectedTotal = mtdActual;
-  const monthRowDates = new Set(monthRows.map(d => d.date));
+  // Projected total = actual-so-far + model projection for the days still ahead in the month
+  const have = new Set(monthRows.map(d => d.date));
+  let remaining = 0, forecastDays = 0;
   MODEL_OUTPUT.projections.forEach(p => {
-    const dt = new Date(p.date);
-    if (dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year && !monthRowDates.has(p.date)) {
-      projectedTotal += p[currentModelKey] || 0;
-    }
+    if (inMonth(new Date(p.date), meta) && !have.has(p.date)) { remaining += p[currentModelKey] || 0; forecastDays++; }
   });
+  const hasForecast = status === 'complete' || forecastDays > 0;
+  const projectedTotal = status === 'complete' ? actual : actual + remaining;
 
+  const el = document.getElementById('pacingKpis');
+  const sub = (text, color) => `<div style="font-size:12px;font-weight:600;margin-top:2px;color:${color || 'var(--grey)'}">${text}</div>`;
+
+  if (goal === undefined) {
+    // No budget on file for this month: describe it against the months around it instead.
+    const cur = dailyAvgFor(meta.year, meta.num);
+    const prevIdx = monthIdx(meta.year, meta.num) - 1;
+    const prev = dailyAvgFor(Math.floor(prevIdx / 12), (prevIdx % 12) + 1);
+    const ly = dailyAvgFor(meta.year - 1, meta.num);
+    const changeCard = (label, ref, refLabel) => {
+      const c = cur && ref ? (cur.avg / ref.avg - 1) * 100 : null;
+      return `<div class="kpi"><div class="label">${label}</div>
+        <div class="value" style="color:${c === null ? 'var(--grey)' : c >= 0 ? '#2f8f3e' : '#D64545'}">${c === null ? '—' : (c >= 0 ? '+' : '−') + Math.abs(c).toFixed(1) + '%'}</div>
+        ${sub(ref ? `${refLabel}: ${fmt(Math.round(ref.avg))}/day` : 'no data')}</div>`;
+    };
+    el.innerHTML = `
+      <div class="kpi"><div class="label">${status === 'complete' ? 'ACTUAL' : 'MTD ACTUAL'} (${meta.label.toUpperCase()})</div>
+        <div class="value">${cur ? fmt(actual) : '—'}</div>
+        ${sub(cur ? `${cur.n} of ${days} days, no goal on file` : 'no actuals for this month')}</div>
+      <div class="kpi"><div class="label">DAILY AVERAGE</div>
+        <div class="value">${cur ? fmt(Math.round(cur.avg)) : '—'}</div>${sub('App Completes per day')}</div>
+      ${changeCard('VS. PRIOR MONTH (PER DAY)', prev, MONTH_SHORT[prevIdx % 12])}
+      ${changeCard(`VS. ${meta.short.toUpperCase()} ${meta.year - 1} (PER DAY)`, ly, `${meta.short} ${meta.year - 1}`)}`;
+    return;
+  }
+
+  const variance = actual - targetToDate;
   const gap = goal - projectedTotal;
   const gapPct = goal > 0 ? (gap / goal) * 100 : 0;
   const onPace = gap <= 0;
-  const mtdVariance = mtdActual - mtdTargetToDate;
-  const pacePctWidth = Math.min(100, Math.max(0, (projectedTotal / goal) * 100));
+  const pacePctWidth = hasForecast ? Math.min(100, Math.max(0, (projectedTotal / goal) * 100)) : 0;
+  const started = status !== 'future';
 
-  document.getElementById('pacingKpis').innerHTML = `
+  el.innerHTML = `
     <div class="kpi">
-      <div class="label">MTD ACTUAL (${meta.label.toUpperCase()})</div>
-      <div class="value">${fmt(mtdActual)}</div>
-      <div style="font-size:12px;font-weight:600;margin-top:2px;color:${mtdVariance >= 0 ? '#2f8f3e' : '#D64545'}">
-        ${mtdVariance >= 0 ? '+' : ''}${fmt(mtdVariance)} vs. target-to-date
-      </div>
+      <div class="label">${status === 'complete' ? 'ACTUAL' : 'MTD ACTUAL'} (${meta.label.toUpperCase()})</div>
+      <div class="value">${started ? fmt(actual) : '—'}</div>
+      ${started
+        ? (haveTargets ? sub(`${variance >= 0 ? '+' : '−'}${fmt(Math.abs(variance))} vs. ${status === 'complete' ? 'target' : 'target-to-date'}`, variance >= 0 ? '#2f8f3e' : '#D64545') : '')
+        : sub('month has not started')}
     </div>
     <div class="kpi">
       <div class="label">PROJECTED TOTAL</div>
-      <div class="value">${fmt(projectedTotal)}</div>
-      <div style="font-size:12px;color:var(--grey);margin-top:2px;">via ${MODEL_OUTPUT.backtest[currentModelKey].label}</div>
+      <div class="value">${hasForecast ? fmt(projectedTotal) : '—'}</div>
+      ${sub(status === 'complete' ? 'month complete' : hasForecast ? `via ${MODEL_OUTPUT.backtest[currentModelKey].label}` : 'no forecast yet (projections cover about 2 months)')}
     </div>
     <div class="kpi">
       <div class="label">MONTHLY GOAL</div>
       <div class="value">${fmt(goal)}</div>
     </div>
     <div class="kpi">
-      <div class="label">PACE VS. GOAL</div>
-      <div class="value" style="color:${onPace ? '#2f8f3e' : '#D64545'}">${onPace ? '+' : '−'}${Math.abs(gapPct).toFixed(1)}%</div>
+      <div class="label">${status === 'complete' ? 'RESULT VS. GOAL' : 'PACE VS. GOAL'}</div>
+      <div class="value" style="color:${!hasForecast ? 'var(--grey)' : onPace ? '#2f8f3e' : '#D64545'}">${hasForecast ? (onPace ? '+' : '−') + Math.abs(gapPct).toFixed(1) + '%' : '—'}</div>
       <div class="pace-bar"><div class="pace-fill" style="width:${pacePctWidth}%;background:${onPace ? 'var(--lime)' : '#D64545'}"></div></div>
     </div>
   `;
 }
 
-function renderKpis(daily, modelOutput) {
-  const last = daily[daily.length - 1];
-  const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
+function renderKpis() {
+  const meta = monthMeta[currentMonth];
+  const rows = DAILY.filter(d => inMonth(new Date(d.date), meta));
+  const last = rows[rows.length - 1];
+  const sorted = Object.entries(MODEL_OUTPUT.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
   const bestLabel = sorted[0][1].label;
 
   document.getElementById('kpis').innerHTML = `
     <div class="kpi">
-      <div class="label">LAST ACTUAL DAY</div>
-      <div class="value">${last['App Complete']}</div>
-      <div style="font-size:12px;color:var(--grey);margin-top:2px;">${last.date}</div>
+      <div class="label">LAST ACTUAL DAY (${meta.short.toUpperCase()})</div>
+      <div class="value">${last ? last['App Complete'] : '—'}</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:2px;">${last ? last.date : 'no actuals in ' + meta.label}</div>
     </div>
     <div class="kpi">
       <div class="label">RECOMMENDED MODEL</div>
@@ -408,27 +509,66 @@ function renderKpis(daily, modelOutput) {
     </div>
     <div class="kpi">
       <div class="label">DATA LAST UPDATED</div>
-      <div class="value" style="font-size:16px;">${new Date(modelOutput.generated).toLocaleString()}</div>
+      <div class="value" style="font-size:16px;">${new Date(MODEL_OUTPUT.generated).toLocaleString()}</div>
     </div>
     <div class="kpi">
-      <div class="label">DAYS OF ACTUAL DATA</div>
-      <div class="value">${daily.length}</div>
+      <div class="label">DAYS OF ACTUAL DATA (${meta.short.toUpperCase()})</div>
+      <div class="value">${rows.length}</div>
+      <div style="font-size:12px;color:var(--grey);margin-top:2px;">of ${daysIn(meta)} days in the month</div>
     </div>
   `;
 }
 
-function renderBacktest(modelOutput) {
-  const sorted = Object.entries(modelOutput.backtest).sort((a,b) => a[1].totalError - b[1].totalError);
-  document.getElementById('backtest-table').innerHTML = `
-    <tr><th>Model</th><th>Total error</th><th>Over N days</th></tr>
-    ${sorted.map(([key, b], i) => `
+// Score each model on the selected month using the forecast frozen at the prior month-end,
+// so this is true out-of-sample accuracy rather than a fit to days the model already saw.
+function monthModelErrors(meta) {
+  const projByDate = new Map(MODEL_OUTPUT.projections.map(p => [p.date, p]));
+  const keys = Object.keys(MODEL_OUTPUT.backtest);
+  const totals = Object.fromEntries(keys.map(k => [k, 0]));
+  let days = 0;
+  DAILY.forEach(d => {
+    if (!inMonth(new Date(d.date), meta)) return;
+    const p = projByDate.get(d.date);
+    if (!p || keys.some(k => typeof p[k] !== 'number')) return;
+    days++;
+    keys.forEach(k => { totals[k] += Math.abs(d['App Complete'] - p[k]); });
+  });
+  return { totals, days, keys };
+}
+
+function noForecastText(meta) {
+  const status = monthStatus(meta);
+  if (status === 'future') return `No actuals yet for ${meta.label}.`;
+  return `No frozen forecast is stored for ${meta.label}, so there is nothing to score.` +
+    (monthIdx(meta.year, meta.num) < monthIdx(2026, 4) ? ' Months before April 2026 are not backfilled because the 12-month model needs a year of earlier data.' : '');
+}
+
+function renderBacktest() {
+  const meta = monthMeta[currentMonth];
+  const { totals, days, keys } = monthModelErrors(meta);
+  const table = document.getElementById('backtest-table');
+  document.getElementById('backtestTitle').textContent = `MODEL CONFIDENCE (${meta.label.toUpperCase()}, FROZEN FORECAST VS. ACTUAL)`;
+  const note = document.getElementById('backtestNote');
+  if (!days) {
+    table.innerHTML = '';
+    note.textContent = noForecastText(meta);
+    return;
+  }
+  const sorted = keys.map(k => [k, totals[k]]).sort((a, b) => a[1] - b[1]);
+  table.innerHTML = `
+    <tr><th>Model</th><th>Total error</th><th>Avg per day</th><th>Over N days</th></tr>
+    ${sorted.map(([key, err], i) => `
       <tr class="${i === 0 ? 'best' : ''}">
-        <td>${b.label}${i === 0 ? ' ★ best' : ''}</td>
-        <td>${b.totalError}</td>
-        <td>${b.days}</td>
-      </tr>
-    `).join('')}
+        <td>${MODEL_OUTPUT.backtest[key].label}${i === 0 ? ' ★ best' : ''}</td>
+        <td>${fmt(Math.round(err))}</td>
+        <td>${(err / days).toFixed(1)}</td>
+        <td>${days}</td>
+      </tr>`).join('')}
   `;
+  const latest = Object.entries(MODEL_OUTPUT.backtest).sort((a, b) => a[1].totalError - b[1].totalError)
+    .map(([, b]) => `${b.label} ${b.totalError}`).join(', ');
+  note.textContent = `Errors compare each day's actual with the forecast frozen at the prior month-end. ` +
+    `The recommended model comes from the latest 14-day backtest (${latest}).`;
 }
 
 const WEEKDAY_IDX = { Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6, Sun: 7 };
@@ -454,48 +594,58 @@ function predictAllModels(modelOutput, dt) {
   return out;
 }
 
-function renderErrorOverTime(daily, modelOutput) {
-  const actualRows = daily.slice(-56); // 8 weeks of lookback
-  const weekBuckets = new Map();
+function renderErrorOverTime() {
+  const meta = monthMeta[currentMonth];
+  const canvas = document.getElementById('errorOverTimeChart');
+  const note = document.getElementById('errorNote');
+  document.getElementById('errorTitle').textContent = `MODEL ERROR OVER TIME (${meta.label.toUpperCase()}, BY WEEK)`;
 
-  actualRows.forEach(d => {
+  const projByDate = new Map(MODEL_OUTPUT.projections.map(p => [p.date, p]));
+  const modelKeys = Object.keys(MODEL_OUTPUT.backtest);
+  const weekBuckets = new Map();
+  DAILY.forEach(d => {
     const dt = new Date(d.date);
+    if (!inMonth(dt, meta)) return;
+    const p = projByDate.get(d.date);
+    if (!p || modelKeys.some(k => typeof p[k] !== 'number')) return;
     const ws = weekStart(dt);
-    const key = ws.toISOString().slice(0, 10);
+    const key = localKey(ws);
     if (!weekBuckets.has(key)) {
-      weekBuckets.set(key, { sortKey: ws.getTime(), label: ws.toLocaleDateString('en-US',{month:'short',day:'numeric'}), errors: {} });
+      weekBuckets.set(key, { sortKey: ws.getTime(), label: ws.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), days: 0, err: {} });
     }
     const bucket = weekBuckets.get(key);
-    const preds = predictAllModels(modelOutput, dt);
-    Object.entries(preds).forEach(([modelKey, predVal]) => {
-      bucket.errors[modelKey] = (bucket.errors[modelKey] || 0) + Math.abs(d['App Complete'] - predVal);
-    });
+    bucket.days++;
+    modelKeys.forEach(k => { bucket.err[k] = (bucket.err[k] || 0) + Math.abs(d['App Complete'] - p[k]); });
   });
-
   const weeks = Array.from(weekBuckets.values()).sort((a, b) => a.sortKey - b.sortKey);
-  const labels = weeks.map(w => w.label);
-  const modelKeys = Object.keys(modelOutput.backtest);
-  const colors = { 'Proj: Day-of-Week': '#A7A7A7', 'Proj: Regr-3mo': '#0070F0', 'Proj: Regr-6mo': '#46B1EF', 'Proj: Regr-12mo': '#D64545' };
 
-  if (errorChartInstance) errorChartInstance.destroy();
-  errorChartInstance = new Chart(document.getElementById('errorOverTimeChart'), {
+  if (errorChartInstance) { errorChartInstance.destroy(); errorChartInstance = null; }
+  canvas.style.display = weeks.length ? '' : 'none';
+  if (!weeks.length) { note.textContent = noForecastText(meta); return; }
+
+  const colors = { 'Proj: Day-of-Week': '#A7A7A7', 'Proj: Regr-3mo': '#0070F0', 'Proj: Regr-6mo': '#46B1EF', 'Proj: Regr-12mo': '#D64545' };
+  errorChartInstance = new Chart(canvas, {
     type: 'line',
     data: {
-      labels,
+      labels: weeks.map(w => w.label),
       datasets: modelKeys.map(key => ({
-        label: modelOutput.backtest[key].label,
-        data: weeks.map(w => w.errors[key] ?? null),
+        label: MODEL_OUTPUT.backtest[key].label,
+        data: weeks.map(w => Math.round(w.err[key] / w.days)),
         borderColor: colors[key] || '#001731',
-        borderWidth: 2, pointRadius: 2, tension: 0.2,
+        borderWidth: 2, pointRadius: 3, tension: 0.2,
       })),
     },
     options: {
       responsive: true,
       interaction: { mode: 'index', intersect: false },
-      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } },
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+        tooltip: { callbacks: { title: items => { const w = weeks[items[0].dataIndex]; return `Week of ${w.label} (${w.days} day${w.days === 1 ? '' : 's'} in ${meta.short})`; } } },
+      },
       scales: { x: { ticks: { font: { size: 9 } } }, y: { ticks: { font: { size: 10 } } } },
     },
   });
+  note.textContent = 'Average absolute error per day, by week, against the forecast frozen at the prior month-end. Weeks at the edge of the month count only their days in it. Lower is better.';
 }
 
 function downloadCsv(daily) {
@@ -551,8 +701,11 @@ function buildWeeklyConversion(rows, segment) {
     if (prov.has(localKey(r.dt))) b.prov = true;
   });
   const all = Array.from(buckets.values()).sort((x, y) => x.start - y.start);
-  // Keep full weeks (tolerating one missing day in the source) plus the in-progress latest week.
-  const weeks = all.filter((w, idx) => w.n >= Math.max(1, expected - 1) || idx === all.length - 1);
+  // Keep full weeks (tolerating one missing day in the source). The in-progress latest week only
+  // counts once it has at least half its days, so one early-week day can't pose as a trend.
+  const minLatest = Math.ceil(expected / 2);
+  const weeks = all.filter((w, idx) =>
+    w.n >= Math.max(1, expected - 1) || (idx === all.length - 1 && w.n >= minLatest));
   weeks.forEach((w, idx) => {
     w.rate = (w.a / w.i) * 100;
     w.partial = w.n < expected;
@@ -563,45 +716,63 @@ function buildWeeklyConversion(rows, segment) {
   return weeks;
 }
 
-function renderConversionKpis(weeks) {
+function segMatch(dt, segment) {
+  const wd = dt.getDay(), weekend = wd === 0 || wd === 6;
+  return segment === 'all' || (segment === 'weekday' && !weekend) || (segment === 'weekend' && weekend);
+}
+
+function periodConversion(rows, year, num, segment) {
+  let i = 0, a = 0, n = 0;
+  rows.forEach(r => {
+    if (r.dt.getFullYear() === year && r.dt.getMonth() + 1 === num && segMatch(r.dt, segment)) { i += r.i; a += r.a; n++; }
+  });
+  return n && i ? { rate: (a / i) * 100, i, a, n } : null;
+}
+
+function renderConversionKpis(rows, meta) {
   const el = document.getElementById('convKpis');
-  const last = weeks[weeks.length - 1];
-  if (!last) { el.innerHTML = ''; return; }
-  const label = last.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  const gap = last.baseline === null ? null : last.rate - last.baseline;
-  const gapColor = gap === null ? 'var(--grey)' : gap <= -2 ? '#D64545' : gap >= 2 ? '#2f8f3e' : 'var(--grey)';
+  const cur = periodConversion(rows, meta.year, meta.num, convSegment);
+  const prevIdx = monthIdx(meta.year, meta.num) - 1;
+  const prevNum = (prevIdx % 12) + 1;
+  const prev = periodConversion(rows, Math.floor(prevIdx / 12), prevNum, convSegment);
+  const ly = periodConversion(rows, meta.year - 1, meta.num, convSegment);
+
   const notes = [];
-  if (last.partial) notes.push(`${last.n} days so far`);
-  if (last.prov) notes.push('still being revised');
-  let streak = 0;
-  for (let k = weeks.length - 1; k >= 0 && weeks[k].flag; k--) streak++;
-  const streakText = streak > 0
-    ? `${streak} week${streak > 1 ? 's' : ''} in a row ${CONV_FLAG_PTS}+ pts below`
-    : 'within the usual range';
+  if (cur) {
+    if (monthStatus(meta) !== 'complete') notes.push(`${cur.n} day${cur.n === 1 ? '' : 's'} so far`);
+    const recent = new Set(rows.slice(-PROVISIONAL_DAYS).map(r => localKey(r.dt)));
+    if (rows.some(r => inMonth(r.dt, meta) && recent.has(localKey(r.dt)) && segMatch(r.dt, convSegment))) notes.push('latest days still being revised');
+  }
+
+  const refCard = (label, ref) => {
+    if (!ref) return `<div class="kpi"><div class="label">${label}</div><div class="value">—</div><div class="sub">no data</div></div>`;
+    let sub = 'no data this month', color = '';
+    if (cur) {
+      const diff = cur.rate - ref.rate;
+      sub = `${meta.short} is ${diff >= 0 ? '+' : '−'}${Math.abs(diff).toFixed(1)} pts`;
+      color = diff <= -2 ? '#D64545' : diff >= 2 ? '#2f8f3e' : '';
+    }
+    return `<div class="kpi"><div class="label">${label}</div><div class="value">${ref.rate.toFixed(1)}%</div>` +
+      `<div class="sub"${color ? ` style="color:${color}"` : ''}>${sub}</div></div>`;
+  };
 
   el.innerHTML = `
     <div class="kpi">
-      <div class="label">WEEK OF ${label.toUpperCase()}</div>
-      <div class="value">${last.rate.toFixed(1)}%</div>
-      <div class="sub">${notes.length ? notes.join(', ') : 'complete week'}</div>
+      <div class="label">${meta.label.toUpperCase()}</div>
+      <div class="value">${cur ? cur.rate.toFixed(1) + '%' : '—'}</div>
+      <div class="sub">${cur ? (notes.length ? notes.join(', ') : `${cur.n} days`) : 'no actuals yet'}</div>
     </div>
-    <div class="kpi">
-      <div class="label">${CONV_BASELINE_WEEKS}-WEEK AVERAGE</div>
-      <div class="value">${last.baseline === null ? '—' : last.baseline.toFixed(1) + '%'}</div>
-      <div class="sub">the weeks before this one</div>
-    </div>
-    <div class="kpi">
-      <div class="label">VS. AVERAGE</div>
-      <div class="value" style="color:${gapColor}">${gap === null ? '—' : (gap >= 0 ? '+' : '−') + Math.abs(gap).toFixed(1) + ' pts'}</div>
-      <div class="sub">${streakText}</div>
-    </div>
+    ${refCard(`PRIOR MONTH (${MONTH_SHORT[prevNum - 1].toUpperCase()})`, prev)}
+    ${refCard(`LAST YEAR (${meta.short.toUpperCase()} ${meta.year - 1})`, ly)}
   `;
 }
 
 function renderConversionChart(weeks) {
-  const shown = weeks.slice(-CONV_TREND_WEEKS);
+  const canvas = document.getElementById('conversionChart');
   if (conversionChartInstance) { conversionChartInstance.destroy(); conversionChartInstance = null; }
-  if (!shown.length) return;
+  canvas.style.display = weeks.length ? '' : 'none';
+  if (!weeks.length) return;
+  const shown = weeks;
   const labels = shown.map(w => w.start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
   const rates = shown.map(w => Number(w.rate.toFixed(1)));
   const base = shown.map(w => w.baseline === null ? null : Number(w.baseline.toFixed(1)));
@@ -609,7 +780,7 @@ function renderConversionChart(weeks) {
   const yMin = Math.floor((Math.min(...vals) - 3) / 5) * 5;
   const yMax = Math.ceil((Math.max(...vals) + 2) / 5) * 5;
 
-  conversionChartInstance = new Chart(document.getElementById('conversionChart'), {
+  conversionChartInstance = new Chart(canvas, {
     type: 'line',
     data: {
       labels,
@@ -663,35 +834,36 @@ function heatColor(v) {
   return `rgb(${from.map((c, k) => Math.round(c + (to[k] - c) * u)).join(',')})`;
 }
 
-function renderConversionHeatmap(rows) {
+// Weeks that overlap the month are shown in full; days from the neighboring month are faded.
+function renderConversionHeatmap(rows, meta) {
   const el = document.getElementById('convHeatmap');
-  if (!rows.length) { el.innerHTML = ''; return; }
+  document.getElementById('heatTitle').textContent = `CONVERSION BY DAY (${meta.label.toUpperCase()})`;
+  if (!rows.some(r => inMonth(r.dt, meta))) { el.innerHTML = ''; return; }
   const byKey = new Map(rows.map(r => [localKey(r.dt), r]));
   const lastDt = rows[rows.length - 1].dt;
   const prov = new Set(rows.slice(-PROVISIONAL_DAYS).map(r => localKey(r.dt)));
-  const thisWeek = weekStart(lastDt);
+  const monthEnd = new Date(meta.year, meta.num, 0);
+  const firstWeek = weekStart(new Date(meta.year, meta.num - 1, 1));
   const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   let html = '<div class="hh"></div>' + dayNames.map(n => `<div class="hh">${n}</div>`).join('') + '<div class="hh">Week</div>';
 
-  for (let w = 9; w >= 0; w--) {
-    const start = new Date(thisWeek);
-    start.setDate(start.getDate() - 7 * w);
+  for (let start = new Date(firstWeek); start <= monthEnd; start = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7)) {
     let wi = 0, wa = 0, rowProv = false, cells = '';
     for (let k = 0; k < 7; k++) {
-      const day = new Date(start);
-      day.setDate(day.getDate() + k);
+      const day = new Date(start.getFullYear(), start.getMonth(), start.getDate() + k);
       const key = localKey(day);
       const r = byKey.get(key);
+      const out = inMonth(day, meta) ? '' : ' out';
       if (r) {
         const rate = (r.a / r.i) * 100;
         wi += r.i; wa += r.a;
         if (prov.has(key)) rowProv = true;
-        cells += `<div class="cell${prov.has(key) ? ' prov' : ''}" style="background:${heatColor(rate)}" ` +
+        cells += `<div class="cell${prov.has(key) ? ' prov' : ''}${out}" style="background:${heatColor(rate)}" ` +
           `title="${r.date}: ${rate.toFixed(1)}% (${r.a.toLocaleString('en-US')} of ${r.i.toLocaleString('en-US')} Intenders)">${Math.round(rate)}</div>`;
       } else if (day > lastDt) {
         cells += '<div></div>';
       } else {
-        cells += `<div class="cell none" title="${formatShortDate(day)}: no data in the source">–</div>`;
+        cells += `<div class="cell none${out}" title="${formatShortDate(day)}: no data in the source">–</div>`;
       }
     }
     const weekRate = wi > 0 ? (wa / wi) * 100 : null;
@@ -719,18 +891,24 @@ function renderConversionSegmentButtons() {
 }
 
 function renderConversionPanel() {
+  const meta = monthMeta[currentMonth];
   const rows = convRows(DAILY);
-  const weeks = buildWeeklyConversion(rows, convSegment);
-  renderConversionKpis(weeks);
+  const monthStart = new Date(meta.year, meta.num - 1, 1);
+  const monthEnd = new Date(meta.year, meta.num, 0);
+  const weeks = buildWeeklyConversion(rows, convSegment).filter(w => {
+    const end = new Date(w.start.getFullYear(), w.start.getMonth(), w.start.getDate() + 6);
+    return w.start <= monthEnd && end >= monthStart;
+  });
+  renderConversionKpis(rows, meta);
   renderConversionChart(weeks);
-  renderConversionHeatmap(rows);
-  document.getElementById('convNote').textContent =
-    `App Complete ÷ Intenders for the same day, grouped Mon–Sun. Red points are weeks more than ${CONV_FLAG_PTS} points ` +
-    `below the average of the ${CONV_BASELINE_WEEKS} weeks before them. Hollow points and dashed lines include the latest ` +
-    `${PROVISIONAL_DAYS} days, which tend to be revised upward in later reports.`;
+  renderConversionHeatmap(rows, meta);
+  document.getElementById('convNote').textContent = weeks.length
+    ? `App Complete ÷ Intenders for the same day. The headline numbers use only days in ${meta.label}; the weekly line shows each Mon–Sun week that touches the month in full. ` +
+      `Red points are weeks more than ${CONV_FLAG_PTS} points below the average of the ${CONV_BASELINE_WEEKS} weeks before them. Hollow points and dashed lines include the latest ` +
+      `${PROVISIONAL_DAYS} days, which tend to be revised upward in later reports.`
+    : `No actuals for ${meta.label} yet.`;
 }
 
-// --- Date helpers for granularity aggregation ---
 function weekStart(dt) {
   const d = new Date(dt);
   const day = d.getDay();
@@ -742,7 +920,7 @@ function fiscalYear(dt) { return dt.getMonth() >= 6 ? dt.getFullYear() + 1 : dt.
 
 // Build one merged list of {dateObj, dateLabel, actual, model, target}
 // covering every date that has ANY of the three, using the selected model.
-function buildMergedRows(daily, modelOutput, modelKey) {
+function buildMergedRows(daily, modelOutput, modelKey, extraMonth) {
   const targets = modelOutput.daily_targets || {};
   const byDate = new Map();
 
@@ -754,6 +932,14 @@ function buildMergedRows(daily, modelOutput, modelKey) {
     row.model = p[modelKey];
     byDate.set(p.date, row);
   });
+  // A month past the forecast window still has an official budget, so show it as Target-only rows.
+  if (extraMonth) {
+    for (let day = 1; day <= daysIn(extraMonth); day++) {
+      const dt = new Date(extraMonth.year, extraMonth.num - 1, day);
+      const label = `${MONTH_SHORT[dt.getMonth()]} ${day}, ${dt.getFullYear()}`;
+      if (!byDate.has(label) && targets[label] !== undefined) byDate.set(label, { date: label, dt });
+    }
+  }
   byDate.forEach((row, dateStr) => {
     if (targets[dateStr] !== undefined) row.target = targets[dateStr];
   });
@@ -811,7 +997,10 @@ function aggregateRows(rows, granularity) {
 
 function renderTrend(daily, modelOutput) {
   const pct = channelPercents[currentChannel] / 100;
-  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey);
+  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey, monthMeta[currentMonth]);
+  const trendMeta = monthMeta[currentMonth];
+  document.getElementById('trendTitle').textContent = 'TREND — ACTUAL VS. MODEL VS. TARGET' +
+    (document.getElementById('rangePreset').value === 'month' ? ` (${trendMeta.label.toUpperCase()})` : '');
   const sliced = ALL_ROWS.slice(rangeStartIdx, rangeEndIdx + 1);
   const aggregated = aggregateRows(sliced, currentGranularity);
 
@@ -932,9 +1121,11 @@ function monthProjectedTotal(monthKey) {
   const actualRows = DAILY.filter(inMonth);
   const have = new Set(actualRows.map(d => d.date));
   let total = actualRows.reduce((sum, d) => sum + d['App Complete'], 0);
-  MODEL_OUTPUT.projections.forEach(p => {
-    if (inMonth(p) && !have.has(p.date)) total += p[currentModelKey] || 0;
-  });
+  if (monthStatus(meta) !== 'complete') {
+    MODEL_OUTPUT.projections.forEach(p => {
+      if (inMonth(p) && !have.has(p.date)) total += p[currentModelKey] || 0;
+    });
+  }
   return total;
 }
 
@@ -964,36 +1155,51 @@ function renderChannelCheck(data, totalC) {
   if (off) el.style.color = '#B26B00';
 }
 
+function renderChannelEmpty(meta) {
+  renderChannelCheck(null, 0);
+  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()})`;
+  document.getElementById('channelView').innerHTML = '';
+  document.getElementById('channelNote').textContent =
+    `No channel data for ${meta.label}. Add a "${meta.tab ? meta.short : meta.key}" entry to docs/data/channel_actuals.json to show it here.`;
+}
+
 function renderChannelPlan() {
   renderChannelCheck(null, 0);
   const meta = monthMeta[currentMonth];
   const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').sort((a, b) => b[1] - a[1]);
   const budgetSum = entries.reduce((sum, [, pct]) => sum + pct, 0);
   const total = monthProjectedTotal(currentMonth);
-  document.getElementById('channelTitle').textContent = `CHANNEL PLAN (${meta.label.toUpperCase()}, PROJECTED)`;
+  document.getElementById('channelTitle').textContent = `CHANNEL PLAN (${meta.label.toUpperCase()}, ${monthStatus(meta) === 'complete' ? 'ACTUAL' : 'PROJECTED'})`;
   document.getElementById('channelView').innerHTML = `
     <table class="chtable">
-      <thead><tr><th>Channel</th><th>Budget share</th><th>Projected App Completes</th></tr></thead>
+      <thead><tr><th>Channel</th><th>Budget share</th><th>${monthStatus(meta) === 'complete' ? 'App Completes' : 'Projected App Completes'}</th></tr></thead>
       <tbody>
         ${entries.map(([ch, pct]) => `
           <tr class="${ch === currentChannel ? 'sel' : ''}">
             <td title="${CHANNEL_FULL_NAMES[ch] || ch}">${ch}</td>
             <td>${((pct / budgetSum) * 100).toFixed(1)}%</td>
-            <td>${fmt(Math.round((total * pct) / budgetSum))}</td>
+            <td>${total > 0 ? fmt(Math.round((total * pct) / budgetSum)) : '—'}</td>
           </tr>`).join('')}
       </tbody>
-      <tfoot><tr><td>All channels</td><td>100%</td><td>${fmt(total)}</td></tr></tfoot>
+      <tfoot><tr><td>All channels</td><td>100%</td><td>${total > 0 ? fmt(total) : '—'}</td></tr></tfoot>
     </table>`;
   document.getElementById('channelNote').textContent =
-    `No channel data for ${currentMonth} yet. Showing each channel's share of the official budget plan applied to the ` +
-    `${meta.label} projection (budget shares normalized to 100%). Add a "${currentMonth}" entry to docs/data/channel_actuals.json to show real results.`;
+    `No channel data for ${meta.label} yet. ` + (total > 0
+      ? `Showing each channel's share of the official budget plan applied to the ${meta.label} ${monthStatus(meta) === 'complete' ? 'actuals' : 'projection'} (budget shares normalized to 100%). `
+      : `There is no forecast for ${meta.label} yet (projections cover about 2 months), so only the budget shares are shown. `) +
+    `Add a "${meta.short}" entry to docs/data/channel_actuals.json to show real results.`;
 }
 
 function renderChannelView(focusSortKey) {
   const meta = monthMeta[currentMonth];
-  const data = parseChannelMonth(CHANNEL_ACTUALS[currentMonth]);
+  const data = parseChannelMonth(channelRawFor(meta));
   renderChannelStamp(data);
-  if (!data || !data.rows.length) { renderChannelPlan(); return; }
+  if (!data || !data.rows.length) {
+    // A finished month with no channel data gets a prompt, not an invented split of its total.
+    if (monthStatus(meta) === 'complete') { renderChannelEmpty(meta); return; }
+    renderChannelPlan();
+    return;
+  }
 
   const budgetSum = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').reduce((sum, [, pct]) => sum + pct, 0);
   const totalI = data.rows.reduce((sum, r) => sum + (r.intenders || 0), 0);
@@ -1068,7 +1274,7 @@ function renderChannelView(focusSortKey) {
       <td></td>
     </tr>`;
 
-  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()}, MONTH TO DATE)`;
+  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()}, ${monthStatus(meta) === 'complete' ? 'FULL MONTH' : 'MONTH TO DATE'})`;
   const view = document.getElementById('channelView');
   view.innerHTML = `<table class="chtable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table>`;
   view.querySelectorAll('button[data-sort]').forEach(btn => {
@@ -1099,9 +1305,22 @@ function formatShortDate(dt) {
 
 function applyRangePreset(preset, actualCount, totalCount) {
   if (preset === 'all') return [0, totalCount - 1];
-  if (preset === 'custom') return [rangeStartIdx, rangeEndIdx]; // leave as-is
+  if (preset === 'custom') return [Math.min(rangeStartIdx, totalCount - 1), Math.min(rangeEndIdx, totalCount - 1)];
+  if (preset === 'month') {
+    const meta = monthMeta[currentMonth];
+    let s = -1, e = -1;
+    ALL_ROWS.forEach((r, i) => { if (inMonth(r.dt, meta)) { if (s < 0) s = i; e = i; } });
+    if (s >= 0) return [s, e];
+    preset = '60'; // nothing to show for this month, fall back to the last 60 days
+  }
   const n = parseInt(preset, 10);
-  return [Math.max(0, actualCount - n), totalCount - 1];
+  let lastActual = -1, lastForecast = -1;
+  ALL_ROWS.forEach((r, i) => {
+    if (typeof r.actual === 'number') lastActual = i;
+    if (typeof r.actual === 'number' || typeof r.model === 'number') lastForecast = i;
+  });
+  if (lastActual < 0) return [0, totalCount - 1];
+  return [Math.max(0, lastActual - n + 1), Math.max(lastForecast, lastActual)];
 }
 
 function updateRangeUI() {
@@ -1115,23 +1334,28 @@ function updateRangeUI() {
   fill.style.width = (endPct - startPct) + '%';
 }
 
+let rangeHandlersBound = false;
+// Safe to call again whenever ALL_ROWS changes (e.g. a new month is picked): re-bounds the
+// sliders and re-applies the chosen preset, binding the event handlers only once.
 function initRangeSlider() {
-  const total = ALL_ROWS.length;
   const startInput = document.getElementById('rangeStart');
   const endInput = document.getElementById('rangeEnd');
   const presetSelect = document.getElementById('rangePreset');
 
   [startInput, endInput].forEach(inp => {
     inp.min = 0;
-    inp.max = total - 1;
+    inp.max = ALL_ROWS.length - 1;
   });
 
-  const [s, e] = applyRangePreset(presetSelect.value, DAILY.length, total);
+  const [s, e] = applyRangePreset(presetSelect.value, DAILY.length, ALL_ROWS.length);
   rangeStartIdx = s;
   rangeEndIdx = e;
   startInput.value = rangeStartIdx;
   endInput.value = rangeEndIdx;
   updateRangeUI();
+
+  if (rangeHandlersBound) return;
+  rangeHandlersBound = true;
 
   startInput.addEventListener('input', () => {
     rangeStartIdx = Math.min(parseInt(startInput.value, 10), rangeEndIdx);
@@ -1148,12 +1372,18 @@ function initRangeSlider() {
     renderTrend(DAILY, MODEL_OUTPUT);
   });
   presetSelect.addEventListener('change', () => {
-    const [ns, ne] = applyRangePreset(presetSelect.value, DAILY.length, total);
+    const [ns, ne] = applyRangePreset(presetSelect.value, DAILY.length, ALL_ROWS.length);
     rangeStartIdx = ns; rangeEndIdx = ne;
     startInput.value = rangeStartIdx; endInput.value = rangeEndIdx;
     updateRangeUI();
     renderTrend(DAILY, MODEL_OUTPUT);
   });
+}
+
+function syncTrendToMonth() {
+  ALL_ROWS = buildMergedRows(DAILY, MODEL_OUTPUT, currentModelKey, monthMeta[currentMonth]);
+  initRangeSlider();
+  renderTrend(DAILY, MODEL_OUTPUT);
 }
 
 function renderGranularityButtons() {
@@ -1203,18 +1433,24 @@ loadData().then(({ daily, modelOutput, channelActuals }) => {
   CHANNEL_ACTUALS = channelActuals || {};
   currentModelKey = bestModelKey(modelOutput);
 
+  buildMonthMeta(daily);
+  const lastDt = new Date(daily[daily.length - 1].date);
+  const lastKey = `${lastDt.getFullYear()}-${String(lastDt.getMonth() + 1).padStart(2, '0')}`;
+  const wanted = new URLSearchParams(location.search).get('month');
+  currentMonth = monthMeta[wanted] ? wanted : (monthMeta[lastKey] ? lastKey : Object.keys(monthMeta).find(k => monthMeta[k].tab));
+
   renderMonthTabs();
   renderPacingKpis();
-  renderKpis(daily, modelOutput);
-  renderBacktest(modelOutput);
-  renderErrorOverTime(daily, modelOutput);
+  renderKpis();
+  renderBacktest();
+  renderErrorOverTime();
   renderConversionSegmentButtons();
   renderConversionPanel();
   renderGranularityButtons();
   renderModelSelect(modelOutput);
   renderChannelSelect();
 
-  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey);
+  ALL_ROWS = buildMergedRows(daily, modelOutput, currentModelKey, monthMeta[currentMonth]);
   initRangeSlider();
   renderTrend(daily, modelOutput);
   renderChannelView();
@@ -1222,7 +1458,7 @@ loadData().then(({ daily, modelOutput, channelActuals }) => {
   document.getElementById('exportCsvBtn').addEventListener('click', () => downloadCsv(daily));
 
   document.getElementById('footer-note').textContent =
-    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day; the Model line in the trend and pacing views is each month's forecast frozen at the prior month-end, while the backtest and error charts keep refitting. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
+    `Last actual: ${modelOutput.last_actual_date}. Regression models refit automatically each run on 3/6/12-month lookback windows ending on the latest actual day; the Model line, model confidence and error views use each month's forecast frozen at the prior month-end (so past months can be scored fairly); only the recommended model still comes from the rolling 14-day backtest. The month selector at the top filters every section. Channel filter scales Model/Target only — Actual is never scaled, since no channel-level actuals are fed into this automated pipeline.`;
 }).catch(err => {
   document.getElementById('footer-note').textContent = 'Error loading data: ' + err.message;
 });
