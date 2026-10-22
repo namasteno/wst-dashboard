@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "incoming/report.pdf"
+      - "incoming/channels*.csv"
   workflow_dispatch: {} # lets you trigger it manually from the Actions tab
 
 permissions:
@@ -31,6 +32,14 @@ jobs:
             exit 1
           fi
 
+      - name: Parse channel exports
+        run: |
+          if ls incoming/channels*.csv >/dev/null 2>&1; then
+            python scripts/parse_channels.py incoming/channels*.csv --out docs/data/channel_data.json
+          else
+            echo "No incoming/channels*.csv found — keeping the existing channel data."
+          fi
+
       - name: Refit models and generate projections
         run: python scripts/update_models.py docs/data/daily.json docs/data/model_output.json
 
@@ -41,6 +50,6 @@ jobs:
         run: |
           git config user.name "wst-dashboard-bot"
           git config user.email "actions@github.com"
-          git add docs/data/daily.json docs/data/model_output.json docs/data/frozen_forecast.json
+          git add docs/data
           git diff --cached --quiet || git commit -m "Update dashboard data: $(date -u +%Y-%m-%d)"
           git push
