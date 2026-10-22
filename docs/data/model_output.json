@@ -1,63 +1,63 @@
 {
-  "generated": "2026-10-21T15:14:39.856457+00:00",
-  "last_actual_date": "Oct 20, 2026",
+  "generated": "2026-10-22T16:23:31.087129+00:00",
+  "last_actual_date": "Oct 21, 2026",
   "dow_baselines": {
-    "Wed": 297,
     "Thu": 283,
-    "Fri": 243,
+    "Fri": 244,
     "Sat": 177,
     "Sun": 195,
     "Mon": 324,
-    "Tue": 317
+    "Tue": 317,
+    "Wed": 294
   },
   "regression_models": {
     "3mo": {
-      "r2": 0.8438,
+      "r2": 0.8406,
       "n": 89,
       "coefs": [
-        366.40805964159125,
-        -0.6812872075853056,
-        -15.640371085354207,
-        -40.42040202316658,
-        -53.58526866173623,
-        -90.3463809448522,
-        -158.29961732349116,
-        -139.00294550052234,
-        -112.70627367755371
+        364.7418096622225,
+        -0.662518905124135,
+        -15.479363754780419,
+        -37.97069100350362,
+        -53.253496741933915,
+        -90.1586310302021,
+        -158.08230508553405,
+        -138.88132464194945,
+        -112.60342112144201
       ],
-      "t0": "2026-07-22"
+      "t0": "2026-07-23"
     },
     "6mo": {
-      "r2": 0.8414,
+      "r2": 0.8392,
       "n": 181,
       "coefs": [
-        412.5784940568215,
-        -0.5888885889825053,
-        -1.8451883148768247,
-        -27.834503804426927,
-        -49.82253829236757,
-        -102.7425213722962,
-        -161.68542898699408,
-        -144.86356483311258,
-        -83.94263531261596
+        411.7862900193628,
+        -0.5871409704520757,
+        -1.4553144654893548,
+        -27.250802219254794,
+        -49.69871162544197,
+        -102.65663140104115,
+        -161.60481123425342,
+        -144.8219040987011,
+        -83.91007970739219
       ],
-      "t0": "2026-04-21"
+      "t0": "2026-04-22"
     },
     "12mo": {
-      "r2": 0.6124,
+      "r2": 0.6154,
       "n": 361,
       "coefs": [
-        401.31641684686895,
-        -0.1915258568835101,
-        -2.32094219917099,
-        -17.189089207127275,
-        -39.106745781899065,
-        -88.121223569013,
-        -151.3233024451465,
-        -134.14023103249966,
-        -114.1428779491646
+        403.69913826474294,
+        -0.19627599249722516,
+        -4.007046732090611,
+        -19.320204701857502,
+        -40.740826722254134,
+        -89.81841695240095,
+        -152.99259730563261,
+        -135.83318844104238,
+        -114.87460946521446
       ],
-      "t0": "2025-10-20"
+      "t0": "2025-10-21"
     }
   },
   "projections": [
@@ -1562,233 +1562,233 @@
     {
       "date": "Nov 1, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 157,
+      "Proj: Regr-3mo": 158,
       "Proj: Regr-6mo": 153,
-      "Proj: Regr-12mo": 195
+      "Proj: Regr-12mo": 194
     },
     {
       "date": "Nov 2, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 296,
+      "Proj: Regr-3mo": 297,
       "Proj: Regr-6mo": 297,
-      "Proj: Regr-12mo": 329
+      "Proj: Regr-12mo": 330
     },
     {
       "date": "Nov 3, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 279,
+      "Proj: Regr-3mo": 280,
       "Proj: Regr-6mo": 295,
-      "Proj: Regr-12mo": 326
+      "Proj: Regr-12mo": 325
     },
     {
       "date": "Nov 4, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 254,
-      "Proj: Regr-6mo": 268,
-      "Proj: Regr-12mo": 311
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 257,
+      "Proj: Regr-6mo": 269,
+      "Proj: Regr-12mo": 310
     },
     {
       "date": "Nov 5, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 240,
+      "Proj: Regr-3mo": 241,
       "Proj: Regr-6mo": 246,
-      "Proj: Regr-12mo": 289
+      "Proj: Regr-12mo": 288
     },
     {
       "date": "Nov 6, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 202,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 204,
       "Proj: Regr-6mo": 192,
-      "Proj: Regr-12mo": 240
+      "Proj: Regr-12mo": 239
     },
     {
       "date": "Nov 7, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 134,
+      "Proj: Regr-3mo": 135,
       "Proj: Regr-6mo": 133,
       "Proj: Regr-12mo": 176
     },
     {
       "date": "Nov 8, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 152,
+      "Proj: Regr-3mo": 154,
       "Proj: Regr-6mo": 149,
-      "Proj: Regr-12mo": 193
+      "Proj: Regr-12mo": 192
     },
     {
       "date": "Nov 9, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 291,
+      "Proj: Regr-3mo": 292,
       "Proj: Regr-6mo": 293,
-      "Proj: Regr-12mo": 327
+      "Proj: Regr-12mo": 328
     },
     {
       "date": "Nov 10, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 274,
+      "Proj: Regr-3mo": 276,
       "Proj: Regr-6mo": 291,
-      "Proj: Regr-12mo": 325
+      "Proj: Regr-12mo": 324
     },
     {
       "date": "Nov 11, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 249,
-      "Proj: Regr-6mo": 264,
-      "Proj: Regr-12mo": 310
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 253,
+      "Proj: Regr-6mo": 265,
+      "Proj: Regr-12mo": 308
     },
     {
       "date": "Nov 12, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 235,
-      "Proj: Regr-6mo": 241,
-      "Proj: Regr-12mo": 288
+      "Proj: Regr-3mo": 237,
+      "Proj: Regr-6mo": 242,
+      "Proj: Regr-12mo": 287
     },
     {
       "date": "Nov 13, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 198,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 199,
       "Proj: Regr-6mo": 188,
-      "Proj: Regr-12mo": 239
+      "Proj: Regr-12mo": 238
     },
     {
       "date": "Nov 14, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 129,
-      "Proj: Regr-6mo": 128,
-      "Proj: Regr-12mo": 175
+      "Proj: Regr-3mo": 130,
+      "Proj: Regr-6mo": 129,
+      "Proj: Regr-12mo": 174
     },
     {
       "date": "Nov 15, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 148,
+      "Proj: Regr-3mo": 149,
       "Proj: Regr-6mo": 145,
-      "Proj: Regr-12mo": 192
+      "Proj: Regr-12mo": 191
     },
     {
       "date": "Nov 16, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 286,
+      "Proj: Regr-3mo": 287,
       "Proj: Regr-6mo": 289,
-      "Proj: Regr-12mo": 326
+      "Proj: Regr-12mo": 327
     },
     {
       "date": "Nov 17, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 270,
-      "Proj: Regr-6mo": 286,
-      "Proj: Regr-12mo": 324
+      "Proj: Regr-3mo": 271,
+      "Proj: Regr-6mo": 287,
+      "Proj: Regr-12mo": 323
     },
     {
       "date": "Nov 18, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 244,
-      "Proj: Regr-6mo": 260,
-      "Proj: Regr-12mo": 308
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 248,
+      "Proj: Regr-6mo": 261,
+      "Proj: Regr-12mo": 307
     },
     {
       "date": "Nov 19, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 230,
-      "Proj: Regr-6mo": 237,
-      "Proj: Regr-12mo": 286
+      "Proj: Regr-3mo": 232,
+      "Proj: Regr-6mo": 238,
+      "Proj: Regr-12mo": 285
     },
     {
       "date": "Nov 20, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 193,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 194,
       "Proj: Regr-6mo": 184,
-      "Proj: Regr-12mo": 237
+      "Proj: Regr-12mo": 236
     },
     {
       "date": "Nov 21, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 124,
-      "Proj: Regr-6mo": 124,
-      "Proj: Regr-12mo": 174
+      "Proj: Regr-3mo": 126,
+      "Proj: Regr-6mo": 125,
+      "Proj: Regr-12mo": 173
     },
     {
       "date": "Nov 22, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 143,
+      "Proj: Regr-3mo": 144,
       "Proj: Regr-6mo": 141,
-      "Proj: Regr-12mo": 191
+      "Proj: Regr-12mo": 190
     },
     {
       "date": "Nov 23, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 281,
+      "Proj: Regr-3mo": 283,
       "Proj: Regr-6mo": 285,
       "Proj: Regr-12mo": 325
     },
     {
       "date": "Nov 24, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 265,
-      "Proj: Regr-6mo": 282,
-      "Proj: Regr-12mo": 322
+      "Proj: Regr-3mo": 266,
+      "Proj: Regr-6mo": 283,
+      "Proj: Regr-12mo": 321
     },
     {
       "date": "Nov 25, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 239,
-      "Proj: Regr-6mo": 256,
-      "Proj: Regr-12mo": 307
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 243,
+      "Proj: Regr-6mo": 257,
+      "Proj: Regr-12mo": 306
     },
     {
       "date": "Nov 26, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 113,
-      "Proj: Regr-6mo": 149,
-      "Proj: Regr-12mo": 171
+      "Proj: Regr-3mo": 115,
+      "Proj: Regr-6mo": 150,
+      "Proj: Regr-12mo": 169
     },
     {
       "date": "Nov 27, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 188,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 190,
       "Proj: Regr-6mo": 180,
-      "Proj: Regr-12mo": 236
+      "Proj: Regr-12mo": 235
     },
     {
       "date": "Nov 28, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 120,
+      "Proj: Regr-3mo": 121,
       "Proj: Regr-6mo": 120,
-      "Proj: Regr-12mo": 172
+      "Proj: Regr-12mo": 171
     },
     {
       "date": "Nov 29, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 138,
-      "Proj: Regr-6mo": 136,
-      "Proj: Regr-12mo": 189
+      "Proj: Regr-3mo": 140,
+      "Proj: Regr-6mo": 137,
+      "Proj: Regr-12mo": 188
     },
     {
       "date": "Nov 30, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 276,
+      "Proj: Regr-3mo": 278,
       "Proj: Regr-6mo": 281,
-      "Proj: Regr-12mo": 323
+      "Proj: Regr-12mo": 324
     }
   ],
   "backtest": {
     "Proj: Day-of-Week": {
       "label": "Day-of-Week",
-      "totalError": 389,
+      "totalError": 338,
       "days": 14
     },
     "Proj: Regr-3mo": {
       "label": "Regression (3mo)",
-      "totalError": 260,
+      "totalError": 257,
       "days": 14
     },
     "Proj: Regr-6mo": {
       "label": "Regression (6mo)",
-      "totalError": 345,
+      "totalError": 323,
       "days": 14
     },
     "Proj: Regr-12mo": {
       "label": "Regression (12mo)",
-      "totalError": 498,
+      "totalError": 443,
       "days": 14
     }
   },
@@ -1978,291 +1978,284 @@
   },
   "live_projections": [
     {
-      "date": "Oct 21, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 263,
-      "Proj: Regr-6mo": 276,
-      "Proj: Regr-12mo": 314
-    },
-    {
       "date": "Oct 22, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 249,
+      "Proj: Regr-3mo": 251,
       "Proj: Regr-6mo": 254,
-      "Proj: Regr-12mo": 292
+      "Proj: Regr-12mo": 291
     },
     {
       "date": "Oct 23, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 212,
-      "Proj: Regr-6mo": 200,
-      "Proj: Regr-12mo": 243
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 213,
+      "Proj: Regr-6mo": 201,
+      "Proj: Regr-12mo": 242
     },
     {
       "date": "Oct 24, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 143,
+      "Proj: Regr-3mo": 144,
       "Proj: Regr-6mo": 141,
-      "Proj: Regr-12mo": 179
+      "Proj: Regr-12mo": 178
     },
     {
       "date": "Oct 25, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 162,
+      "Proj: Regr-3mo": 163,
       "Proj: Regr-6mo": 157,
-      "Proj: Regr-12mo": 196
+      "Proj: Regr-12mo": 195
     },
     {
       "date": "Oct 26, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 300,
+      "Proj: Regr-3mo": 301,
       "Proj: Regr-6mo": 301,
-      "Proj: Regr-12mo": 330
+      "Proj: Regr-12mo": 331
     },
     {
       "date": "Oct 27, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 284,
+      "Proj: Regr-3mo": 285,
       "Proj: Regr-6mo": 299,
-      "Proj: Regr-12mo": 328
+      "Proj: Regr-12mo": 327
     },
     {
       "date": "Oct 28, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 259,
-      "Proj: Regr-6mo": 272,
-      "Proj: Regr-12mo": 312
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 262,
+      "Proj: Regr-6mo": 273,
+      "Proj: Regr-12mo": 311
     },
     {
       "date": "Oct 29, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 245,
+      "Proj: Regr-3mo": 246,
       "Proj: Regr-6mo": 250,
       "Proj: Regr-12mo": 290
     },
     {
       "date": "Oct 30, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 207,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 208,
       "Proj: Regr-6mo": 196,
-      "Proj: Regr-12mo": 241
+      "Proj: Regr-12mo": 240
     },
     {
       "date": "Oct 31, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 139,
+      "Proj: Regr-3mo": 140,
       "Proj: Regr-6mo": 137,
-      "Proj: Regr-12mo": 178
+      "Proj: Regr-12mo": 177
     },
     {
       "date": "Nov 1, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 157,
+      "Proj: Regr-3mo": 158,
       "Proj: Regr-6mo": 153,
-      "Proj: Regr-12mo": 195
+      "Proj: Regr-12mo": 194
     },
     {
       "date": "Nov 2, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 296,
+      "Proj: Regr-3mo": 297,
       "Proj: Regr-6mo": 297,
-      "Proj: Regr-12mo": 329
+      "Proj: Regr-12mo": 330
     },
     {
       "date": "Nov 3, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 279,
+      "Proj: Regr-3mo": 280,
       "Proj: Regr-6mo": 295,
-      "Proj: Regr-12mo": 326
+      "Proj: Regr-12mo": 325
     },
     {
       "date": "Nov 4, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 254,
-      "Proj: Regr-6mo": 268,
-      "Proj: Regr-12mo": 311
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 257,
+      "Proj: Regr-6mo": 269,
+      "Proj: Regr-12mo": 310
     },
     {
       "date": "Nov 5, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 240,
+      "Proj: Regr-3mo": 241,
       "Proj: Regr-6mo": 246,
-      "Proj: Regr-12mo": 289
+      "Proj: Regr-12mo": 288
     },
     {
       "date": "Nov 6, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 202,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 204,
       "Proj: Regr-6mo": 192,
-      "Proj: Regr-12mo": 240
+      "Proj: Regr-12mo": 239
     },
     {
       "date": "Nov 7, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 134,
+      "Proj: Regr-3mo": 135,
       "Proj: Regr-6mo": 133,
       "Proj: Regr-12mo": 176
     },
     {
       "date": "Nov 8, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 152,
+      "Proj: Regr-3mo": 154,
       "Proj: Regr-6mo": 149,
-      "Proj: Regr-12mo": 193
+      "Proj: Regr-12mo": 192
     },
     {
       "date": "Nov 9, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 291,
+      "Proj: Regr-3mo": 292,
       "Proj: Regr-6mo": 293,
-      "Proj: Regr-12mo": 327
+      "Proj: Regr-12mo": 328
     },
     {
       "date": "Nov 10, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 274,
+      "Proj: Regr-3mo": 276,
       "Proj: Regr-6mo": 291,
-      "Proj: Regr-12mo": 325
+      "Proj: Regr-12mo": 324
     },
     {
       "date": "Nov 11, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 249,
-      "Proj: Regr-6mo": 264,
-      "Proj: Regr-12mo": 310
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 253,
+      "Proj: Regr-6mo": 265,
+      "Proj: Regr-12mo": 308
     },
     {
       "date": "Nov 12, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 235,
-      "Proj: Regr-6mo": 241,
-      "Proj: Regr-12mo": 288
+      "Proj: Regr-3mo": 237,
+      "Proj: Regr-6mo": 242,
+      "Proj: Regr-12mo": 287
     },
     {
       "date": "Nov 13, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 198,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 199,
       "Proj: Regr-6mo": 188,
-      "Proj: Regr-12mo": 239
+      "Proj: Regr-12mo": 238
     },
     {
       "date": "Nov 14, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 129,
-      "Proj: Regr-6mo": 128,
-      "Proj: Regr-12mo": 175
+      "Proj: Regr-3mo": 130,
+      "Proj: Regr-6mo": 129,
+      "Proj: Regr-12mo": 174
     },
     {
       "date": "Nov 15, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 148,
+      "Proj: Regr-3mo": 149,
       "Proj: Regr-6mo": 145,
-      "Proj: Regr-12mo": 192
+      "Proj: Regr-12mo": 191
     },
     {
       "date": "Nov 16, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 286,
+      "Proj: Regr-3mo": 287,
       "Proj: Regr-6mo": 289,
-      "Proj: Regr-12mo": 326
+      "Proj: Regr-12mo": 327
     },
     {
       "date": "Nov 17, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 270,
-      "Proj: Regr-6mo": 286,
-      "Proj: Regr-12mo": 324
+      "Proj: Regr-3mo": 271,
+      "Proj: Regr-6mo": 287,
+      "Proj: Regr-12mo": 323
     },
     {
       "date": "Nov 18, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 244,
-      "Proj: Regr-6mo": 260,
-      "Proj: Regr-12mo": 308
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 248,
+      "Proj: Regr-6mo": 261,
+      "Proj: Regr-12mo": 307
     },
     {
       "date": "Nov 19, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 230,
-      "Proj: Regr-6mo": 237,
-      "Proj: Regr-12mo": 286
+      "Proj: Regr-3mo": 232,
+      "Proj: Regr-6mo": 238,
+      "Proj: Regr-12mo": 285
     },
     {
       "date": "Nov 20, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 193,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 194,
       "Proj: Regr-6mo": 184,
-      "Proj: Regr-12mo": 237
+      "Proj: Regr-12mo": 236
     },
     {
       "date": "Nov 21, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 124,
-      "Proj: Regr-6mo": 124,
-      "Proj: Regr-12mo": 174
+      "Proj: Regr-3mo": 126,
+      "Proj: Regr-6mo": 125,
+      "Proj: Regr-12mo": 173
     },
     {
       "date": "Nov 22, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 143,
+      "Proj: Regr-3mo": 144,
       "Proj: Regr-6mo": 141,
-      "Proj: Regr-12mo": 191
+      "Proj: Regr-12mo": 190
     },
     {
       "date": "Nov 23, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 281,
+      "Proj: Regr-3mo": 283,
       "Proj: Regr-6mo": 285,
       "Proj: Regr-12mo": 325
     },
     {
       "date": "Nov 24, 2026",
       "Proj: Day-of-Week": 317,
-      "Proj: Regr-3mo": 265,
-      "Proj: Regr-6mo": 282,
-      "Proj: Regr-12mo": 322
+      "Proj: Regr-3mo": 266,
+      "Proj: Regr-6mo": 283,
+      "Proj: Regr-12mo": 321
     },
     {
       "date": "Nov 25, 2026",
-      "Proj: Day-of-Week": 297,
-      "Proj: Regr-3mo": 239,
-      "Proj: Regr-6mo": 256,
-      "Proj: Regr-12mo": 307
+      "Proj: Day-of-Week": 294,
+      "Proj: Regr-3mo": 243,
+      "Proj: Regr-6mo": 257,
+      "Proj: Regr-12mo": 306
     },
     {
       "date": "Nov 26, 2026",
       "Proj: Day-of-Week": 283,
-      "Proj: Regr-3mo": 113,
-      "Proj: Regr-6mo": 149,
-      "Proj: Regr-12mo": 171
+      "Proj: Regr-3mo": 115,
+      "Proj: Regr-6mo": 150,
+      "Proj: Regr-12mo": 169
     },
     {
       "date": "Nov 27, 2026",
-      "Proj: Day-of-Week": 243,
-      "Proj: Regr-3mo": 188,
+      "Proj: Day-of-Week": 244,
+      "Proj: Regr-3mo": 190,
       "Proj: Regr-6mo": 180,
-      "Proj: Regr-12mo": 236
+      "Proj: Regr-12mo": 235
     },
     {
       "date": "Nov 28, 2026",
       "Proj: Day-of-Week": 177,
-      "Proj: Regr-3mo": 120,
+      "Proj: Regr-3mo": 121,
       "Proj: Regr-6mo": 120,
-      "Proj: Regr-12mo": 172
+      "Proj: Regr-12mo": 171
     },
     {
       "date": "Nov 29, 2026",
       "Proj: Day-of-Week": 195,
-      "Proj: Regr-3mo": 138,
-      "Proj: Regr-6mo": 136,
-      "Proj: Regr-12mo": 189
+      "Proj: Regr-3mo": 140,
+      "Proj: Regr-6mo": 137,
+      "Proj: Regr-12mo": 188
     },
     {
       "date": "Nov 30, 2026",
       "Proj: Day-of-Week": 324,
-      "Proj: Regr-3mo": 276,
+      "Proj: Regr-3mo": 278,
       "Proj: Regr-6mo": 281,
-      "Proj: Regr-12mo": 323
+      "Proj: Regr-12mo": 324
     }
   ],
   "frozen": {
