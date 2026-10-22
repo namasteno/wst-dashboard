@@ -1,0 +1,5704 @@
+{
+ "updated": {
+  "monthly": "2026-10-22",
+  "weekly": "2026-10-22"
+ },
+ "monthly": {
+  "2025-03": {
+   "Digital Video": {
+    "intenders": 336,
+    "converted": 262,
+    "prior_intenders": 213,
+    "prior_converted": 157
+   },
+   "Direct": {
+    "intenders": 1411,
+    "converted": 1393,
+    "prior_intenders": 1568,
+    "prior_converted": 1359
+   },
+   "Display": {
+    "intenders": 683,
+    "converted": 522,
+    "prior_intenders": 535,
+    "prior_converted": 316
+   },
+   "Email": {
+    "intenders": 848,
+    "converted": 633,
+    "prior_intenders": 414,
+    "prior_converted": 368
+   },
+   "Paid Other": {
+    "intenders": 25,
+    "converted": 26,
+    "prior_intenders": 86,
+    "prior_converted": 64
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2285,
+    "converted": 1813,
+    "prior_intenders": 2037,
+    "prior_converted": 1351
+   },
+   "PS-TM": {
+    "intenders": 1782,
+    "converted": 1722,
+    "prior_intenders": 1196,
+    "prior_converted": 1110
+   },
+   "Paid Social": {
+    "intenders": 58,
+    "converted": 49,
+    "prior_intenders": 181,
+    "prior_converted": 124
+   },
+   "SEO": {
+    "intenders": 1962,
+    "converted": 1875,
+    "prior_intenders": 2708,
+    "prior_converted": 2495
+   },
+   "Unknown": {
+    "intenders": 711,
+    "converted": 661,
+    "prior_intenders": 1243,
+    "prior_converted": 1058
+   },
+   "Unpaid Other": {
+    "intenders": 205,
+    "converted": 153,
+    "prior_intenders": 175,
+    "prior_converted": 143
+   }
+  },
+  "2025-04": {
+   "Digital Video": {
+    "intenders": 385,
+    "converted": 307,
+    "prior_intenders": 257,
+    "prior_converted": 223
+   },
+   "Direct": {
+    "intenders": 1571,
+    "converted": 1553,
+    "prior_intenders": 1854,
+    "prior_converted": 1746
+   },
+   "Display": {
+    "intenders": 571,
+    "converted": 485,
+    "prior_intenders": 523,
+    "prior_converted": 441
+   },
+   "Email": {
+    "intenders": 968,
+    "converted": 712,
+    "prior_intenders": 677,
+    "prior_converted": 551
+   },
+   "Paid Other": {
+    "intenders": 27,
+    "converted": 22,
+    "prior_intenders": 135,
+    "prior_converted": 104
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2175,
+    "converted": 1707,
+    "prior_intenders": 1549,
+    "prior_converted": 1278
+   },
+   "PS-TM": {
+    "intenders": 1757,
+    "converted": 1715,
+    "prior_intenders": 910,
+    "prior_converted": 890
+   },
+   "Paid Social": {
+    "intenders": 50,
+    "converted": 30,
+    "prior_intenders": 122,
+    "prior_converted": 90
+   },
+   "SEO": {
+    "intenders": 1863,
+    "converted": 1764,
+    "prior_intenders": 2873,
+    "prior_converted": 2734
+   },
+   "Unknown": {
+    "intenders": 734,
+    "converted": 669,
+    "prior_intenders": 1067,
+    "prior_converted": 952
+   },
+   "Unpaid Other": {
+    "intenders": 173,
+    "converted": 171,
+    "prior_intenders": 153,
+    "prior_converted": 141
+   }
+  },
+  "2025-05": {
+   "Digital Video": {
+    "intenders": 314,
+    "converted": 247,
+    "prior_intenders": 323,
+    "prior_converted": 283
+   },
+   "Direct": {
+    "intenders": 3191,
+    "converted": 1975,
+    "prior_intenders": 1842,
+    "prior_converted": 1794
+   },
+   "Display": {
+    "intenders": 611,
+    "converted": 493,
+    "prior_intenders": 627,
+    "prior_converted": 552
+   },
+   "Email": {
+    "intenders": 1429,
+    "converted": 1031,
+    "prior_intenders": 1103,
+    "prior_converted": 922
+   },
+   "Paid Other": {
+    "intenders": 41,
+    "converted": 38,
+    "prior_intenders": 155,
+    "prior_converted": 136
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 2438,
+    "converted": 1859,
+    "prior_intenders": 1624,
+    "prior_converted": 1422
+   },
+   "PS-TM": {
+    "intenders": 2141,
+    "converted": 2088,
+    "prior_intenders": 943,
+    "prior_converted": 929
+   },
+   "Paid Social": {
+    "intenders": 41,
+    "converted": 30,
+    "prior_intenders": 136,
+    "prior_converted": 111
+   },
+   "SEO": {
+    "intenders": 1977,
+    "converted": 1829,
+    "prior_intenders": 2974,
+    "prior_converted": 2917
+   },
+   "Unknown": {
+    "intenders": 828,
+    "converted": 713,
+    "prior_intenders": 812,
+    "prior_converted": 735
+   },
+   "Unpaid Other": {
+    "intenders": 262,
+    "converted": 255,
+    "prior_intenders": 165,
+    "prior_converted": 159
+   }
+  },
+  "2025-06": {
+   "Digital Video": {
+    "intenders": 274,
+    "converted": 182,
+    "prior_intenders": 285,
+    "prior_converted": 241
+   },
+   "Direct": {
+    "intenders": 2451,
+    "converted": 2364,
+    "prior_intenders": 1606,
+    "prior_converted": 1550
+   },
+   "Display": {
+    "intenders": 531,
+    "converted": 410,
+    "prior_intenders": 617,
+    "prior_converted": 494
+   },
+   "Email": {
+    "intenders": 1386,
+    "converted": 975,
+    "prior_intenders": 1081,
+    "prior_converted": 857
+   },
+   "Paid Other": {
+    "intenders": 49,
+    "converted": 39,
+    "prior_intenders": 131,
+    "prior_converted": 112
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2180,
+    "converted": 1435,
+    "prior_intenders": 1626,
+    "prior_converted": 1460
+   },
+   "PS-TM": {
+    "intenders": 1749,
+    "converted": 1606,
+    "prior_intenders": 979,
+    "prior_converted": 976
+   },
+   "Paid Social": {
+    "intenders": 52,
+    "converted": 40,
+    "prior_intenders": 101,
+    "prior_converted": 73
+   },
+   "SEO": {
+    "intenders": 1767,
+    "converted": 1611,
+    "prior_intenders": 2686,
+    "prior_converted": 2608
+   },
+   "Unknown": {
+    "intenders": 944,
+    "converted": 797,
+    "prior_intenders": 979,
+    "prior_converted": 910
+   },
+   "Unpaid Other": {
+    "intenders": 170,
+    "converted": 160,
+    "prior_intenders": 194,
+    "prior_converted": 185
+   }
+  },
+  "2025-07": {
+   "Digital Video": {
+    "intenders": 310,
+    "converted": 219,
+    "prior_intenders": 326,
+    "prior_converted": 275
+   },
+   "Direct": {
+    "intenders": 2445,
+    "converted": 2405,
+    "prior_intenders": 1571,
+    "prior_converted": 1535
+   },
+   "Display": {
+    "intenders": 500,
+    "converted": 416,
+    "prior_intenders": 618,
+    "prior_converted": 519
+   },
+   "Email": {
+    "intenders": 1363,
+    "converted": 972,
+    "prior_intenders": 1073,
+    "prior_converted": 826
+   },
+   "Paid Other": {
+    "intenders": 45,
+    "converted": 40,
+    "prior_intenders": 136,
+    "prior_converted": 121
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2200,
+    "converted": 1329,
+    "prior_intenders": 1702,
+    "prior_converted": 1459
+   },
+   "PS-TM": {
+    "intenders": 2054,
+    "converted": 1921,
+    "prior_intenders": 954,
+    "prior_converted": 925
+   },
+   "Paid Social": {
+    "intenders": 52,
+    "converted": 29,
+    "prior_intenders": 97,
+    "prior_converted": 68
+   },
+   "SEO": {
+    "intenders": 1738,
+    "converted": 1575,
+    "prior_intenders": 3028,
+    "prior_converted": 2886
+   },
+   "Unknown": {
+    "intenders": 1071,
+    "converted": 806,
+    "prior_intenders": 809,
+    "prior_converted": 749
+   },
+   "Unpaid Other": {
+    "intenders": 185,
+    "converted": 188,
+    "prior_intenders": 202,
+    "prior_converted": 186
+   }
+  },
+  "2025-08": {
+   "Digital Video": {
+    "intenders": 352,
+    "converted": 245,
+    "prior_intenders": 367,
+    "prior_converted": 296
+   },
+   "Direct": {
+    "intenders": 2728,
+    "converted": 2649,
+    "prior_intenders": 1635,
+    "prior_converted": 1576
+   },
+   "Display": {
+    "intenders": 532,
+    "converted": 446,
+    "prior_intenders": 617,
+    "prior_converted": 505
+   },
+   "Email": {
+    "intenders": 1444,
+    "converted": 982,
+    "prior_intenders": 1040,
+    "prior_converted": 768
+   },
+   "Paid Other": {
+    "intenders": 79,
+    "converted": 70,
+    "prior_intenders": 132,
+    "prior_converted": 107
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2459,
+    "converted": 1661,
+    "prior_intenders": 1783,
+    "prior_converted": 1488
+   },
+   "PS-TM": {
+    "intenders": 2254,
+    "converted": 2108,
+    "prior_intenders": 897,
+    "prior_converted": 875
+   },
+   "Paid Social": {
+    "intenders": 45,
+    "converted": 27,
+    "prior_intenders": 91,
+    "prior_converted": 74
+   },
+   "SEO": {
+    "intenders": 1740,
+    "converted": 1581,
+    "prior_intenders": 3352,
+    "prior_converted": 3222
+   },
+   "Unknown": {
+    "intenders": 1277,
+    "converted": 824,
+    "prior_intenders": 1123,
+    "prior_converted": 1031
+   },
+   "Unpaid Other": {
+    "intenders": 176,
+    "converted": 169,
+    "prior_intenders": 256,
+    "prior_converted": 236
+   }
+  },
+  "2025-09": {
+   "Digital Video": {
+    "intenders": 265,
+    "converted": 195,
+    "prior_intenders": 326,
+    "prior_converted": 256
+   },
+   "Direct": {
+    "intenders": 2339,
+    "converted": 2241,
+    "prior_intenders": 1368,
+    "prior_converted": 1361
+   },
+   "Display": {
+    "intenders": 439,
+    "converted": 366,
+    "prior_intenders": 636,
+    "prior_converted": 520
+   },
+   "Email": {
+    "intenders": 1288,
+    "converted": 861,
+    "prior_intenders": 888,
+    "prior_converted": 647
+   },
+   "Paid Other": {
+    "intenders": 42,
+    "converted": 39,
+    "prior_intenders": 143,
+    "prior_converted": 111
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2363,
+    "converted": 1689,
+    "prior_intenders": 1899,
+    "prior_converted": 1499
+   },
+   "PS-TM": {
+    "intenders": 1812,
+    "converted": 1690,
+    "prior_intenders": 847,
+    "prior_converted": 804
+   },
+   "Paid Social": {
+    "intenders": 64,
+    "converted": 42,
+    "prior_intenders": 111,
+    "prior_converted": 74
+   },
+   "SEO": {
+    "intenders": 1423,
+    "converted": 1271,
+    "prior_intenders": 2791,
+    "prior_converted": 2639
+   },
+   "Unknown": {
+    "intenders": 1290,
+    "converted": 728,
+    "prior_intenders": 726,
+    "prior_converted": 657
+   },
+   "Unpaid Other": {
+    "intenders": 163,
+    "converted": 153,
+    "prior_intenders": 203,
+    "prior_converted": 190
+   }
+  },
+  "2025-10": {
+   "Digital Video": {
+    "intenders": 348,
+    "converted": 270,
+    "prior_intenders": 331,
+    "prior_converted": 261
+   },
+   "Direct": {
+    "intenders": 2084,
+    "converted": 1976,
+    "prior_intenders": 1443,
+    "prior_converted": 1397
+   },
+   "Display": {
+    "intenders": 491,
+    "converted": 431,
+    "prior_intenders": 615,
+    "prior_converted": 516
+   },
+   "Email": {
+    "intenders": 1085,
+    "converted": 765,
+    "prior_intenders": 1051,
+    "prior_converted": 786
+   },
+   "Paid Other": {
+    "intenders": 70,
+    "converted": 61,
+    "prior_intenders": 145,
+    "prior_converted": 123
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2663,
+    "converted": 1814,
+    "prior_intenders": 1834,
+    "prior_converted": 1486
+   },
+   "PS-TM": {
+    "intenders": 1714,
+    "converted": 1570,
+    "prior_intenders": 898,
+    "prior_converted": 852
+   },
+   "Paid Social": {
+    "intenders": 50,
+    "converted": 36,
+    "prior_intenders": 96,
+    "prior_converted": 74
+   },
+   "SEO": {
+    "intenders": 1195,
+    "converted": 1078,
+    "prior_intenders": 2781,
+    "prior_converted": 2602
+   },
+   "Unknown": {
+    "intenders": 1356,
+    "converted": 693,
+    "prior_intenders": 1146,
+    "prior_converted": 1053
+   },
+   "Unpaid Other": {
+    "intenders": 143,
+    "converted": 134,
+    "prior_intenders": 193,
+    "prior_converted": 169
+   }
+  },
+  "2025-11": {
+   "Digital Video": {
+    "intenders": 318,
+    "converted": 237,
+    "prior_intenders": 288,
+    "prior_converted": 224
+   },
+   "Direct": {
+    "intenders": 1979,
+    "converted": 1855,
+    "prior_intenders": 1215,
+    "prior_converted": 1185
+   },
+   "Display": {
+    "intenders": 547,
+    "converted": 447,
+    "prior_intenders": 534,
+    "prior_converted": 441
+   },
+   "Email": {
+    "intenders": 963,
+    "converted": 690,
+    "prior_intenders": 825,
+    "prior_converted": 634
+   },
+   "Paid Other": {
+    "intenders": 68,
+    "converted": 56,
+    "prior_intenders": 121,
+    "prior_converted": 94
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 2928,
+    "converted": 1903,
+    "prior_intenders": 1726,
+    "prior_converted": 1354
+   },
+   "PS-TM": {
+    "intenders": 1613,
+    "converted": 1478,
+    "prior_intenders": 877,
+    "prior_converted": 845
+   },
+   "Paid Social": {
+    "intenders": 51,
+    "converted": 32,
+    "prior_intenders": 58,
+    "prior_converted": 52
+   },
+   "SEO": {
+    "intenders": 1050,
+    "converted": 931,
+    "prior_intenders": 2475,
+    "prior_converted": 2345
+   },
+   "Unknown": {
+    "intenders": 1219,
+    "converted": 582,
+    "prior_intenders": 957,
+    "prior_converted": 880
+   },
+   "Unpaid Other": {
+    "intenders": 117,
+    "converted": 111,
+    "prior_intenders": 169,
+    "prior_converted": 172
+   }
+  },
+  "2025-12": {
+   "Digital Video": {
+    "intenders": 403,
+    "converted": 315,
+    "prior_intenders": 325,
+    "prior_converted": 251
+   },
+   "Direct": {
+    "intenders": 2919,
+    "converted": 2829,
+    "prior_intenders": 1314,
+    "prior_converted": 1239
+   },
+   "Display": {
+    "intenders": 759,
+    "converted": 612,
+    "prior_intenders": 571,
+    "prior_converted": 452
+   },
+   "Email": {
+    "intenders": 1146,
+    "converted": 764,
+    "prior_intenders": 949,
+    "prior_converted": 661
+   },
+   "Paid Other": {
+    "intenders": 63,
+    "converted": 55,
+    "prior_intenders": 98,
+    "prior_converted": 78
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 2898,
+    "converted": 1947,
+    "prior_intenders": 1901,
+    "prior_converted": 1450
+   },
+   "PS-TM": {
+    "intenders": 2577,
+    "converted": 2414,
+    "prior_intenders": 899,
+    "prior_converted": 826
+   },
+   "Paid Social": {
+    "intenders": 60,
+    "converted": 36,
+    "prior_intenders": 83,
+    "prior_converted": 67
+   },
+   "SEO": {
+    "intenders": 1421,
+    "converted": 1272,
+    "prior_intenders": 2682,
+    "prior_converted": 2494
+   },
+   "Unknown": {
+    "intenders": 1027,
+    "converted": 577,
+    "prior_intenders": 678,
+    "prior_converted": 609
+   },
+   "Unpaid Other": {
+    "intenders": 167,
+    "converted": 158,
+    "prior_intenders": 181,
+    "prior_converted": 169
+   }
+  },
+  "2026-01": {
+   "Digital Video": {
+    "intenders": 415,
+    "converted": 285,
+    "prior_intenders": 401,
+    "prior_converted": 301
+   },
+   "Direct": {
+    "intenders": 3076,
+    "converted": 2755,
+    "prior_intenders": 1575,
+    "prior_converted": 1533
+   },
+   "Display": {
+    "intenders": 1015,
+    "converted": 721,
+    "prior_intenders": 725,
+    "prior_converted": 570
+   },
+   "Email": {
+    "intenders": 1369,
+    "converted": 857,
+    "prior_intenders": 1228,
+    "prior_converted": 866
+   },
+   "Paid Other": {
+    "intenders": 97,
+    "converted": 84,
+    "prior_intenders": 79,
+    "prior_converted": 70
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 3687,
+    "converted": 2136,
+    "prior_intenders": 2314,
+    "prior_converted": 1791
+   },
+   "PS-TM": {
+    "intenders": 2512,
+    "converted": 2266,
+    "prior_intenders": 1988,
+    "prior_converted": 1881
+   },
+   "Paid Social": {
+    "intenders": 83,
+    "converted": 59,
+    "prior_intenders": 92,
+    "prior_converted": 80
+   },
+   "SEO": {
+    "intenders": 1432,
+    "converted": 1232,
+    "prior_intenders": 2781,
+    "prior_converted": 2616
+   },
+   "Unknown": {
+    "intenders": 1140,
+    "converted": 789,
+    "prior_intenders": 1025,
+    "prior_converted": 952
+   },
+   "Unpaid Other": {
+    "intenders": 227,
+    "converted": 201,
+    "prior_intenders": 236,
+    "prior_converted": 215
+   }
+  },
+  "2026-02": {
+   "Digital Video": {
+    "intenders": 347,
+    "converted": 220,
+    "prior_intenders": 312,
+    "prior_converted": 246
+   },
+   "Direct": {
+    "intenders": 2619,
+    "converted": 2327,
+    "prior_intenders": 1410,
+    "prior_converted": 1359
+   },
+   "Display": {
+    "intenders": 728,
+    "converted": 474,
+    "prior_intenders": 803,
+    "prior_converted": 530
+   },
+   "Email": {
+    "intenders": 1097,
+    "converted": 624,
+    "prior_intenders": 1006,
+    "prior_converted": 746
+   },
+   "Paid Other": {
+    "intenders": 52,
+    "converted": 42,
+    "prior_intenders": 35,
+    "prior_converted": 33
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 3421,
+    "converted": 1764,
+    "prior_intenders": 2045,
+    "prior_converted": 1609
+   },
+   "PS-TM": {
+    "intenders": 1874,
+    "converted": 1678,
+    "prior_intenders": 1808,
+    "prior_converted": 1807
+   },
+   "Paid Social": {
+    "intenders": 55,
+    "converted": 35,
+    "prior_intenders": 64,
+    "prior_converted": 53
+   },
+   "SEO": {
+    "intenders": 1072,
+    "converted": 901,
+    "prior_intenders": 2014,
+    "prior_converted": 1930
+   },
+   "Unknown": {
+    "intenders": 796,
+    "converted": 516,
+    "prior_intenders": 942,
+    "prior_converted": 862
+   },
+   "Unpaid Other": {
+    "intenders": 168,
+    "converted": 151,
+    "prior_intenders": 295,
+    "prior_converted": 192
+   }
+  },
+  "2026-03": {
+   "Digital Video": {
+    "intenders": 301,
+    "converted": 202,
+    "prior_intenders": 336,
+    "prior_converted": 262
+   },
+   "Direct": {
+    "intenders": 2805,
+    "converted": 2450,
+    "prior_intenders": 1411,
+    "prior_converted": 1393
+   },
+   "Display": {
+    "intenders": 684,
+    "converted": 427,
+    "prior_intenders": 683,
+    "prior_converted": 522
+   },
+   "Email": {
+    "intenders": 1085,
+    "converted": 611,
+    "prior_intenders": 848,
+    "prior_converted": 633
+   },
+   "Paid Other": {
+    "intenders": 59,
+    "converted": 43,
+    "prior_intenders": 25,
+    "prior_converted": 26
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 3418,
+    "converted": 1890,
+    "prior_intenders": 2285,
+    "prior_converted": 1813
+   },
+   "PS-TM": {
+    "intenders": 2186,
+    "converted": 1878,
+    "prior_intenders": 1782,
+    "prior_converted": 1722
+   },
+   "Paid Social": {
+    "intenders": 58,
+    "converted": 32,
+    "prior_intenders": 58,
+    "prior_converted": 49
+   },
+   "SEO": {
+    "intenders": 1255,
+    "converted": 1027,
+    "prior_intenders": 1962,
+    "prior_converted": 1875
+   },
+   "Unknown": {
+    "intenders": 923,
+    "converted": 673,
+    "prior_intenders": 711,
+    "prior_converted": 661
+   },
+   "Unpaid Other": {
+    "intenders": 202,
+    "converted": 168,
+    "prior_intenders": 205,
+    "prior_converted": 153
+   }
+  },
+  "2026-04": {
+   "Digital Video": {
+    "intenders": 253,
+    "converted": 193,
+    "prior_intenders": 385,
+    "prior_converted": 307
+   },
+   "Direct": {
+    "intenders": 2633,
+    "converted": 2408,
+    "prior_intenders": 1571,
+    "prior_converted": 1553
+   },
+   "Display": {
+    "intenders": 680,
+    "converted": 443,
+    "prior_intenders": 571,
+    "prior_converted": 485
+   },
+   "Email": {
+    "intenders": 942,
+    "converted": 611,
+    "prior_intenders": 968,
+    "prior_converted": 712
+   },
+   "Paid Other": {
+    "intenders": 35,
+    "converted": 31,
+    "prior_intenders": 27,
+    "prior_converted": 22
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 3169,
+    "converted": 1888,
+    "prior_intenders": 2175,
+    "prior_converted": 1707
+   },
+   "PS-TM": {
+    "intenders": 2366,
+    "converted": 2049,
+    "prior_intenders": 1757,
+    "prior_converted": 1715
+   },
+   "Paid Social": {
+    "intenders": 47,
+    "converted": 28,
+    "prior_intenders": 50,
+    "prior_converted": 30
+   },
+   "SEO": {
+    "intenders": 1306,
+    "converted": 1111,
+    "prior_intenders": 1863,
+    "prior_converted": 1764
+   },
+   "Unknown": {
+    "intenders": 857,
+    "converted": 646,
+    "prior_intenders": 734,
+    "prior_converted": 669
+   },
+   "Unpaid Other": {
+    "intenders": 186,
+    "converted": 181,
+    "prior_intenders": 173,
+    "prior_converted": 171
+   }
+  },
+  "2026-05": {
+   "Digital Video": {
+    "intenders": 154,
+    "converted": 109,
+    "prior_intenders": 314,
+    "prior_converted": 247
+   },
+   "Direct": {
+    "intenders": 1906,
+    "converted": 1620,
+    "prior_intenders": 3191,
+    "prior_converted": 1975
+   },
+   "Display": {
+    "intenders": 504,
+    "converted": 346,
+    "prior_intenders": 611,
+    "prior_converted": 493
+   },
+   "Email": {
+    "intenders": 1006,
+    "converted": 649,
+    "prior_intenders": 1429,
+    "prior_converted": 1031
+   },
+   "Paid Other": {
+    "intenders": 47,
+    "converted": 38,
+    "prior_intenders": 41,
+    "prior_converted": 38
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 3185,
+    "converted": 2054,
+    "prior_intenders": 2438,
+    "prior_converted": 1859
+   },
+   "PS-TM": {
+    "intenders": 2874,
+    "converted": 2591,
+    "prior_intenders": 2141,
+    "prior_converted": 2088
+   },
+   "Paid Social": {
+    "intenders": 65,
+    "converted": 41,
+    "prior_intenders": 41,
+    "prior_converted": 30
+   },
+   "SEO": {
+    "intenders": 1608,
+    "converted": 1325,
+    "prior_intenders": 1977,
+    "prior_converted": 1829
+   },
+   "Unknown": {
+    "intenders": 880,
+    "converted": 578,
+    "prior_intenders": 828,
+    "prior_converted": 713
+   },
+   "Unpaid Other": {
+    "intenders": 269,
+    "converted": 244,
+    "prior_intenders": 262,
+    "prior_converted": 255
+   }
+  },
+  "2026-06": {
+   "Digital Video": {
+    "intenders": 92,
+    "converted": 61,
+    "prior_intenders": 274,
+    "prior_converted": 182
+   },
+   "Direct": {
+    "intenders": 1608,
+    "converted": 1484,
+    "prior_intenders": 2451,
+    "prior_converted": 2364
+   },
+   "Display": {
+    "intenders": 329,
+    "converted": 203,
+    "prior_intenders": 531,
+    "prior_converted": 410
+   },
+   "Email": {
+    "intenders": 1013,
+    "converted": 646,
+    "prior_intenders": 1386,
+    "prior_converted": 975
+   },
+   "Paid Other": {
+    "intenders": 53,
+    "converted": 46,
+    "prior_intenders": 49,
+    "prior_converted": 39
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 3751,
+    "converted": 2262,
+    "prior_intenders": 2180,
+    "prior_converted": 1435
+   },
+   "PS-TM": {
+    "intenders": 2614,
+    "converted": 2310,
+    "prior_intenders": 1749,
+    "prior_converted": 1606
+   },
+   "Paid Social": {
+    "intenders": 57,
+    "converted": 35,
+    "prior_intenders": 52,
+    "prior_converted": 40
+   },
+   "SEO": {
+    "intenders": 1437,
+    "converted": 1218,
+    "prior_intenders": 1767,
+    "prior_converted": 1611
+   },
+   "Unknown": {
+    "intenders": 1067,
+    "converted": 660,
+    "prior_intenders": 944,
+    "prior_converted": 797
+   },
+   "Unpaid Other": {
+    "intenders": 240,
+    "converted": 217,
+    "prior_intenders": 170,
+    "prior_converted": 160
+   }
+  },
+  "2026-07": {
+   "Digital Video": {
+    "intenders": 275,
+    "converted": 201,
+    "prior_intenders": 310,
+    "prior_converted": 219
+   },
+   "Direct": {
+    "intenders": 1746,
+    "converted": 1639,
+    "prior_intenders": 2445,
+    "prior_converted": 2405
+   },
+   "Display": {
+    "intenders": 475,
+    "converted": 336,
+    "prior_intenders": 500,
+    "prior_converted": 416
+   },
+   "Email": {
+    "intenders": 847,
+    "converted": 580,
+    "prior_intenders": 1363,
+    "prior_converted": 972
+   },
+   "Paid Other": {
+    "intenders": 55,
+    "converted": 41,
+    "prior_intenders": 45,
+    "prior_converted": 40
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 2976,
+    "converted": 1815,
+    "prior_intenders": 2200,
+    "prior_converted": 1329
+   },
+   "PS-TM": {
+    "intenders": 2540,
+    "converted": 2322,
+    "prior_intenders": 2054,
+    "prior_converted": 1921
+   },
+   "Paid Social": {
+    "intenders": 37,
+    "converted": 22,
+    "prior_intenders": 52,
+    "prior_converted": 29
+   },
+   "SEO": {
+    "intenders": 1233,
+    "converted": 1094,
+    "prior_intenders": 1738,
+    "prior_converted": 1575
+   },
+   "Unknown": {
+    "intenders": 933,
+    "converted": 640,
+    "prior_intenders": 1071,
+    "prior_converted": 806
+   },
+   "Unpaid Other": {
+    "intenders": 212,
+    "converted": 185,
+    "prior_intenders": 185,
+    "prior_converted": 188
+   }
+  },
+  "2026-08": {
+   "Digital Video": {
+    "intenders": 221,
+    "converted": 169,
+    "prior_intenders": 352,
+    "prior_converted": 245
+   },
+   "Direct": {
+    "intenders": 1740,
+    "converted": 1625,
+    "prior_intenders": 2728,
+    "prior_converted": 2649
+   },
+   "Display": {
+    "intenders": 588,
+    "converted": 468,
+    "prior_intenders": 532,
+    "prior_converted": 446
+   },
+   "Email": {
+    "intenders": 848,
+    "converted": 576,
+    "prior_intenders": 1444,
+    "prior_converted": 982
+   },
+   "Paid Other": {
+    "intenders": 69,
+    "converted": 55,
+    "prior_intenders": 79,
+    "prior_converted": 70
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 1,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 2921,
+    "converted": 1809,
+    "prior_intenders": 2459,
+    "prior_converted": 1661
+   },
+   "PS-TM": {
+    "intenders": 2330,
+    "converted": 2143,
+    "prior_intenders": 2254,
+    "prior_converted": 2108
+   },
+   "Paid Social": {
+    "intenders": 20,
+    "converted": 16,
+    "prior_intenders": 45,
+    "prior_converted": 27
+   },
+   "SEO": {
+    "intenders": 1215,
+    "converted": 1086,
+    "prior_intenders": 1740,
+    "prior_converted": 1581
+   },
+   "Unknown": {
+    "intenders": 935,
+    "converted": 700,
+    "prior_intenders": 1277,
+    "prior_converted": 824
+   },
+   "Unpaid Other": {
+    "intenders": 262,
+    "converted": 225,
+    "prior_intenders": 176,
+    "prior_converted": 169
+   }
+  },
+  "2026-09": {
+   "Digital Video": {
+    "intenders": 259,
+    "converted": 179,
+    "prior_intenders": 265,
+    "prior_converted": 195
+   },
+   "Direct": {
+    "intenders": 1434,
+    "converted": 1334,
+    "prior_intenders": 2339,
+    "prior_converted": 2241
+   },
+   "Display": {
+    "intenders": 584,
+    "converted": 445,
+    "prior_intenders": 439,
+    "prior_converted": 366
+   },
+   "Email": {
+    "intenders": 835,
+    "converted": 524,
+    "prior_intenders": 1288,
+    "prior_converted": 861
+   },
+   "Paid Other": {
+    "intenders": 40,
+    "converted": 24,
+    "prior_intenders": 42,
+    "prior_converted": 39
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 2842,
+    "converted": 1667,
+    "prior_intenders": 2363,
+    "prior_converted": 1689
+   },
+   "PS-TM": {
+    "intenders": 2086,
+    "converted": 1856,
+    "prior_intenders": 1812,
+    "prior_converted": 1690
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 11,
+    "prior_intenders": 64,
+    "prior_converted": 42
+   },
+   "SEO": {
+    "intenders": 1012,
+    "converted": 901,
+    "prior_intenders": 1423,
+    "prior_converted": 1271
+   },
+   "Unknown": {
+    "intenders": 830,
+    "converted": 542,
+    "prior_intenders": 1290,
+    "prior_converted": 728
+   },
+   "Unpaid Other": {
+    "intenders": 212,
+    "converted": 192,
+    "prior_intenders": 163,
+    "prior_converted": 153
+   }
+  },
+  "2026-10": {
+   "Digital Video": {
+    "intenders": 268,
+    "converted": 167,
+    "prior_intenders": 348,
+    "prior_converted": 270
+   },
+   "Direct": {
+    "intenders": 916,
+    "converted": 906,
+    "prior_intenders": 2084,
+    "prior_converted": 1976
+   },
+   "Display": {
+    "intenders": 293,
+    "converted": 200,
+    "prior_intenders": 491,
+    "prior_converted": 431
+   },
+   "Email": {
+    "intenders": 557,
+    "converted": 296,
+    "prior_intenders": 1085,
+    "prior_converted": 765
+   },
+   "Paid Other": {
+    "intenders": 21,
+    "converted": 21,
+    "prior_intenders": 70,
+    "prior_converted": 61
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1,
+    "prior_intenders": 0,
+    "prior_converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 3042,
+    "converted": 1500,
+    "prior_intenders": 2663,
+    "prior_converted": 1814
+   },
+   "PS-TM": {
+    "intenders": 1169,
+    "converted": 1036,
+    "prior_intenders": 1714,
+    "prior_converted": 1570
+   },
+   "Paid Social": {
+    "intenders": 17,
+    "converted": 7,
+    "prior_intenders": 50,
+    "prior_converted": 36
+   },
+   "SEO": {
+    "intenders": 557,
+    "converted": 521,
+    "prior_intenders": 1195,
+    "prior_converted": 1078
+   },
+   "Unknown": {
+    "intenders": 479,
+    "converted": 274,
+    "prior_intenders": 1356,
+    "prior_converted": 693
+   },
+   "Unpaid Other": {
+    "intenders": 117,
+    "converted": 112,
+    "prior_intenders": 143,
+    "prior_converted": 134
+   }
+  }
+ },
+ "weekly": {
+  "2025-03-02": {
+   "Digital Video": {
+    "intenders": 71,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 367,
+    "converted": 345
+   },
+   "Display": {
+    "intenders": 205,
+    "converted": 133
+   },
+   "Email": {
+    "intenders": 223,
+    "converted": 164
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 523,
+    "converted": 429
+   },
+   "PS-TM": {
+    "intenders": 456,
+    "converted": 443
+   },
+   "Paid Social": {
+    "intenders": 12,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 449,
+    "converted": 434
+   },
+   "Unknown": {
+    "intenders": 186,
+    "converted": 170
+   },
+   "Unpaid Other": {
+    "intenders": 70,
+    "converted": 37
+   }
+  },
+  "2025-03-09": {
+   "Digital Video": {
+    "intenders": 76,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 333,
+    "converted": 327
+   },
+   "Display": {
+    "intenders": 184,
+    "converted": 125
+   },
+   "Email": {
+    "intenders": 188,
+    "converted": 148
+   },
+   "Paid Other": {
+    "intenders": 7,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 486,
+    "converted": 399
+   },
+   "PS-TM": {
+    "intenders": 399,
+    "converted": 393
+   },
+   "Paid Social": {
+    "intenders": 18,
+    "converted": 15
+   },
+   "SEO": {
+    "intenders": 492,
+    "converted": 467
+   },
+   "Unknown": {
+    "intenders": 197,
+    "converted": 179
+   },
+   "Unpaid Other": {
+    "intenders": 47,
+    "converted": 27
+   }
+  },
+  "2025-03-16": {
+   "Digital Video": {
+    "intenders": 74,
+    "converted": 57
+   },
+   "Direct": {
+    "intenders": 325,
+    "converted": 312
+   },
+   "Display": {
+    "intenders": 154,
+    "converted": 120
+   },
+   "Email": {
+    "intenders": 166,
+    "converted": 120
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 5
+   },
+   "PS-NTM": {
+    "intenders": 501,
+    "converted": 406
+   },
+   "PS-TM": {
+    "intenders": 412,
+    "converted": 392
+   },
+   "Paid Social": {
+    "intenders": 17,
+    "converted": 14
+   },
+   "SEO": {
+    "intenders": 447,
+    "converted": 438
+   },
+   "Unknown": {
+    "intenders": 161,
+    "converted": 144
+   },
+   "Unpaid Other": {
+    "intenders": 57,
+    "converted": 40
+   }
+  },
+  "2025-03-23": {
+   "Digital Video": {
+    "intenders": 83,
+    "converted": 59
+   },
+   "Direct": {
+    "intenders": 307,
+    "converted": 311
+   },
+   "Display": {
+    "intenders": 149,
+    "converted": 116
+   },
+   "Email": {
+    "intenders": 207,
+    "converted": 146
+   },
+   "Paid Other": {
+    "intenders": 5,
+    "converted": 4
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 570,
+    "converted": 420
+   },
+   "PS-TM": {
+    "intenders": 391,
+    "converted": 385
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 456,
+    "converted": 428
+   },
+   "Unknown": {
+    "intenders": 150,
+    "converted": 145
+   },
+   "Unpaid Other": {
+    "intenders": 43,
+    "converted": 36
+   }
+  },
+  "2025-03-30": {
+   "Digital Video": {
+    "intenders": 72,
+    "converted": 64
+   },
+   "Direct": {
+    "intenders": 322,
+    "converted": 330
+   },
+   "Display": {
+    "intenders": 133,
+    "converted": 116
+   },
+   "Email": {
+    "intenders": 202,
+    "converted": 160
+   },
+   "Paid Other": {
+    "intenders": 6,
+    "converted": 5
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 520,
+    "converted": 419
+   },
+   "PS-TM": {
+    "intenders": 426,
+    "converted": 396
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 414,
+    "converted": 393
+   },
+   "Unknown": {
+    "intenders": 141,
+    "converted": 135
+   },
+   "Unpaid Other": {
+    "intenders": 35,
+    "converted": 37
+   }
+  },
+  "2025-04-06": {
+   "Digital Video": {
+    "intenders": 77,
+    "converted": 67
+   },
+   "Direct": {
+    "intenders": 324,
+    "converted": 327
+   },
+   "Display": {
+    "intenders": 121,
+    "converted": 100
+   },
+   "Email": {
+    "intenders": 199,
+    "converted": 149
+   },
+   "Paid Other": {
+    "intenders": 7,
+    "converted": 7
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 494,
+    "converted": 385
+   },
+   "PS-TM": {
+    "intenders": 352,
+    "converted": 341
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 411,
+    "converted": 383
+   },
+   "Unknown": {
+    "intenders": 144,
+    "converted": 131
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 47
+   }
+  },
+  "2025-04-13": {
+   "Digital Video": {
+    "intenders": 99,
+    "converted": 69
+   },
+   "Direct": {
+    "intenders": 388,
+    "converted": 379
+   },
+   "Display": {
+    "intenders": 140,
+    "converted": 121
+   },
+   "Email": {
+    "intenders": 199,
+    "converted": 145
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "PS-NTM": {
+    "intenders": 488,
+    "converted": 382
+   },
+   "PS-TM": {
+    "intenders": 380,
+    "converted": 374
+   },
+   "Paid Social": {
+    "intenders": 18,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 427,
+    "converted": 401
+   },
+   "Unknown": {
+    "intenders": 158,
+    "converted": 143
+   },
+   "Unpaid Other": {
+    "intenders": 37,
+    "converted": 36
+   }
+  },
+  "2025-04-20": {
+   "Digital Video": {
+    "intenders": 72,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 306,
+    "converted": 298
+   },
+   "Display": {
+    "intenders": 132,
+    "converted": 109
+   },
+   "Email": {
+    "intenders": 208,
+    "converted": 154
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 3
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 492,
+    "converted": 372
+   },
+   "PS-TM": {
+    "intenders": 407,
+    "converted": 407
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 444,
+    "converted": 430
+   },
+   "Unknown": {
+    "intenders": 180,
+    "converted": 172
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 36
+   }
+  },
+  "2025-04-27": {
+   "Digital Video": {
+    "intenders": 99,
+    "converted": 80
+   },
+   "Direct": {
+    "intenders": 388,
+    "converted": 384
+   },
+   "Display": {
+    "intenders": 120,
+    "converted": 104
+   },
+   "Email": {
+    "intenders": 257,
+    "converted": 188
+   },
+   "Paid Other": {
+    "intenders": 5,
+    "converted": 3
+   },
+   "PS-NTM": {
+    "intenders": 543,
+    "converted": 431
+   },
+   "PS-TM": {
+    "intenders": 436,
+    "converted": 415
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 5
+   },
+   "SEO": {
+    "intenders": 442,
+    "converted": 416
+   },
+   "Unknown": {
+    "intenders": 166,
+    "converted": 144
+   },
+   "Unpaid Other": {
+    "intenders": 34,
+    "converted": 34
+   }
+  },
+  "2025-05-04": {
+   "Digital Video": {
+    "intenders": 86,
+    "converted": 76
+   },
+   "Direct": {
+    "intenders": 441,
+    "converted": 426
+   },
+   "Display": {
+    "intenders": 156,
+    "converted": 125
+   },
+   "Email": {
+    "intenders": 285,
+    "converted": 204
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 514,
+    "converted": 419
+   },
+   "PS-TM": {
+    "intenders": 436,
+    "converted": 432
+   },
+   "Paid Social": {
+    "intenders": 11,
+    "converted": 11
+   },
+   "SEO": {
+    "intenders": 417,
+    "converted": 396
+   },
+   "Unknown": {
+    "intenders": 196,
+    "converted": 176
+   },
+   "Unpaid Other": {
+    "intenders": 41,
+    "converted": 43
+   }
+  },
+  "2025-05-11": {
+   "Digital Video": {
+    "intenders": 73,
+    "converted": 54
+   },
+   "Direct": {
+    "intenders": 1523,
+    "converted": 422
+   },
+   "Display": {
+    "intenders": 134,
+    "converted": 123
+   },
+   "Email": {
+    "intenders": 305,
+    "converted": 197
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "PS-NTM": {
+    "intenders": 527,
+    "converted": 398
+   },
+   "PS-TM": {
+    "intenders": 463,
+    "converted": 454
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 417,
+    "converted": 380
+   },
+   "Unknown": {
+    "intenders": 195,
+    "converted": 158
+   },
+   "Unpaid Other": {
+    "intenders": 45,
+    "converted": 48
+   }
+  },
+  "2025-05-18": {
+   "Digital Video": {
+    "intenders": 71,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 457,
+    "converted": 430
+   },
+   "Display": {
+    "intenders": 143,
+    "converted": 111
+   },
+   "Email": {
+    "intenders": 341,
+    "converted": 245
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 543,
+    "converted": 417
+   },
+   "PS-TM": {
+    "intenders": 544,
+    "converted": 529
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 484,
+    "converted": 448
+   },
+   "Unknown": {
+    "intenders": 180,
+    "converted": 161
+   },
+   "Unpaid Other": {
+    "intenders": 53,
+    "converted": 53
+   }
+  },
+  "2025-05-25": {
+   "Digital Video": {
+    "intenders": 72,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 496,
+    "converted": 456
+   },
+   "Display": {
+    "intenders": 147,
+    "converted": 110
+   },
+   "Email": {
+    "intenders": 303,
+    "converted": 228
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 13
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 594,
+    "converted": 452
+   },
+   "PS-TM": {
+    "intenders": 503,
+    "converted": 493
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 482,
+    "converted": 440
+   },
+   "Unknown": {
+    "intenders": 173,
+    "converted": 153
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 50
+   }
+  },
+  "2025-06-01": {
+   "Digital Video": {
+    "intenders": 68,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 539,
+    "converted": 507
+   },
+   "Display": {
+    "intenders": 128,
+    "converted": 104
+   },
+   "Email": {
+    "intenders": 360,
+    "converted": 279
+   },
+   "Paid Other": {
+    "intenders": 7,
+    "converted": 6
+   },
+   "PS-NTM": {
+    "intenders": 573,
+    "converted": 429
+   },
+   "PS-TM": {
+    "intenders": 479,
+    "converted": 467
+   },
+   "Paid Social": {
+    "intenders": 11,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 450,
+    "converted": 424
+   },
+   "Unknown": {
+    "intenders": 212,
+    "converted": 183
+   },
+   "Unpaid Other": {
+    "intenders": 102,
+    "converted": 92
+   }
+  },
+  "2025-06-08": {
+   "Digital Video": {
+    "intenders": 65,
+    "converted": 47
+   },
+   "Direct": {
+    "intenders": 551,
+    "converted": 544
+   },
+   "Display": {
+    "intenders": 132,
+    "converted": 108
+   },
+   "Email": {
+    "intenders": 340,
+    "converted": 241
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 7
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 557,
+    "converted": 392
+   },
+   "PS-TM": {
+    "intenders": 444,
+    "converted": 414
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 429,
+    "converted": 404
+   },
+   "Unknown": {
+    "intenders": 230,
+    "converted": 177
+   },
+   "Unpaid Other": {
+    "intenders": 42,
+    "converted": 39
+   }
+  },
+  "2025-06-15": {
+   "Digital Video": {
+    "intenders": 65,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 592,
+    "converted": 570
+   },
+   "Display": {
+    "intenders": 118,
+    "converted": 90
+   },
+   "Email": {
+    "intenders": 335,
+    "converted": 242
+   },
+   "Paid Other": {
+    "intenders": 12,
+    "converted": 11
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 452,
+    "converted": 298
+   },
+   "PS-TM": {
+    "intenders": 364,
+    "converted": 338
+   },
+   "Paid Social": {
+    "intenders": 12,
+    "converted": 11
+   },
+   "SEO": {
+    "intenders": 413,
+    "converted": 371
+   },
+   "Unknown": {
+    "intenders": 230,
+    "converted": 189
+   },
+   "Unpaid Other": {
+    "intenders": 33,
+    "converted": 32
+   }
+  },
+  "2025-06-22": {
+   "Digital Video": {
+    "intenders": 61,
+    "converted": 42
+   },
+   "Direct": {
+    "intenders": 581,
+    "converted": 565
+   },
+   "Display": {
+    "intenders": 127,
+    "converted": 93
+   },
+   "Email": {
+    "intenders": 308,
+    "converted": 216
+   },
+   "Paid Other": {
+    "intenders": 13,
+    "converted": 10
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 515,
+    "converted": 328
+   },
+   "PS-TM": {
+    "intenders": 389,
+    "converted": 342
+   },
+   "Paid Social": {
+    "intenders": 19,
+    "converted": 14
+   },
+   "SEO": {
+    "intenders": 403,
+    "converted": 362
+   },
+   "Unknown": {
+    "intenders": 191,
+    "converted": 164
+   },
+   "Unpaid Other": {
+    "intenders": 43,
+    "converted": 37
+   }
+  },
+  "2025-06-29": {
+   "Digital Video": {
+    "intenders": 67,
+    "converted": 38
+   },
+   "Direct": {
+    "intenders": 579,
+    "converted": 539
+   },
+   "Display": {
+    "intenders": 119,
+    "converted": 89
+   },
+   "Email": {
+    "intenders": 333,
+    "converted": 222
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 512,
+    "converted": 312
+   },
+   "PS-TM": {
+    "intenders": 419,
+    "converted": 389
+   },
+   "Paid Social": {
+    "intenders": 5,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 385,
+    "converted": 352
+   },
+   "Unknown": {
+    "intenders": 224,
+    "converted": 198
+   },
+   "Unpaid Other": {
+    "intenders": 38,
+    "converted": 35
+   }
+  },
+  "2025-07-06": {
+   "Digital Video": {
+    "intenders": 55,
+    "converted": 41
+   },
+   "Direct": {
+    "intenders": 470,
+    "converted": 457
+   },
+   "Display": {
+    "intenders": 102,
+    "converted": 81
+   },
+   "Email": {
+    "intenders": 251,
+    "converted": 180
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 6
+   },
+   "PS-NTM": {
+    "intenders": 436,
+    "converted": 271
+   },
+   "PS-TM": {
+    "intenders": 397,
+    "converted": 354
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 356,
+    "converted": 333
+   },
+   "Unknown": {
+    "intenders": 183,
+    "converted": 158
+   },
+   "Unpaid Other": {
+    "intenders": 35,
+    "converted": 40
+   }
+  },
+  "2025-07-13": {
+   "Digital Video": {
+    "intenders": 76,
+    "converted": 57
+   },
+   "Direct": {
+    "intenders": 523,
+    "converted": 530
+   },
+   "Display": {
+    "intenders": 113,
+    "converted": 101
+   },
+   "Email": {
+    "intenders": 356,
+    "converted": 273
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 10
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 479,
+    "converted": 302
+   },
+   "PS-TM": {
+    "intenders": 481,
+    "converted": 461
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 410,
+    "converted": 379
+   },
+   "Unknown": {
+    "intenders": 261,
+    "converted": 219
+   },
+   "Unpaid Other": {
+    "intenders": 40,
+    "converted": 39
+   }
+  },
+  "2025-07-20": {
+   "Digital Video": {
+    "intenders": 70,
+    "converted": 48
+   },
+   "Direct": {
+    "intenders": 562,
+    "converted": 568
+   },
+   "Display": {
+    "intenders": 109,
+    "converted": 92
+   },
+   "Email": {
+    "intenders": 305,
+    "converted": 217
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 10
+   },
+   "PS-NTM": {
+    "intenders": 509,
+    "converted": 304
+   },
+   "PS-TM": {
+    "intenders": 445,
+    "converted": 426
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 416,
+    "converted": 377
+   },
+   "Unknown": {
+    "intenders": 275,
+    "converted": 184
+   },
+   "Unpaid Other": {
+    "intenders": 45,
+    "converted": 45
+   }
+  },
+  "2025-07-27": {
+   "Digital Video": {
+    "intenders": 72,
+    "converted": 49
+   },
+   "Direct": {
+    "intenders": 581,
+    "converted": 565
+   },
+   "Display": {
+    "intenders": 113,
+    "converted": 89
+   },
+   "Email": {
+    "intenders": 290,
+    "converted": 203
+   },
+   "Paid Other": {
+    "intenders": 9,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 535,
+    "converted": 309
+   },
+   "PS-TM": {
+    "intenders": 447,
+    "converted": 426
+   },
+   "Paid Social": {
+    "intenders": 12,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 367,
+    "converted": 325
+   },
+   "Unknown": {
+    "intenders": 241,
+    "converted": 184
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 37
+   }
+  },
+  "2025-08-03": {
+   "Digital Video": {
+    "intenders": 77,
+    "converted": 48
+   },
+   "Direct": {
+    "intenders": 613,
+    "converted": 568
+   },
+   "Display": {
+    "intenders": 115,
+    "converted": 101
+   },
+   "Email": {
+    "intenders": 319,
+    "converted": 211
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 13
+   },
+   "PS-NTM": {
+    "intenders": 540,
+    "converted": 340
+   },
+   "PS-TM": {
+    "intenders": 539,
+    "converted": 482
+   },
+   "Paid Social": {
+    "intenders": 12,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 399,
+    "converted": 344
+   },
+   "Unknown": {
+    "intenders": 253,
+    "converted": 161
+   },
+   "Unpaid Other": {
+    "intenders": 48,
+    "converted": 49
+   }
+  },
+  "2025-08-10": {
+   "Digital Video": {
+    "intenders": 87,
+    "converted": 57
+   },
+   "Direct": {
+    "intenders": 615,
+    "converted": 603
+   },
+   "Display": {
+    "intenders": 128,
+    "converted": 114
+   },
+   "Email": {
+    "intenders": 345,
+    "converted": 242
+   },
+   "Paid Other": {
+    "intenders": 20,
+    "converted": 18
+   },
+   "PS-NTM": {
+    "intenders": 567,
+    "converted": 383
+   },
+   "PS-TM": {
+    "intenders": 480,
+    "converted": 450
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 423,
+    "converted": 383
+   },
+   "Unknown": {
+    "intenders": 297,
+    "converted": 193
+   },
+   "Unpaid Other": {
+    "intenders": 48,
+    "converted": 45
+   }
+  },
+  "2025-08-17": {
+   "Digital Video": {
+    "intenders": 82,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 646,
+    "converted": 633
+   },
+   "Display": {
+    "intenders": 129,
+    "converted": 106
+   },
+   "Email": {
+    "intenders": 342,
+    "converted": 225
+   },
+   "Paid Other": {
+    "intenders": 21,
+    "converted": 18
+   },
+   "PS-NTM": {
+    "intenders": 603,
+    "converted": 397
+   },
+   "PS-TM": {
+    "intenders": 550,
+    "converted": 514
+   },
+   "Paid Social": {
+    "intenders": 5,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 408,
+    "converted": 378
+   },
+   "Unknown": {
+    "intenders": 378,
+    "converted": 248
+   },
+   "Unpaid Other": {
+    "intenders": 45,
+    "converted": 43
+   }
+  },
+  "2025-08-24": {
+   "Digital Video": {
+    "intenders": 86,
+    "converted": 60
+   },
+   "Direct": {
+    "intenders": 687,
+    "converted": 672
+   },
+   "Display": {
+    "intenders": 121,
+    "converted": 102
+   },
+   "Email": {
+    "intenders": 355,
+    "converted": 247
+   },
+   "Paid Other": {
+    "intenders": 18,
+    "converted": 16
+   },
+   "PS-NTM": {
+    "intenders": 562,
+    "converted": 387
+   },
+   "PS-TM": {
+    "intenders": 537,
+    "converted": 503
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 418,
+    "converted": 390
+   },
+   "Unknown": {
+    "intenders": 280,
+    "converted": 184
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 36
+   }
+  },
+  "2025-08-31": {
+   "Digital Video": {
+    "intenders": 69,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 576,
+    "converted": 552
+   },
+   "Display": {
+    "intenders": 123,
+    "converted": 96
+   },
+   "Email": {
+    "intenders": 286,
+    "converted": 191
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 11
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 494,
+    "converted": 342
+   },
+   "PS-TM": {
+    "intenders": 515,
+    "converted": 486
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 358,
+    "converted": 313
+   },
+   "Unknown": {
+    "intenders": 233,
+    "converted": 152
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 32
+   }
+  },
+  "2025-09-07": {
+   "Digital Video": {
+    "intenders": 89,
+    "converted": 57
+   },
+   "Direct": {
+    "intenders": 534,
+    "converted": 529
+   },
+   "Display": {
+    "intenders": 122,
+    "converted": 101
+   },
+   "Email": {
+    "intenders": 334,
+    "converted": 220
+   },
+   "Paid Other": {
+    "intenders": 3,
+    "converted": 3
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 522,
+    "converted": 375
+   },
+   "PS-TM": {
+    "intenders": 459,
+    "converted": 413
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 338,
+    "converted": 291
+   },
+   "Unknown": {
+    "intenders": 300,
+    "converted": 157
+   },
+   "Unpaid Other": {
+    "intenders": 31,
+    "converted": 31
+   }
+  },
+  "2025-09-14": {
+   "Digital Video": {
+    "intenders": 76,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 528,
+    "converted": 511
+   },
+   "Display": {
+    "intenders": 128,
+    "converted": 110
+   },
+   "Email": {
+    "intenders": 334,
+    "converted": 237
+   },
+   "Paid Other": {
+    "intenders": 6,
+    "converted": 8
+   },
+   "PS-NTM": {
+    "intenders": 539,
+    "converted": 390
+   },
+   "PS-TM": {
+    "intenders": 377,
+    "converted": 371
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 330,
+    "converted": 304
+   },
+   "Unknown": {
+    "intenders": 311,
+    "converted": 184
+   },
+   "Unpaid Other": {
+    "intenders": 32,
+    "converted": 31
+   }
+  },
+  "2025-09-21": {
+   "Digital Video": {
+    "intenders": 49,
+    "converted": 38
+   },
+   "Direct": {
+    "intenders": 516,
+    "converted": 496
+   },
+   "Display": {
+    "intenders": 99,
+    "converted": 89
+   },
+   "Email": {
+    "intenders": 285,
+    "converted": 186
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 552,
+    "converted": 399
+   },
+   "PS-TM": {
+    "intenders": 405,
+    "converted": 372
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 308,
+    "converted": 283
+   },
+   "Unknown": {
+    "intenders": 282,
+    "converted": 165
+   },
+   "Unpaid Other": {
+    "intenders": 31,
+    "converted": 31
+   }
+  },
+  "2025-09-28": {
+   "Digital Video": {
+    "intenders": 28,
+    "converted": 22
+   },
+   "Direct": {
+    "intenders": 571,
+    "converted": 531
+   },
+   "Display": {
+    "intenders": 59,
+    "converted": 41
+   },
+   "Email": {
+    "intenders": 255,
+    "converted": 167
+   },
+   "Paid Other": {
+    "intenders": 17,
+    "converted": 14
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 569,
+    "converted": 404
+   },
+   "PS-TM": {
+    "intenders": 425,
+    "converted": 385
+   },
+   "Paid Social": {
+    "intenders": 17,
+    "converted": 12
+   },
+   "SEO": {
+    "intenders": 336,
+    "converted": 293
+   },
+   "Unknown": {
+    "intenders": 301,
+    "converted": 156
+   },
+   "Unpaid Other": {
+    "intenders": 56,
+    "converted": 48
+   }
+  },
+  "2025-10-05": {
+   "Digital Video": {
+    "intenders": 85,
+    "converted": 67
+   },
+   "Direct": {
+    "intenders": 507,
+    "converted": 475
+   },
+   "Display": {
+    "intenders": 108,
+    "converted": 85
+   },
+   "Email": {
+    "intenders": 253,
+    "converted": 172
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 572,
+    "converted": 392
+   },
+   "PS-TM": {
+    "intenders": 412,
+    "converted": 394
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 5
+   },
+   "SEO": {
+    "intenders": 292,
+    "converted": 261
+   },
+   "Unknown": {
+    "intenders": 302,
+    "converted": 165
+   },
+   "Unpaid Other": {
+    "intenders": 29,
+    "converted": 29
+   }
+  },
+  "2025-10-12": {
+   "Digital Video": {
+    "intenders": 75,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 479,
+    "converted": 461
+   },
+   "Display": {
+    "intenders": 104,
+    "converted": 95
+   },
+   "Email": {
+    "intenders": 233,
+    "converted": 163
+   },
+   "Paid Other": {
+    "intenders": 9,
+    "converted": 6
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 547,
+    "converted": 357
+   },
+   "PS-TM": {
+    "intenders": 337,
+    "converted": 315
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 261,
+    "converted": 246
+   },
+   "Unknown": {
+    "intenders": 327,
+    "converted": 159
+   },
+   "Unpaid Other": {
+    "intenders": 34,
+    "converted": 30
+   }
+  },
+  "2025-10-19": {
+   "Digital Video": {
+    "intenders": 71,
+    "converted": 64
+   },
+   "Direct": {
+    "intenders": 429,
+    "converted": 412
+   },
+   "Display": {
+    "intenders": 97,
+    "converted": 90
+   },
+   "Email": {
+    "intenders": 257,
+    "converted": 176
+   },
+   "Paid Other": {
+    "intenders": 20,
+    "converted": 17
+   },
+   "PS-NTM": {
+    "intenders": 582,
+    "converted": 394
+   },
+   "PS-TM": {
+    "intenders": 385,
+    "converted": 348
+   },
+   "Paid Social": {
+    "intenders": 11,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 272,
+    "converted": 237
+   },
+   "Unknown": {
+    "intenders": 300,
+    "converted": 156
+   },
+   "Unpaid Other": {
+    "intenders": 27,
+    "converted": 25
+   }
+  },
+  "2025-10-26": {
+   "Digital Video": {
+    "intenders": 76,
+    "converted": 57
+   },
+   "Direct": {
+    "intenders": 478,
+    "converted": 458
+   },
+   "Display": {
+    "intenders": 112,
+    "converted": 97
+   },
+   "Email": {
+    "intenders": 224,
+    "converted": 161
+   },
+   "Paid Other": {
+    "intenders": 23,
+    "converted": 21
+   },
+   "PS-NTM": {
+    "intenders": 675,
+    "converted": 476
+   },
+   "PS-TM": {
+    "intenders": 404,
+    "converted": 377
+   },
+   "Paid Social": {
+    "intenders": 20,
+    "converted": 14
+   },
+   "SEO": {
+    "intenders": 271,
+    "converted": 246
+   },
+   "Unknown": {
+    "intenders": 286,
+    "converted": 129
+   },
+   "Unpaid Other": {
+    "intenders": 37,
+    "converted": 34
+   }
+  },
+  "2025-11-02": {
+   "Digital Video": {
+    "intenders": 78,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 467,
+    "converted": 430
+   },
+   "Display": {
+    "intenders": 131,
+    "converted": 110
+   },
+   "Email": {
+    "intenders": 242,
+    "converted": 182
+   },
+   "Paid Other": {
+    "intenders": 17,
+    "converted": 17
+   },
+   "PS-NTM": {
+    "intenders": 644,
+    "converted": 433
+   },
+   "PS-TM": {
+    "intenders": 401,
+    "converted": 358
+   },
+   "Paid Social": {
+    "intenders": 6,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 266,
+    "converted": 233
+   },
+   "Unknown": {
+    "intenders": 308,
+    "converted": 170
+   },
+   "Unpaid Other": {
+    "intenders": 33,
+    "converted": 32
+   }
+  },
+  "2025-11-09": {
+   "Digital Video": {
+    "intenders": 75,
+    "converted": 59
+   },
+   "Direct": {
+    "intenders": 427,
+    "converted": 420
+   },
+   "Display": {
+    "intenders": 138,
+    "converted": 110
+   },
+   "Email": {
+    "intenders": 248,
+    "converted": 178
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 660,
+    "converted": 459
+   },
+   "PS-TM": {
+    "intenders": 366,
+    "converted": 345
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 261,
+    "converted": 241
+   },
+   "Unknown": {
+    "intenders": 310,
+    "converted": 159
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 32
+   }
+  },
+  "2025-11-16": {
+   "Digital Video": {
+    "intenders": 74,
+    "converted": 59
+   },
+   "Direct": {
+    "intenders": 458,
+    "converted": 441
+   },
+   "Display": {
+    "intenders": 135,
+    "converted": 113
+   },
+   "Email": {
+    "intenders": 248,
+    "converted": 168
+   },
+   "Paid Other": {
+    "intenders": 21,
+    "converted": 17
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 694,
+    "converted": 451
+   },
+   "PS-TM": {
+    "intenders": 400,
+    "converted": 365
+   },
+   "Paid Social": {
+    "intenders": 12,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 267,
+    "converted": 240
+   },
+   "Unknown": {
+    "intenders": 275,
+    "converted": 134
+   },
+   "Unpaid Other": {
+    "intenders": 24,
+    "converted": 25
+   }
+  },
+  "2025-11-23": {
+   "Digital Video": {
+    "intenders": 93,
+    "converted": 63
+   },
+   "Direct": {
+    "intenders": 492,
+    "converted": 464
+   },
+   "Display": {
+    "intenders": 140,
+    "converted": 118
+   },
+   "Email": {
+    "intenders": 242,
+    "converted": 180
+   },
+   "Paid Other": {
+    "intenders": 13,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 768,
+    "converted": 474
+   },
+   "PS-TM": {
+    "intenders": 413,
+    "converted": 374
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 246,
+    "converted": 217
+   },
+   "Unknown": {
+    "intenders": 289,
+    "converted": 150
+   },
+   "Unpaid Other": {
+    "intenders": 28,
+    "converted": 27
+   }
+  },
+  "2025-11-30": {
+   "Digital Video": {
+    "intenders": 61,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 514,
+    "converted": 444
+   },
+   "Display": {
+    "intenders": 104,
+    "converted": 84
+   },
+   "Email": {
+    "intenders": 180,
+    "converted": 126
+   },
+   "Paid Other": {
+    "intenders": 18,
+    "converted": 16
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 631,
+    "converted": 401
+   },
+   "PS-TM": {
+    "intenders": 355,
+    "converted": 321
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 220,
+    "converted": 185
+   },
+   "Unknown": {
+    "intenders": 272,
+    "converted": 118
+   },
+   "Unpaid Other": {
+    "intenders": 24,
+    "converted": 23
+   }
+  },
+  "2025-12-07": {
+   "Digital Video": {
+    "intenders": 127,
+    "converted": 100
+   },
+   "Direct": {
+    "intenders": 868,
+    "converted": 849
+   },
+   "Display": {
+    "intenders": 194,
+    "converted": 167
+   },
+   "Email": {
+    "intenders": 313,
+    "converted": 201
+   },
+   "Paid Other": {
+    "intenders": 27,
+    "converted": 23
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 652,
+    "converted": 485
+   },
+   "PS-TM": {
+    "intenders": 833,
+    "converted": 793
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 11
+   },
+   "SEO": {
+    "intenders": 417,
+    "converted": 380
+   },
+   "Unknown": {
+    "intenders": 310,
+    "converted": 169
+   },
+   "Unpaid Other": {
+    "intenders": 52,
+    "converted": 53
+   }
+  },
+  "2025-12-14": {
+   "Digital Video": {
+    "intenders": 89,
+    "converted": 81
+   },
+   "Direct": {
+    "intenders": 652,
+    "converted": 647
+   },
+   "Display": {
+    "intenders": 181,
+    "converted": 146
+   },
+   "Email": {
+    "intenders": 292,
+    "converted": 209
+   },
+   "Paid Other": {
+    "intenders": 13,
+    "converted": 12
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 605,
+    "converted": 437
+   },
+   "PS-TM": {
+    "intenders": 611,
+    "converted": 579
+   },
+   "Paid Social": {
+    "intenders": 16,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 350,
+    "converted": 323
+   },
+   "Unknown": {
+    "intenders": 288,
+    "converted": 143
+   },
+   "Unpaid Other": {
+    "intenders": 48,
+    "converted": 42
+   }
+  },
+  "2025-12-21": {
+   "Digital Video": {
+    "intenders": 90,
+    "converted": 65
+   },
+   "Direct": {
+    "intenders": 635,
+    "converted": 600
+   },
+   "Display": {
+    "intenders": 158,
+    "converted": 136
+   },
+   "Email": {
+    "intenders": 236,
+    "converted": 162
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 658,
+    "converted": 436
+   },
+   "PS-TM": {
+    "intenders": 541,
+    "converted": 499
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 317,
+    "converted": 268
+   },
+   "Unknown": {
+    "intenders": 197,
+    "converted": 119
+   },
+   "Unpaid Other": {
+    "intenders": 33,
+    "converted": 34
+   }
+  },
+  "2025-12-28": {
+   "Digital Video": {
+    "intenders": 56,
+    "converted": 44
+   },
+   "Direct": {
+    "intenders": 487,
+    "converted": 467
+   },
+   "Display": {
+    "intenders": 143,
+    "converted": 104
+   },
+   "Email": {
+    "intenders": 192,
+    "converted": 120
+   },
+   "Paid Other": {
+    "intenders": 7,
+    "converted": 7
+   },
+   "PS-NTM": {
+    "intenders": 659,
+    "converted": 393
+   },
+   "PS-TM": {
+    "intenders": 367,
+    "converted": 335
+   },
+   "Paid Social": {
+    "intenders": 7,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 225,
+    "converted": 199
+   },
+   "Unknown": {
+    "intenders": 151,
+    "converted": 82
+   },
+   "Unpaid Other": {
+    "intenders": 18,
+    "converted": 16
+   }
+  },
+  "2026-01-04": {
+   "Digital Video": {
+    "intenders": 93,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 590,
+    "converted": 568
+   },
+   "Display": {
+    "intenders": 189,
+    "converted": 132
+   },
+   "Email": {
+    "intenders": 236,
+    "converted": 154
+   },
+   "Paid Other": {
+    "intenders": 13,
+    "converted": 10
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 769,
+    "converted": 443
+   },
+   "PS-TM": {
+    "intenders": 520,
+    "converted": 475
+   },
+   "Paid Social": {
+    "intenders": 25,
+    "converted": 17
+   },
+   "SEO": {
+    "intenders": 262,
+    "converted": 227
+   },
+   "Unknown": {
+    "intenders": 192,
+    "converted": 127
+   },
+   "Unpaid Other": {
+    "intenders": 30,
+    "converted": 26
+   }
+  },
+  "2026-01-11": {
+   "Digital Video": {
+    "intenders": 118,
+    "converted": 78
+   },
+   "Direct": {
+    "intenders": 730,
+    "converted": 710
+   },
+   "Display": {
+    "intenders": 248,
+    "converted": 190
+   },
+   "Email": {
+    "intenders": 420,
+    "converted": 262
+   },
+   "Paid Other": {
+    "intenders": 32,
+    "converted": 31
+   },
+   "PS-NTM": {
+    "intenders": 880,
+    "converted": 518
+   },
+   "PS-TM": {
+    "intenders": 645,
+    "converted": 592
+   },
+   "Paid Social": {
+    "intenders": 17,
+    "converted": 11
+   },
+   "SEO": {
+    "intenders": 379,
+    "converted": 320
+   },
+   "Unknown": {
+    "intenders": 270,
+    "converted": 172
+   },
+   "Unpaid Other": {
+    "intenders": 69,
+    "converted": 60
+   }
+  },
+  "2026-01-18": {
+   "Digital Video": {
+    "intenders": 95,
+    "converted": 63
+   },
+   "Direct": {
+    "intenders": 624,
+    "converted": 594
+   },
+   "Display": {
+    "intenders": 219,
+    "converted": 157
+   },
+   "Email": {
+    "intenders": 306,
+    "converted": 175
+   },
+   "Paid Other": {
+    "intenders": 26,
+    "converted": 20
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 861,
+    "converted": 515
+   },
+   "PS-TM": {
+    "intenders": 596,
+    "converted": 540
+   },
+   "Paid Social": {
+    "intenders": 18,
+    "converted": 16
+   },
+   "SEO": {
+    "intenders": 323,
+    "converted": 285
+   },
+   "Unknown": {
+    "intenders": 227,
+    "converted": 167
+   },
+   "Unpaid Other": {
+    "intenders": 61,
+    "converted": 55
+   }
+  },
+  "2026-01-25": {
+   "Digital Video": {
+    "intenders": 74,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 726,
+    "converted": 581
+   },
+   "Display": {
+    "intenders": 227,
+    "converted": 149
+   },
+   "Email": {
+    "intenders": 284,
+    "converted": 183
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 12
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 839,
+    "converted": 466
+   },
+   "PS-TM": {
+    "intenders": 511,
+    "converted": 454
+   },
+   "Paid Social": {
+    "intenders": 23,
+    "converted": 13
+   },
+   "SEO": {
+    "intenders": 293,
+    "converted": 254
+   },
+   "Unknown": {
+    "intenders": 355,
+    "converted": 266
+   },
+   "Unpaid Other": {
+    "intenders": 38,
+    "converted": 34
+   }
+  },
+  "2026-02-01": {
+   "Digital Video": {
+    "intenders": 89,
+    "converted": 61
+   },
+   "Direct": {
+    "intenders": 771,
+    "converted": 645
+   },
+   "Display": {
+    "intenders": 242,
+    "converted": 165
+   },
+   "Email": {
+    "intenders": 268,
+    "converted": 171
+   },
+   "Paid Other": {
+    "intenders": 19,
+    "converted": 16
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 777,
+    "converted": 450
+   },
+   "PS-TM": {
+    "intenders": 526,
+    "converted": 469
+   },
+   "Paid Social": {
+    "intenders": 11,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 329,
+    "converted": 284
+   },
+   "Unknown": {
+    "intenders": 198,
+    "converted": 131
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 44
+   }
+  },
+  "2026-02-08": {
+   "Digital Video": {
+    "intenders": 86,
+    "converted": 52
+   },
+   "Direct": {
+    "intenders": 618,
+    "converted": 560
+   },
+   "Display": {
+    "intenders": 218,
+    "converted": 141
+   },
+   "Email": {
+    "intenders": 309,
+    "converted": 178
+   },
+   "Paid Other": {
+    "intenders": 20,
+    "converted": 13
+   },
+   "PS-NTM": {
+    "intenders": 897,
+    "converted": 431
+   },
+   "PS-TM": {
+    "intenders": 443,
+    "converted": 393
+   },
+   "Paid Social": {
+    "intenders": 11,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 265,
+    "converted": 216
+   },
+   "Unknown": {
+    "intenders": 226,
+    "converted": 148
+   },
+   "Unpaid Other": {
+    "intenders": 38,
+    "converted": 29
+   }
+  },
+  "2026-02-15": {
+   "Digital Video": {
+    "intenders": 94,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 620,
+    "converted": 558
+   },
+   "Display": {
+    "intenders": 182,
+    "converted": 115
+   },
+   "Email": {
+    "intenders": 278,
+    "converted": 143
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 7
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 903,
+    "converted": 455
+   },
+   "PS-TM": {
+    "intenders": 440,
+    "converted": 392
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 238,
+    "converted": 194
+   },
+   "Unknown": {
+    "intenders": 204,
+    "converted": 126
+   },
+   "Unpaid Other": {
+    "intenders": 44,
+    "converted": 40
+   }
+  },
+  "2026-02-22": {
+   "Digital Video": {
+    "intenders": 81,
+    "converted": 53
+   },
+   "Direct": {
+    "intenders": 592,
+    "converted": 538
+   },
+   "Display": {
+    "intenders": 157,
+    "converted": 108
+   },
+   "Email": {
+    "intenders": 261,
+    "converted": 138
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 15
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 812,
+    "converted": 425
+   },
+   "PS-TM": {
+    "intenders": 447,
+    "converted": 418
+   },
+   "Paid Social": {
+    "intenders": 16,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 244,
+    "converted": 202
+   },
+   "Unknown": {
+    "intenders": 206,
+    "converted": 148
+   },
+   "Unpaid Other": {
+    "intenders": 38,
+    "converted": 39
+   }
+  },
+  "2026-03-01": {
+   "Digital Video": {
+    "intenders": 81,
+    "converted": 59
+   },
+   "Direct": {
+    "intenders": 755,
+    "converted": 648
+   },
+   "Display": {
+    "intenders": 161,
+    "converted": 106
+   },
+   "Email": {
+    "intenders": 241,
+    "converted": 157
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 795,
+    "converted": 455
+   },
+   "PS-TM": {
+    "intenders": 533,
+    "converted": 464
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 12
+   },
+   "SEO": {
+    "intenders": 314,
+    "converted": 279
+   },
+   "Unknown": {
+    "intenders": 155,
+    "converted": 87
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 47
+   }
+  },
+  "2026-03-08": {
+   "Digital Video": {
+    "intenders": 77,
+    "converted": 52
+   },
+   "Direct": {
+    "intenders": 603,
+    "converted": 570
+   },
+   "Display": {
+    "intenders": 162,
+    "converted": 93
+   },
+   "Email": {
+    "intenders": 259,
+    "converted": 159
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 761,
+    "converted": 443
+   },
+   "PS-TM": {
+    "intenders": 463,
+    "converted": 409
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 265,
+    "converted": 235
+   },
+   "Unknown": {
+    "intenders": 186,
+    "converted": 122
+   },
+   "Unpaid Other": {
+    "intenders": 46,
+    "converted": 38
+   }
+  },
+  "2026-03-15": {
+   "Digital Video": {
+    "intenders": 70,
+    "converted": 45
+   },
+   "Direct": {
+    "intenders": 637,
+    "converted": 603
+   },
+   "Display": {
+    "intenders": 144,
+    "converted": 95
+   },
+   "Email": {
+    "intenders": 230,
+    "converted": 130
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "PS-NTM": {
+    "intenders": 820,
+    "converted": 453
+   },
+   "PS-TM": {
+    "intenders": 471,
+    "converted": 413
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 265,
+    "converted": 223
+   },
+   "Unknown": {
+    "intenders": 262,
+    "converted": 213
+   },
+   "Unpaid Other": {
+    "intenders": 49,
+    "converted": 38
+   }
+  },
+  "2026-03-22": {
+   "Digital Video": {
+    "intenders": 57,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 562,
+    "converted": 522
+   },
+   "Display": {
+    "intenders": 139,
+    "converted": 98
+   },
+   "Email": {
+    "intenders": 228,
+    "converted": 129
+   },
+   "Paid Other": {
+    "intenders": 9,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 768,
+    "converted": 452
+   },
+   "PS-TM": {
+    "intenders": 495,
+    "converted": 441
+   },
+   "Paid Social": {
+    "intenders": 18,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 253,
+    "converted": 217
+   },
+   "Unknown": {
+    "intenders": 167,
+    "converted": 113
+   },
+   "Unpaid Other": {
+    "intenders": 42,
+    "converted": 33
+   }
+  },
+  "2026-03-29": {
+   "Digital Video": {
+    "intenders": 69,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 673,
+    "converted": 514
+   },
+   "Display": {
+    "intenders": 155,
+    "converted": 91
+   },
+   "Email": {
+    "intenders": 253,
+    "converted": 134
+   },
+   "Paid Other": {
+    "intenders": 19,
+    "converted": 12
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 709,
+    "converted": 362
+   },
+   "PS-TM": {
+    "intenders": 509,
+    "converted": 404
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 308,
+    "converted": 237
+   },
+   "Unknown": {
+    "intenders": 243,
+    "converted": 179
+   },
+   "Unpaid Other": {
+    "intenders": 44,
+    "converted": 39
+   }
+  },
+  "2026-04-05": {
+   "Digital Video": {
+    "intenders": 54,
+    "converted": 36
+   },
+   "Direct": {
+    "intenders": 650,
+    "converted": 537
+   },
+   "Display": {
+    "intenders": 175,
+    "converted": 99
+   },
+   "Email": {
+    "intenders": 235,
+    "converted": 141
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 751,
+    "converted": 402
+   },
+   "PS-TM": {
+    "intenders": 511,
+    "converted": 432
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 287,
+    "converted": 218
+   },
+   "Unknown": {
+    "intenders": 225,
+    "converted": 176
+   },
+   "Unpaid Other": {
+    "intenders": 39,
+    "converted": 39
+   }
+  },
+  "2026-04-12": {
+   "Digital Video": {
+    "intenders": 52,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 585,
+    "converted": 561
+   },
+   "Display": {
+    "intenders": 147,
+    "converted": 98
+   },
+   "Email": {
+    "intenders": 199,
+    "converted": 128
+   },
+   "Paid Other": {
+    "intenders": 3,
+    "converted": 4
+   },
+   "PS-NTM": {
+    "intenders": 716,
+    "converted": 422
+   },
+   "PS-TM": {
+    "intenders": 511,
+    "converted": 444
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 262,
+    "converted": 212
+   },
+   "Unknown": {
+    "intenders": 199,
+    "converted": 154
+   },
+   "Unpaid Other": {
+    "intenders": 42,
+    "converted": 38
+   }
+  },
+  "2026-04-19": {
+   "Digital Video": {
+    "intenders": 57,
+    "converted": 47
+   },
+   "Direct": {
+    "intenders": 546,
+    "converted": 542
+   },
+   "Display": {
+    "intenders": 142,
+    "converted": 92
+   },
+   "Email": {
+    "intenders": 178,
+    "converted": 119
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 4
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 745,
+    "converted": 438
+   },
+   "PS-TM": {
+    "intenders": 511,
+    "converted": 457
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 285,
+    "converted": 254
+   },
+   "Unknown": {
+    "intenders": 172,
+    "converted": 136
+   },
+   "Unpaid Other": {
+    "intenders": 46,
+    "converted": 43
+   }
+  },
+  "2026-04-26": {
+   "Digital Video": {
+    "intenders": 69,
+    "converted": 49
+   },
+   "Direct": {
+    "intenders": 669,
+    "converted": 620
+   },
+   "Display": {
+    "intenders": 166,
+    "converted": 116
+   },
+   "Email": {
+    "intenders": 218,
+    "converted": 146
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 11
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 735,
+    "converted": 427
+   },
+   "PS-TM": {
+    "intenders": 521,
+    "converted": 453
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 10
+   },
+   "SEO": {
+    "intenders": 323,
+    "converted": 290
+   },
+   "Unknown": {
+    "intenders": 157,
+    "converted": 105
+   },
+   "Unpaid Other": {
+    "intenders": 39,
+    "converted": 39
+   }
+  },
+  "2026-05-03": {
+   "Digital Video": {
+    "intenders": 61,
+    "converted": 45
+   },
+   "Direct": {
+    "intenders": 576,
+    "converted": 444
+   },
+   "Display": {
+    "intenders": 171,
+    "converted": 116
+   },
+   "Email": {
+    "intenders": 272,
+    "converted": 173
+   },
+   "Paid Other": {
+    "intenders": 16,
+    "converted": 12
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 762,
+    "converted": 484
+   },
+   "PS-TM": {
+    "intenders": 720,
+    "converted": 620
+   },
+   "Paid Social": {
+    "intenders": 7,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 389,
+    "converted": 316
+   },
+   "Unknown": {
+    "intenders": 211,
+    "converted": 146
+   },
+   "Unpaid Other": {
+    "intenders": 52,
+    "converted": 50
+   }
+  },
+  "2026-05-10": {
+   "Digital Video": {
+    "intenders": 62,
+    "converted": 42
+   },
+   "Direct": {
+    "intenders": 378,
+    "converted": 373
+   },
+   "Display": {
+    "intenders": 181,
+    "converted": 116
+   },
+   "Email": {
+    "intenders": 267,
+    "converted": 176
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 763,
+    "converted": 476
+   },
+   "PS-TM": {
+    "intenders": 630,
+    "converted": 571
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 295,
+    "converted": 252
+   },
+   "Unknown": {
+    "intenders": 208,
+    "converted": 132
+   },
+   "Unpaid Other": {
+    "intenders": 57,
+    "converted": 52
+   }
+  },
+  "2026-05-17": {
+   "Digital Video": {
+    "intenders": 51,
+    "converted": 35
+   },
+   "Direct": {
+    "intenders": 395,
+    "converted": 392
+   },
+   "Display": {
+    "intenders": 149,
+    "converted": 117
+   },
+   "Email": {
+    "intenders": 217,
+    "converted": 152
+   },
+   "Paid Other": {
+    "intenders": 12,
+    "converted": 12
+   },
+   "PS-NTM": {
+    "intenders": 719,
+    "converted": 473
+   },
+   "PS-TM": {
+    "intenders": 714,
+    "converted": 662
+   },
+   "Paid Social": {
+    "intenders": 21,
+    "converted": 14
+   },
+   "SEO": {
+    "intenders": 341,
+    "converted": 301
+   },
+   "Unknown": {
+    "intenders": 198,
+    "converted": 125
+   },
+   "Unpaid Other": {
+    "intenders": 57,
+    "converted": 54
+   }
+  },
+  "2026-05-24": {
+   "Digital Video": {
+    "intenders": 13,
+    "converted": 10
+   },
+   "Direct": {
+    "intenders": 482,
+    "converted": 401
+   },
+   "Display": {
+    "intenders": 61,
+    "converted": 42
+   },
+   "Email": {
+    "intenders": 245,
+    "converted": 151
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 10
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 683,
+    "converted": 445
+   },
+   "PS-TM": {
+    "intenders": 680,
+    "converted": 628
+   },
+   "Paid Social": {
+    "intenders": 18,
+    "converted": 11
+   },
+   "SEO": {
+    "intenders": 434,
+    "converted": 370
+   },
+   "Unknown": {
+    "intenders": 216,
+    "converted": 136
+   },
+   "Unpaid Other": {
+    "intenders": 83,
+    "converted": 75
+   }
+  },
+  "2026-05-31": {
+   "Digital Video": {
+    "intenders": 7,
+    "converted": 4
+   },
+   "Direct": {
+    "intenders": 535,
+    "converted": 343
+   },
+   "Display": {
+    "intenders": 57,
+    "converted": 34
+   },
+   "Email": {
+    "intenders": 207,
+    "converted": 127
+   },
+   "Paid Other": {
+    "intenders": 6,
+    "converted": 3
+   },
+   "PS-NTM": {
+    "intenders": 736,
+    "converted": 493
+   },
+   "PS-TM": {
+    "intenders": 641,
+    "converted": 541
+   },
+   "Paid Social": {
+    "intenders": 9,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 429,
+    "converted": 310
+   },
+   "Unknown": {
+    "intenders": 199,
+    "converted": 155
+   },
+   "Unpaid Other": {
+    "intenders": 54,
+    "converted": 46
+   }
+  },
+  "2026-06-07": {
+   "Digital Video": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "Direct": {
+    "intenders": 350,
+    "converted": 315
+   },
+   "Display": {
+    "intenders": 58,
+    "converted": 34
+   },
+   "Email": {
+    "intenders": 216,
+    "converted": 143
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 731,
+    "converted": 455
+   },
+   "PS-TM": {
+    "intenders": 623,
+    "converted": 543
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 12
+   },
+   "SEO": {
+    "intenders": 380,
+    "converted": 326
+   },
+   "Unknown": {
+    "intenders": 261,
+    "converted": 171
+   },
+   "Unpaid Other": {
+    "intenders": 55,
+    "converted": 47
+   }
+  },
+  "2026-06-14": {
+   "Digital Video": {
+    "intenders": 8,
+    "converted": 4
+   },
+   "Direct": {
+    "intenders": 386,
+    "converted": 352
+   },
+   "Display": {
+    "intenders": 58,
+    "converted": 35
+   },
+   "Email": {
+    "intenders": 229,
+    "converted": 142
+   },
+   "Paid Other": {
+    "intenders": 5,
+    "converted": 4
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 923,
+    "converted": 568
+   },
+   "PS-TM": {
+    "intenders": 603,
+    "converted": 534
+   },
+   "Paid Social": {
+    "intenders": 15,
+    "converted": 7
+   },
+   "SEO": {
+    "intenders": 357,
+    "converted": 286
+   },
+   "Unknown": {
+    "intenders": 181,
+    "converted": 115
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 45
+   }
+  },
+  "2026-06-21": {
+   "Digital Video": {
+    "intenders": 8,
+    "converted": 6
+   },
+   "Direct": {
+    "intenders": 352,
+    "converted": 329
+   },
+   "Display": {
+    "intenders": 51,
+    "converted": 33
+   },
+   "Email": {
+    "intenders": 244,
+    "converted": 162
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 11
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 887,
+    "converted": 507
+   },
+   "PS-TM": {
+    "intenders": 624,
+    "converted": 547
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 9
+   },
+   "SEO": {
+    "intenders": 277,
+    "converted": 235
+   },
+   "Unknown": {
+    "intenders": 290,
+    "converted": 205
+   },
+   "Unpaid Other": {
+    "intenders": 71,
+    "converted": 63
+   }
+  },
+  "2026-06-28": {
+   "Digital Video": {
+    "intenders": 38,
+    "converted": 23
+   },
+   "Direct": {
+    "intenders": 397,
+    "converted": 377
+   },
+   "Display": {
+    "intenders": 99,
+    "converted": 67
+   },
+   "Email": {
+    "intenders": 252,
+    "converted": 153
+   },
+   "Paid Other": {
+    "intenders": 25,
+    "converted": 20
+   },
+   "PS-NTM": {
+    "intenders": 992,
+    "converted": 598
+   },
+   "PS-TM": {
+    "intenders": 559,
+    "converted": 506
+   },
+   "Paid Social": {
+    "intenders": 13,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 317,
+    "converted": 274
+   },
+   "Unknown": {
+    "intenders": 255,
+    "converted": 124
+   },
+   "Unpaid Other": {
+    "intenders": 48,
+    "converted": 47
+   }
+  },
+  "2026-07-05": {
+   "Digital Video": {
+    "intenders": 66,
+    "converted": 40
+   },
+   "Direct": {
+    "intenders": 343,
+    "converted": 314
+   },
+   "Display": {
+    "intenders": 134,
+    "converted": 76
+   },
+   "Email": {
+    "intenders": 215,
+    "converted": 147
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 14
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 758,
+    "converted": 438
+   },
+   "PS-TM": {
+    "intenders": 542,
+    "converted": 479
+   },
+   "Paid Social": {
+    "intenders": 5,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 301,
+    "converted": 274
+   },
+   "Unknown": {
+    "intenders": 213,
+    "converted": 111
+   },
+   "Unpaid Other": {
+    "intenders": 55,
+    "converted": 51
+   }
+  },
+  "2026-07-12": {
+   "Digital Video": {
+    "intenders": 68,
+    "converted": 52
+   },
+   "Direct": {
+    "intenders": 395,
+    "converted": 368
+   },
+   "Display": {
+    "intenders": 111,
+    "converted": 80
+   },
+   "Email": {
+    "intenders": 198,
+    "converted": 116
+   },
+   "Paid Other": {
+    "intenders": 16,
+    "converted": 12
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 719,
+    "converted": 417
+   },
+   "PS-TM": {
+    "intenders": 538,
+    "converted": 491
+   },
+   "Paid Social": {
+    "intenders": 3,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 290,
+    "converted": 244
+   },
+   "Unknown": {
+    "intenders": 204,
+    "converted": 120
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 42
+   }
+  },
+  "2026-07-19": {
+   "Digital Video": {
+    "intenders": 75,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 421,
+    "converted": 416
+   },
+   "Display": {
+    "intenders": 101,
+    "converted": 68
+   },
+   "Email": {
+    "intenders": 182,
+    "converted": 138
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "PS-NTM": {
+    "intenders": 623,
+    "converted": 410
+   },
+   "PS-TM": {
+    "intenders": 605,
+    "converted": 561
+   },
+   "Paid Social": {
+    "intenders": 10,
+    "converted": 8
+   },
+   "SEO": {
+    "intenders": 257,
+    "converted": 236
+   },
+   "Unknown": {
+    "intenders": 182,
+    "converted": 132
+   },
+   "Unpaid Other": {
+    "intenders": 44,
+    "converted": 39
+   }
+  },
+  "2026-07-26": {
+   "Digital Video": {
+    "intenders": 55,
+    "converted": 39
+   },
+   "Direct": {
+    "intenders": 378,
+    "converted": 352
+   },
+   "Display": {
+    "intenders": 107,
+    "converted": 81
+   },
+   "Email": {
+    "intenders": 177,
+    "converted": 122
+   },
+   "Paid Other": {
+    "intenders": 10,
+    "converted": 6
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 628,
+    "converted": 409
+   },
+   "PS-TM": {
+    "intenders": 570,
+    "converted": 514
+   },
+   "Paid Social": {
+    "intenders": 14,
+    "converted": 5
+   },
+   "SEO": {
+    "intenders": 276,
+    "converted": 247
+   },
+   "Unknown": {
+    "intenders": 257,
+    "converted": 201
+   },
+   "Unpaid Other": {
+    "intenders": 36,
+    "converted": 30
+   }
+  },
+  "2026-08-02": {
+   "Digital Video": {
+    "intenders": 54,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 401,
+    "converted": 363
+   },
+   "Display": {
+    "intenders": 101,
+    "converted": 77
+   },
+   "Email": {
+    "intenders": 182,
+    "converted": 126
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 8
+   },
+   "PS-NTM": {
+    "intenders": 641,
+    "converted": 379
+   },
+   "PS-TM": {
+    "intenders": 593,
+    "converted": 546
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 285,
+    "converted": 255
+   },
+   "Unknown": {
+    "intenders": 180,
+    "converted": 135
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 44
+   }
+  },
+  "2026-08-09": {
+   "Digital Video": {
+    "intenders": 56,
+    "converted": 43
+   },
+   "Direct": {
+    "intenders": 368,
+    "converted": 347
+   },
+   "Display": {
+    "intenders": 117,
+    "converted": 94
+   },
+   "Email": {
+    "intenders": 220,
+    "converted": 138
+   },
+   "Paid Other": {
+    "intenders": 27,
+    "converted": 19
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 686,
+    "converted": 405
+   },
+   "PS-TM": {
+    "intenders": 545,
+    "converted": 525
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 6
+   },
+   "SEO": {
+    "intenders": 256,
+    "converted": 222
+   },
+   "Unknown": {
+    "intenders": 209,
+    "converted": 143
+   },
+   "Unpaid Other": {
+    "intenders": 50,
+    "converted": 41
+   }
+  },
+  "2026-08-16": {
+   "Digital Video": {
+    "intenders": 58,
+    "converted": 45
+   },
+   "Direct": {
+    "intenders": 420,
+    "converted": 399
+   },
+   "Display": {
+    "intenders": 143,
+    "converted": 118
+   },
+   "Email": {
+    "intenders": 204,
+    "converted": 148
+   },
+   "Paid Other": {
+    "intenders": 13,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 690,
+    "converted": 433
+   },
+   "PS-TM": {
+    "intenders": 573,
+    "converted": 516
+   },
+   "Paid Social": {
+    "intenders": 2,
+    "converted": 1
+   },
+   "SEO": {
+    "intenders": 293,
+    "converted": 261
+   },
+   "Unknown": {
+    "intenders": 265,
+    "converted": 209
+   },
+   "Unpaid Other": {
+    "intenders": 66,
+    "converted": 63
+   }
+  },
+  "2026-08-23": {
+   "Digital Video": {
+    "intenders": 44,
+    "converted": 37
+   },
+   "Direct": {
+    "intenders": 422,
+    "converted": 385
+   },
+   "Display": {
+    "intenders": 143,
+    "converted": 109
+   },
+   "Email": {
+    "intenders": 202,
+    "converted": 144
+   },
+   "Paid Other": {
+    "intenders": 12,
+    "converted": 13
+   },
+   "PS-NTM": {
+    "intenders": 708,
+    "converted": 427
+   },
+   "PS-TM": {
+    "intenders": 547,
+    "converted": 505
+   },
+   "Paid Social": {
+    "intenders": 5,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 270,
+    "converted": 240
+   },
+   "Unknown": {
+    "intenders": 187,
+    "converted": 142
+   },
+   "Unpaid Other": {
+    "intenders": 53,
+    "converted": 45
+   }
+  },
+  "2026-08-30": {
+   "Digital Video": {
+    "intenders": 41,
+    "converted": 32
+   },
+   "Direct": {
+    "intenders": 406,
+    "converted": 380
+   },
+   "Display": {
+    "intenders": 147,
+    "converted": 117
+   },
+   "Email": {
+    "intenders": 157,
+    "converted": 104
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 9
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 582,
+    "converted": 384
+   },
+   "PS-TM": {
+    "intenders": 477,
+    "converted": 423
+   },
+   "Paid Social": {
+    "intenders": 4,
+    "converted": 2
+   },
+   "SEO": {
+    "intenders": 281,
+    "converted": 255
+   },
+   "Unknown": {
+    "intenders": 217,
+    "converted": 162
+   },
+   "Unpaid Other": {
+    "intenders": 76,
+    "converted": 65
+   }
+  },
+  "2026-09-06": {
+   "Digital Video": {
+    "intenders": 46,
+    "converted": 27
+   },
+   "Direct": {
+    "intenders": 308,
+    "converted": 293
+   },
+   "Display": {
+    "intenders": 125,
+    "converted": 97
+   },
+   "Email": {
+    "intenders": 189,
+    "converted": 124
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 4
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 627,
+    "converted": 376
+   },
+   "PS-TM": {
+    "intenders": 485,
+    "converted": 436
+   },
+   "Paid Social": {
+    "intenders": 2,
+    "converted": 2
+   },
+   "SEO": {
+    "intenders": 256,
+    "converted": 225
+   },
+   "Unknown": {
+    "intenders": 190,
+    "converted": 120
+   },
+   "Unpaid Other": {
+    "intenders": 47,
+    "converted": 33
+   }
+  },
+  "2026-09-13": {
+   "Digital Video": {
+    "intenders": 48,
+    "converted": 40
+   },
+   "Direct": {
+    "intenders": 244,
+    "converted": 216
+   },
+   "Display": {
+    "intenders": 128,
+    "converted": 109
+   },
+   "Email": {
+    "intenders": 227,
+    "converted": 155
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 2
+   },
+   "PS-NTM": {
+    "intenders": 491,
+    "converted": 334
+   },
+   "PS-TM": {
+    "intenders": 488,
+    "converted": 424
+   },
+   "Paid Social": {
+    "intenders": 4,
+    "converted": 2
+   },
+   "SEO": {
+    "intenders": 218,
+    "converted": 192
+   },
+   "Unknown": {
+    "intenders": 221,
+    "converted": 151
+   },
+   "Unpaid Other": {
+    "intenders": 48,
+    "converted": 45
+   }
+  },
+  "2026-09-20": {
+   "Digital Video": {
+    "intenders": 56,
+    "converted": 39
+   },
+   "Direct": {
+    "intenders": 405,
+    "converted": 368
+   },
+   "Display": {
+    "intenders": 133,
+    "converted": 101
+   },
+   "Email": {
+    "intenders": 160,
+    "converted": 91
+   },
+   "Paid Other": {
+    "intenders": 14,
+    "converted": 9
+   },
+   "PS-NTM": {
+    "intenders": 505,
+    "converted": 339
+   },
+   "PS-TM": {
+    "intenders": 475,
+    "converted": 420
+   },
+   "Paid Social": {
+    "intenders": 3,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 227,
+    "converted": 213
+   },
+   "Unknown": {
+    "intenders": 161,
+    "converted": 111
+   },
+   "Unpaid Other": {
+    "intenders": 45,
+    "converted": 38
+   }
+  },
+  "2026-09-27": {
+   "Digital Video": {
+    "intenders": 73,
+    "converted": 46
+   },
+   "Direct": {
+    "intenders": 348,
+    "converted": 328
+   },
+   "Display": {
+    "intenders": 148,
+    "converted": 105
+   },
+   "Email": {
+    "intenders": 198,
+    "converted": 119
+   },
+   "Paid Other": {
+    "intenders": 11,
+    "converted": 6
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 915,
+    "converted": 477
+   },
+   "PS-TM": {
+    "intenders": 498,
+    "converted": 451
+   },
+   "Paid Social": {
+    "intenders": 4,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 243,
+    "converted": 219
+   },
+   "Unknown": {
+    "intenders": 202,
+    "converted": 125
+   },
+   "Unpaid Other": {
+    "intenders": 52,
+    "converted": 53
+   }
+  },
+  "2026-10-04": {
+   "Digital Video": {
+    "intenders": 85,
+    "converted": 56
+   },
+   "Direct": {
+    "intenders": 335,
+    "converted": 320
+   },
+   "Display": {
+    "intenders": 126,
+    "converted": 82
+   },
+   "Email": {
+    "intenders": 181,
+    "converted": 111
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 7
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 942,
+    "converted": 449
+   },
+   "PS-TM": {
+    "intenders": 426,
+    "converted": 375
+   },
+   "Paid Social": {
+    "intenders": 4,
+    "converted": 4
+   },
+   "SEO": {
+    "intenders": 216,
+    "converted": 188
+   },
+   "Unknown": {
+    "intenders": 170,
+    "converted": 103
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 47
+   }
+  },
+  "2026-10-11": {
+   "Digital Video": {
+    "intenders": 88,
+    "converted": 55
+   },
+   "Direct": {
+    "intenders": 352,
+    "converted": 330
+   },
+   "Display": {
+    "intenders": 88,
+    "converted": 60
+   },
+   "Email": {
+    "intenders": 201,
+    "converted": 95
+   },
+   "Paid Other": {
+    "intenders": 8,
+    "converted": 8
+   },
+   "Paid Search (other)": {
+    "intenders": 0,
+    "converted": 0
+   },
+   "PS-NTM": {
+    "intenders": 1104,
+    "converted": 524
+   },
+   "PS-TM": {
+    "intenders": 385,
+    "converted": 344
+   },
+   "Paid Social": {
+    "intenders": 8,
+    "converted": 3
+   },
+   "SEO": {
+    "intenders": 203,
+    "converted": 172
+   },
+   "Unknown": {
+    "intenders": 190,
+    "converted": 112
+   },
+   "Unpaid Other": {
+    "intenders": 33,
+    "converted": 31
+   }
+  },
+  "2026-10-18": {
+   "Digital Video": {
+    "intenders": 98,
+    "converted": 58
+   },
+   "Direct": {
+    "intenders": 301,
+    "converted": 286
+   },
+   "Display": {
+    "intenders": 108,
+    "converted": 73
+   },
+   "Email": {
+    "intenders": 208,
+    "converted": 101
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 6
+   },
+   "Paid Search (other)": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "PS-NTM": {
+    "intenders": 1024,
+    "converted": 472
+   },
+   "PS-TM": {
+    "intenders": 418,
+    "converted": 333
+   },
+   "Paid Social": {
+    "intenders": 6,
+    "converted": 2
+   },
+   "SEO": {
+    "intenders": 190,
+    "converted": 161
+   },
+   "Unknown": {
+    "intenders": 167,
+    "converted": 87
+   },
+   "Unpaid Other": {
+    "intenders": 51,
+    "converted": 47
+   }
+  },
+  "2026-10-25": {
+   "Digital Video": {
+    "intenders": 42,
+    "converted": 29
+   },
+   "Direct": {
+    "intenders": 112,
+    "converted": 150
+   },
+   "Display": {
+    "intenders": 44,
+    "converted": 35
+   },
+   "Email": {
+    "intenders": 55,
+    "converted": 44
+   },
+   "Paid Other": {
+    "intenders": 4,
+    "converted": 4
+   },
+   "PS-NTM": {
+    "intenders": 360,
+    "converted": 252
+   },
+   "PS-TM": {
+    "intenders": 165,
+    "converted": 193
+   },
+   "Paid Social": {
+    "intenders": 1,
+    "converted": 1
+   },
+   "SEO": {
+    "intenders": 59,
+    "converted": 93
+   },
+   "Unknown": {
+    "intenders": 44,
+    "converted": 40
+   },
+   "Unpaid Other": {
+    "intenders": 10,
+    "converted": 14
+   }
+  }
+ }
+}

@@ -128,10 +128,33 @@
   .rate-mark { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--blue); }
   .rate-val { width: 46px; text-align: right; font-weight: 700; }
   .mix-muted { color: var(--grey); }
+  .delta-pos { color: #2f8f3e; font-weight: 700; }
+  .delta-neg { color: #D64545; font-weight: 700; }
+  .shift { margin-top: 14px; padding: 10px 12px; background: #F4F8FD; border-left: 3px solid var(--med-blue); font-size: 12px; line-height: 1.5; color: #001731; }
+  .shift .shift-title { font-size: 10px; font-weight: 700; color: var(--grey); letter-spacing: 0.04em; margin-bottom: 4px; }
+  .shift p { margin: 0 0 6px; }
+  .shift p:last-child { margin-bottom: 0; }
+  .cgrid { display: grid; grid-template-columns: var(--lab, 118px) repeat(var(--cols, 1), minmax(0, 1fr)); gap: 3px; align-items: stretch; }
+  .cgrid .ch { font-size: 10px; font-weight: 700; color: var(--grey); text-align: center; padding-bottom: 2px; }
+  .cgrid .ch button { background: none; border: none; font: inherit; color: inherit; cursor: pointer; padding: 0; }
+  .cgrid .ch button:hover, .cgrid .ch.selcol { color: var(--blue); }
+  .cgrid .rl { font-size: 11px; font-weight: 600; display: flex; align-items: center; }
+  .cgrid .rl.low { color: var(--grey); }
+  .cgrid .rl.all { font-weight: 800; color: var(--blue); }
+  .cgrid .cell { height: 28px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #001731; }
+  .cgrid .cell.low { opacity: 0.4; }
+  .cgrid .cell.selcol { box-shadow: inset 0 0 0 2px var(--blue); }
+  .cgrid .cell.prov { outline: 1.5px dashed var(--blue); outline-offset: -2px; opacity: 0.6; }
+  .cgrid .cell.none { background: repeating-linear-gradient(45deg, #fff, #fff 4px, var(--light-grey) 4px, var(--light-grey) 8px); color: var(--grey); font-weight: 600; }
+  .cgrid .cell.all { border: 1px solid rgba(0,40,85,0.25); }
+  .seg-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
   @media (max-width: 700px) {
     .kpis { grid-template-columns: repeat(2, 1fr); }
     .chtable { font-size: 11px; }
+    .chtable .hide-sm { display: none; }
+    .cgrid { --lab: 78px; gap: 2px; }
+    .cgrid .cell { height: 24px; font-size: 10px; }
     .chtable th, .chtable td { padding: 6px 4px; }
     .chtable th { white-space: normal; }
     .rate-cell { min-width: 96px; gap: 4px; }
@@ -250,6 +273,13 @@
     </div>
     <div id="channelView"></div>
     <div class="note" id="channelCheck"></div>
+    <div id="channelShift"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:22px;">
+      <h2 id="channelGridTitle" style="margin:0;">CONVERSION RATE BY MONTH</h2>
+      <div class="control-group" id="channelPeriodButtons"></div>
+    </div>
+    <div class="cgrid" id="channelGrid" style="margin-top:10px;"></div>
+    <div class="heat-legend" id="channelGridLegend"></div>
     <div class="note" id="channelNote"></div>
   </div>
 
@@ -328,6 +358,7 @@ try {
 let DAILY = [];
 let MODEL_OUTPUT = null;
 let CHANNEL_ACTUALS = {};
+let CHANNEL_DATA = null; // parsed Tableau channel export (docs/data/channel_data.json), if present
 let trendChartInstance = null;
 let errorChartInstance = null;
 let currentGranularity = 'daily';
@@ -339,12 +370,13 @@ let rangeStartIdx = 0;
 let rangeEndIdx = 0;
 
 async function loadData() {
-  const [daily, modelOutput, channelActuals] = await Promise.all([
+  const [daily, modelOutput, channelActuals, channelData] = await Promise.all([
     fetch('data/daily.json').then(r => r.json()),
     fetch('data/model_output.json').then(r => r.json()),
     fetch('data/channel_actuals.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
+    fetch('data/channel_data.json').then(r => r.ok ? r.json() : null).catch(() => null),
   ]);
-  return { daily, modelOutput, channelActuals };
+  return { daily, modelOutput, channelActuals, channelData };
 }
 
 function fmt(n) { return (n === null || n === undefined) ? '—' : n.toLocaleString('en-US'); }
@@ -1051,17 +1083,21 @@ function renderTrend(daily, modelOutput) {
 }
 
 // --- Channel performance ---
-// Channel data is pulled weekly and lives in docs/data/channel_actuals.json, with its own
-// "updated" date, separate from the daily report feed.
+// Channel numbers come from the Tableau channel export: upload it to incoming/ and the workflow
+// writes docs/data/channel_data.json (monthly and weekly, with last year's values). The older
+// hand-entered docs/data/channel_actuals.json is still read for any month the export doesn't cover.
 const CHANNEL_ALIASES = {
   'Paid Search (Trademark)': 'PS-TM',
   'Paid Search (Non-Trademark)': 'PS-NTM',
   'Paid Search': 'Paid Search (other)',
 };
 const CHANNEL_FULL_NAMES = { 'PS-TM': 'Paid Search (Trademark)', 'PS-NTM': 'Paid Search (Non-Trademark)' };
-const CHANNEL_LOW_VOLUME = 30;  // under this many Intenders a rate is mostly noise
-const CHANNEL_STALE_DAYS = 8;   // the pull is weekly; flag it once it is more than a week old
+const CHANNEL_LOW_VOLUME = 30;  // under this many Intenders a monthly rate is mostly noise
+const CHANNEL_LOW_WEEKLY = 15;  // same idea for a single week
+const CHANNEL_STALE_DAYS = 8;   // flag the export once it is more than a week old
+const CH_LO = 45, CH_HI = 95;   // colour scale for the channel grid
 let channelSort = { key: 'intenders', dir: 'desc' };
+let channelPeriod = 'monthly';  // 'monthly' | 'weekly' (the grid only)
 
 function parseIsoLocal(str) { return str ? new Date(`${str}T00:00:00`) : null; }
 
@@ -1084,12 +1120,35 @@ function parseChannelMonth(raw) {
   return { updated: raw.updated || null, through: raw.through || null, rows: Array.from(merged.values()) };
 }
 
+function exportRows(period) {
+  return Object.entries(period || {}).map(([key, v]) => ({
+    key, intenders: v.intenders, converted: v.converted,
+    priorIntenders: v.prior_intenders ?? null, priorConverted: v.prior_converted ?? null,
+  }));
+}
+
+function monthKeyOffset(meta, delta) {
+  const idx = monthIdx(meta.year, meta.num) + delta;
+  return `${Math.floor(idx / 12)}-${String((idx % 12) + 1).padStart(2, '0')}`;
+}
+
+// The channel numbers for the selected month: the Tableau export if it has the month, otherwise
+// the older hand-entered snapshot.
+function channelDataFor(meta) {
+  const exp = CHANNEL_DATA && CHANNEL_DATA.monthly && CHANNEL_DATA.monthly[meta.key];
+  if (exp && Object.keys(exp).length) {
+    return { source: 'export', updated: (CHANNEL_DATA.updated && CHANNEL_DATA.updated.monthly) || null, through: null, rows: exportRows(exp) };
+  }
+  const legacy = parseChannelMonth(channelRawFor(meta));
+  return legacy ? { source: 'manual', ...legacy } : null;
+}
+
 function renderChannelStamp(data) {
   const el = document.getElementById('channelStamp');
   el.classList.remove('stale');
   if (!data) { el.textContent = ''; return; }
   const upd = parseIsoLocal(data.updated);
-  if (!upd) { el.textContent = 'Update date not set in channel_actuals.json'; return; }
+  if (!upd) { el.textContent = 'Update date missing from the channel data'; return; }
   let text = `Channel data updated ${formatShortDate(upd)}`;
   if (data.through) text += ` (through ${formatShortDate(parseIsoLocal(data.through))})`;
   // Only nag about age for the month we are in; older months are final.
@@ -1115,6 +1174,12 @@ function channelRateCell(rate, low, overall, converted, intenders) {
   return `<div class="rate-cell" title="${tip}"><div class="rate-track"><div class="rate-fill" style="width:${Math.min(100, rate)}%;background:${color}"></div>${mark}</div><span class="rate-val">${rate.toFixed(1)}%</span></div>`;
 }
 
+function deltaCell(v) {
+  if (v === null || v === undefined) return '<span class="mix-muted">—</span>';
+  const cls = v <= -2 ? 'delta-neg' : v >= 2 ? 'delta-pos' : 'mix-muted';
+  return `<span class="${cls}">${pts(v)}</span>`;
+}
+
 function monthProjectedTotal(monthKey) {
   const meta = monthMeta[monthKey];
   const inMonth = d => { const dt = new Date(d.date); return dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year; };
@@ -1129,43 +1194,199 @@ function monthProjectedTotal(monthKey) {
   return total;
 }
 
-// Reconcile the weekly channel total against the daily report up to the same date, so a
-// mismatch is visible (and explained) instead of silently confusing.
-function renderChannelCheck(data, totalC) {
+// Informational reconciliation with the daily report. The daily feed keeps first-reported values
+// while the channel export carries WGU's later revisions, so a small positive gap is normal.
+function renderChannelCheck(data, totalC, meta) {
   const el = document.getElementById('channelCheck');
   el.textContent = '';
   el.style.color = '';
-  if (!data || !data.through) return;
-  const through = parseIsoLocal(data.through);
-  const meta = monthMeta[currentMonth];
+  if (!data) return;
   let daily = 0, days = 0;
+  const through = data.through ? parseIsoLocal(data.through) : null;
   DAILY.forEach(d => {
     const dt = new Date(d.date);
-    if (dt.getMonth() + 1 === meta.num && dt.getFullYear() === meta.year && dt <= through) {
-      daily += d['App Complete'];
-      days++;
-    }
+    if (inMonth(dt, meta) && (!through || dt <= through)) { daily += d['App Complete']; days++; }
   });
-  if (!days) return;
+  if (!days || daily <= 0) return;
   const diff = totalC - daily;
-  const off = daily > 0 && Math.abs(diff) / daily > 0.02;
-  el.textContent = `Check: the daily report shows ${fmt(daily)} App Completes through ${formatShortDate(through)}; ` +
-    `this table totals ${fmt(totalC)} (${diff >= 0 ? '+' : '−'}${fmt(Math.abs(diff))}).` +
-    (off ? ' That is a gap of more than 2%, so confirm the pull dates and that the daily report is current.' : '');
+  const pct = (diff / daily) * 100;
+  const sign = diff >= 0 ? '+' : '−';
+  const scope = through ? `through ${formatShortDate(through)}` : `${days} of ${daysIn(meta)} days`;
+  const off = through ? Math.abs(pct) > 2 : (pct > 5 || pct < -1);
+  el.textContent = `Check: the daily report shows ${fmt(daily)} App Completes for ${meta.short} (${scope}); this table shows ${fmt(totalC)} ` +
+    `(${sign}${fmt(Math.abs(diff))}, ${sign}${Math.abs(pct).toFixed(1)}%). ` +
+    (off ? 'That gap is larger than revisions usually explain, so the two probably end on different days.'
+         : 'The channel export carries later revisions, which usually add 1–2%.');
   if (off) el.style.color = '#B26B00';
 }
 
+// Split the change in overall conversion between two periods into (a) channel mix: more or less of the
+// volume coming from high- or low-converting channels, and (b) rates within each channel.
+// per-channel mix effect = share change x (its old rate - the old overall rate); rate effect = new share x rate change.
+function shiftShare(cur, ref) {
+  const tot = rs => ({ i: rs.reduce((sum, r) => sum + r.intenders, 0), c: rs.reduce((sum, r) => sum + r.converted, 0) });
+  const t1 = tot(cur), t0 = tot(ref);
+  if (!t1.i || !t0.i) return null;
+  const R1 = t1.c / t1.i, R0 = t0.c / t0.i;
+  const m0 = new Map(ref.map(r => [r.key, r])), m1 = new Map(cur.map(r => [r.key, r]));
+  let mix = 0, rate = 0;
+  const per = [];
+  new Set([...m0.keys(), ...m1.keys()]).forEach(k => {
+    const a = m0.get(k), b = m1.get(k);
+    const s0 = a ? a.intenders / t0.i : 0, s1 = b ? b.intenders / t1.i : 0;
+    const r0 = a && a.intenders > 0 ? a.converted / a.intenders : R0;
+    const r1 = b && b.intenders > 0 ? b.converted / b.intenders : r0;
+    const m = (s1 - s0) * (r0 - R0), r = s1 * (r1 - r0);
+    mix += m; rate += r;
+    per.push({ key: k, total: (m + r) * 100, s0: s0 * 100, s1: s1 * 100, r0: r0 * 100, r1: r1 * 100 });
+  });
+  per.sort((x, y) => Math.abs(y.total) - Math.abs(x.total));
+  return { R0: R0 * 100, R1: R1 * 100, delta: (R1 - R0) * 100, mix: mix * 100, rate: rate * 100, per };
+}
+
+function pts(v) { const t = Math.abs(v).toFixed(1); return t === '0.0' ? '0.0' : `${v >= 0 ? '+' : '−'}${t}`; }
+
+function shiftLine(label, sh) {
+  const movers = sh.per.filter(x => Math.abs(x.total) >= 0.3).slice(0, 3).map(x =>
+    `<b>${x.key}</b> ${pts(x.total)} pts (share ${x.s0.toFixed(0)}% → ${x.s1.toFixed(0)}%, rate ${x.r0.toFixed(1)}% → ${x.r1.toFixed(1)}%)`);
+  return `<p><b>vs. ${label}:</b> overall ${sh.R0.toFixed(1)}% → ${sh.R1.toFixed(1)}% (${pts(sh.delta)} pts) = ` +
+    `${pts(sh.mix)} pts from channel mix and ${pts(sh.rate)} pts from rates inside channels.` +
+    (movers.length ? ` Biggest movers: ${movers.join('; ')}.` : '') + '</p>';
+}
+
+function renderChannelShift(data, meta) {
+  const el = document.getElementById('channelShift');
+  el.innerHTML = '';
+  if (!data || data.source !== 'export') return;
+  const lines = [];
+  const prevRows = CHANNEL_DATA.monthly && CHANNEL_DATA.monthly[monthKeyOffset(meta, -1)];
+  if (prevRows) {
+    const sh = shiftShare(data.rows, exportRows(prevRows));
+    if (sh) lines.push(shiftLine(MONTH_NAMES[(monthIdx(meta.year, meta.num) - 1) % 12], sh));
+  }
+  const lyRows = data.rows.filter(r => r.priorIntenders > 0 && r.priorConverted !== null)
+    .map(r => ({ key: r.key, intenders: r.priorIntenders, converted: r.priorConverted }));
+  if (lyRows.reduce((sum, r) => sum + r.intenders, 0) >= 100) {
+    const sh = shiftShare(data.rows, lyRows);
+    if (sh) lines.push(shiftLine(`${meta.short} ${meta.year - 1}`, sh));
+  }
+  if (!lines.length) return;
+  const partial = monthStatus(meta) !== 'complete'
+    ? '<p style="color:var(--grey);">This month is still in progress: its rates run about 1–2 points low until WGU finishes revising the latest days, so part of any gap is timing.</p>' : '';
+  el.innerHTML = `<div class="shift"><div class="shift-title">WHAT MOVED CONVERSION</div>${lines.join('')}${partial}</div>`;
+}
+
+function chHeat(v) {
+  const t = Math.min(1, Math.max(0, (v - CH_LO) / (CH_HI - CH_LO)));
+  const lo = [214, 69, 69], mid = [241, 241, 241], hi = [151, 225, 82];
+  const [from, to, u] = t < 0.5 ? [lo, mid, t * 2] : [mid, hi, (t - 0.5) * 2];
+  return `rgb(${from.map((c, k) => Math.round(c + (to[k] - c) * u)).join(',')})`;
+}
+
+function renderChannelPeriodButtons() {
+  const container = document.getElementById('channelPeriodButtons');
+  const hasWeekly = !!(CHANNEL_DATA && CHANNEL_DATA.weekly && Object.keys(CHANNEL_DATA.weekly).length);
+  if (!hasWeekly && channelPeriod === 'weekly') channelPeriod = 'monthly';
+  container.innerHTML = [['monthly', 'Monthly'], ['weekly', 'Weekly']].map(([key, label]) =>
+    `<button class="seg-btn ${key === channelPeriod ? 'active' : ''}" style="text-transform:none" data-period="${key}"` +
+    `${key === 'weekly' && !hasWeekly ? ' disabled title="Upload a weekly Tableau channel export to enable this"' : ''}>${label}</button>`
+  ).join('');
+  container.querySelectorAll('button:not([disabled])').forEach(btn => btn.addEventListener('click', () => {
+    channelPeriod = btn.dataset.period;
+    renderChannelView();
+  }));
+}
+
+// Channels down the side, months (or weeks) across, coloured by conversion rate.
+function renderChannelGrid() {
+  const meta = monthMeta[currentMonth];
+  const el = document.getElementById('channelGrid');
+  const legend = document.getElementById('channelGridLegend');
+  const title = document.getElementById('channelGridTitle');
+  const weekly = channelPeriod === 'weekly';
+  const source = CHANNEL_DATA && (weekly ? CHANNEL_DATA.weekly : CHANNEL_DATA.monthly);
+  const narrow = window.matchMedia('(max-width: 700px)').matches;
+  let cols = [];
+
+  if (source) {
+    if (weekly) {
+      const lo = new Date(meta.year, meta.num - 1, 1 - 21), hi = new Date(meta.year, meta.num, 6);
+      cols = Object.keys(source).filter(k => { const d = parseIsoLocal(k); return d >= lo && d <= hi; }).sort();
+    } else {
+      cols = Object.keys(source).filter(k => k <= meta.key).sort().slice(narrow ? -6 : -12);
+    }
+  }
+  title.textContent = weekly ? 'CONVERSION RATE BY WEEK (WEEKS ENDING)' : 'CONVERSION RATE BY MONTH';
+  if (!cols.length) {
+    el.innerHTML = '';
+    el.style.removeProperty('--cols');
+    legend.innerHTML = `<span>${source ? 'No ' + (weekly ? 'weeks' : 'months') + ' with channel data around ' + meta.label + '.' : 'Upload the Tableau channel export to see conversion by channel over time.'}</span>`;
+    return;
+  }
+
+  const lastDaily = new Date(DAILY[DAILY.length - 1].date);
+  const low = weekly ? CHANNEL_LOW_WEEKLY : CHANNEL_LOW_VOLUME;
+  const info = cols.map(k => {
+    if (weekly) {
+      const d = parseIsoLocal(k);
+      const unfinished = d > lastDaily;
+      return { key: k, label: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + (unfinished ? '*' : ''), selected: inMonth(d, meta), prov: unfinished, monthKey: null };
+    }
+    const [y, m] = k.split('-').map(Number);
+    return { key: k, label: `${MONTH_SHORT[m - 1]} ${String(y).slice(2)}`, selected: k === meta.key, prov: false, monthKey: monthMeta[k] ? k : null };
+  });
+
+  // rows: every channel seen in the window, biggest first; "All channels" last
+  const volume = new Map();
+  cols.forEach(k => Object.entries(source[k]).forEach(([ch, v]) => volume.set(ch, (volume.get(ch) || 0) + v.intenders)));
+  const channels = Array.from(volume.keys()).sort((a, b) => volume.get(b) - volume.get(a));
+
+  let html = '<div></div>' + info.map(c => {
+    const label = c.monthKey && c.key !== meta.key
+      ? `<button type="button" data-gridmonth="${c.monthKey}" title="Show ${monthMeta[c.monthKey].label}">${c.label}</button>` : c.label;
+    return `<div class="ch${c.selected ? ' selcol' : ''}">${label}</div>`;
+  }).join('');
+
+  const cell = (v, c, allRow) => {
+    if (!v || !v.intenders) return `<div class="cell none${c.selected ? ' selcol' : ''}" title="no data">–</div>`;
+    const rate = (v.converted / v.intenders) * 100;
+    const isLow = !allRow && v.intenders < low;
+    return `<div class="cell${isLow ? ' low' : ''}${allRow ? ' all' : ''}${c.selected ? ' selcol' : ''}${c.prov ? ' prov' : ''}" style="background:${chHeat(rate)}" ` +
+      `title="${c.label}: ${rate.toFixed(1)}% (${fmt(v.converted)} of ${fmt(v.intenders)} Intenders${isLow ? ', low volume' : ''}${c.prov ? ', week still filling in' : ''})">${Math.round(rate)}</div>`;
+  };
+
+  channels.forEach(ch => {
+    const thin = cols.every(k => !source[k][ch] || source[k][ch].intenders < low);
+    html += `<div class="rl${thin ? ' low' : ''}" title="${CHANNEL_FULL_NAMES[ch] || ch}">${ch}</div>` +
+      info.map(c => cell(source[c.key][ch], c, false)).join('');
+  });
+  html += '<div class="rl all">All channels</div>' + info.map(c => {
+    const rows = Object.values(source[c.key]);
+    return cell({ intenders: rows.reduce((sum, v) => sum + v.intenders, 0), converted: rows.reduce((sum, v) => sum + v.converted, 0) }, c, true);
+  }).join('');
+
+  el.style.setProperty('--cols', cols.length);
+  el.innerHTML = html;
+  el.querySelectorAll('button[data-gridmonth]').forEach(btn => btn.addEventListener('click', () => setMonth(btn.dataset.gridmonth)));
+
+  const updated = CHANNEL_DATA.updated && CHANNEL_DATA.updated[weekly ? 'weekly' : 'monthly'];
+  legend.innerHTML = `<span>${CH_LO}%</span><span class="ramp"></span><span>${CH_HI}%</span>` +
+    `<span style="margin-left:10px;">Outlined: ${meta.label}. Faded: under ${low} Intenders. ` +
+    (weekly ? '* Week not finished: its Intenders are still coming in, so rates run high. ' : 'Click a month to switch to it. ') +
+    (updated ? `Updated ${formatShortDate(parseIsoLocal(updated))}.` : '') + '</span>';
+}
+
 function renderChannelEmpty(meta) {
-  renderChannelCheck(null, 0);
+  renderChannelCheck(null, 0, meta);
   document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()})`;
   document.getElementById('channelView').innerHTML = '';
   document.getElementById('channelNote').textContent =
-    `No channel data for ${meta.label}. Add a "${meta.tab ? meta.short : meta.key}" entry to docs/data/channel_actuals.json to show it here.`;
+    `No channel data for ${meta.label}. Upload a Tableau channel export that covers it (incoming/channels_monthly.csv) to show it here.`;
 }
 
 function renderChannelPlan() {
-  renderChannelCheck(null, 0);
   const meta = monthMeta[currentMonth];
+  renderChannelCheck(null, 0, meta);
   const entries = Object.entries(channelPercents).filter(([ch]) => ch !== 'Total').sort((a, b) => b[1] - a[1]);
   const budgetSum = entries.reduce((sum, [, pct]) => sum + pct, 0);
   const total = monthProjectedTotal(currentMonth);
@@ -1187,13 +1408,16 @@ function renderChannelPlan() {
     `No channel data for ${meta.label} yet. ` + (total > 0
       ? `Showing each channel's share of the official budget plan applied to the ${meta.label} ${monthStatus(meta) === 'complete' ? 'actuals' : 'projection'} (budget shares normalized to 100%). `
       : `There is no forecast for ${meta.label} yet (projections cover about 2 months), so only the budget shares are shown. `) +
-    `Add a "${meta.short}" entry to docs/data/channel_actuals.json to show real results.`;
+    `Upload a Tableau channel export that covers this month to show real results.`;
 }
 
 function renderChannelView(focusSortKey) {
   const meta = monthMeta[currentMonth];
-  const data = parseChannelMonth(channelRawFor(meta));
+  const data = channelDataFor(meta);
   renderChannelStamp(data);
+  renderChannelPeriodButtons();
+  renderChannelGrid();
+  document.getElementById('channelShift').innerHTML = '';
   if (!data || !data.rows.length) {
     // A finished month with no channel data gets a prompt, not an invented split of its total.
     if (monthStatus(meta) === 'complete') { renderChannelEmpty(meta); return; }
@@ -1206,18 +1430,31 @@ function renderChannelView(focusSortKey) {
   const totalC = data.rows.reduce((sum, r) => sum + r.converted, 0);
   const hasRates = data.rows.every(r => r.intenders !== null) && totalI > 0;
   const overall = hasRates ? (totalC / totalI) * 100 : null;
-  renderChannelCheck(data, totalC);
+  renderChannelCheck(data, totalC, meta);
+  renderChannelShift(data, meta);
+
+  // Reference periods for the "vs." columns: the previous month and the same month last year.
+  const prevMonth = CHANNEL_DATA && CHANNEL_DATA.monthly && CHANNEL_DATA.monthly[monthKeyOffset(meta, -1)];
+  const prevMap = new Map(exportRows(prevMonth).map(r => [r.key, r]));
+  const rateOf = (i, c) => (i !== null && i !== undefined && i >= CHANNEL_LOW_VOLUME && c !== null && c !== undefined ? (c / i) * 100 : null);
+  const prevTotals = exportRows(prevMonth).reduce((a, r) => ({ i: a.i + r.intenders, c: a.c + r.converted }), { i: 0, c: 0 });
+  const lyTotals = data.rows.filter(r => r.priorIntenders > 0 && r.priorConverted !== null)
+    .reduce((a, r) => ({ i: a.i + r.priorIntenders, c: a.c + r.priorConverted }), { i: 0, c: 0 });
 
   const rows = data.rows.map(r => {
     const pct = channelPercents[r.key];
     const share = totalC > 0 ? (r.converted / totalC) * 100 : 0;
     const budgetShare = pct === undefined ? null : (pct / budgetSum) * 100;
+    const rate = r.intenders > 0 ? (r.converted / r.intenders) * 100 : null;
+    const low = r.intenders !== null && r.intenders < CHANNEL_LOW_VOLUME;
+    const pm = prevMap.get(r.key);
+    const prevRate = pm ? rateOf(pm.intenders, pm.converted) : null;
+    const lyRate = rateOf(r.priorIntenders, r.priorConverted);
     return {
-      ...r,
-      rate: r.intenders > 0 ? (r.converted / r.intenders) * 100 : null,
-      share, budgetShare,
+      ...r, rate, low, share, budgetShare,
       mix: budgetShare === null ? null : share - budgetShare,
-      low: r.intenders !== null && r.intenders < CHANNEL_LOW_VOLUME,
+      dm: rate !== null && !low && prevRate !== null ? rate - prevRate : null,
+      dy: rate !== null && !low && lyRate !== null ? rate - lyRate : null,
     };
   });
 
@@ -1226,6 +1463,8 @@ function renderChannelView(focusSortKey) {
     intenders: r => (r.intenders === null ? -1 : r.intenders),
     converted: r => r.converted,
     rate: r => (r.rate === null ? -1 : r.rate),
+    dm: r => (r.dm === null ? -999 : r.dm),
+    dy: r => (r.dy === null ? -999 : r.dy),
     mix: r => (r.mix === null ? -999 : r.mix),
   };
   const dir = channelSort.dir === 'asc' ? 1 : -1;
@@ -1234,47 +1473,62 @@ function renderChannelView(focusSortKey) {
     return ((a < b ? -1 : a > b ? 1 : 0) * dir) || x.key.localeCompare(y.key);
   };
   let ordered;
-  if (channelSort.key === 'rate') {
+  if (['rate', 'dm', 'dy'].includes(channelSort.key)) {
     // Keep thin-volume channels below the rest so a 107% on 15 Intenders never tops the list.
     ordered = rows.filter(r => !r.low).sort(cmp).concat(rows.filter(r => r.low).sort(cmp));
   } else {
     ordered = rows.sort(cmp);
   }
 
-  const cols = [['channel', 'Channel'], ['intenders', 'Intenders'], ['converted', 'Converted'], ['rate', 'Conversion rate'], ['mix', 'Mix vs. budget']];
-  const head = cols.map(([key, label]) => {
+  const cols = [
+    ['channel', 'Channel', '', ''],
+    ['intenders', 'Intenders', '', ''],
+    ['converted', 'Converted', 'hide-sm', ''],
+    ['rate', 'Conversion rate', '', ''],
+    ['dm', 'vs. prior mo.', '', 'Change in conversion rate versus the previous month, in percentage points'],
+    ['dy', 'vs. last yr.', '', 'Change in conversion rate versus the same month last year, in percentage points'],
+    ['mix', 'Mix vs. budget', 'hide-sm', ''],
+  ];
+  const head = cols.map(([key, label, cls, tip]) => {
     const active = channelSort.key === key;
     const arrow = active ? (channelSort.dir === 'asc' ? ' ▲' : ' ▼') : '';
-    return `<th class="${active ? 'sorted' : ''}" aria-sort="${active ? (channelSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}">` +
+    return `<th class="${cls}${active ? ' sorted' : ''}" aria-sort="${active ? (channelSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}"${tip ? ` title="${tip}"` : ''}>` +
       `<button type="button" data-sort="${key}">${label}${arrow}</button></th>`;
   }).join('');
 
   const body = ordered.map(r => {
     const mixText = r.mix === null
       ? '<span class="mix-muted">—</span>'
-      : `<span class="${Math.abs(r.mix) < 1 ? 'mix-muted' : ''}">${r.mix >= 0 ? '+' : '−'}${Math.abs(r.mix).toFixed(1)} pts</span>`;
+      : `<span class="${Math.abs(r.mix) < 1 ? 'mix-muted' : ''}">${pts(r.mix)} pts</span>`;
     const mixTip = r.mix === null ? 'No budget share for this channel'
       : `${r.share.toFixed(1)}% of App Completes vs. ${r.budgetShare.toFixed(1)}% of budget`;
     return `
       <tr class="${r.key === currentChannel ? 'sel' : ''}${r.low ? ' low' : ''}">
         <td title="${CHANNEL_FULL_NAMES[r.key] || r.key}">${r.key}${r.low ? '<div class="lowtag">low volume</div>' : ''}</td>
         <td>${fmt(r.intenders)}</td>
-        <td>${fmt(r.converted)}</td>
+        <td class="hide-sm">${fmt(r.converted)}</td>
         <td>${channelRateCell(r.rate, r.low, overall, r.converted, r.intenders)}</td>
-        <td title="${mixTip}">${mixText}</td>
+        <td>${deltaCell(r.dm)}</td>
+        <td>${deltaCell(r.dy)}</td>
+        <td class="hide-sm" title="${mixTip}">${mixText}</td>
       </tr>`;
   }).join('');
 
+  const footDm = overall !== null && prevTotals.i > 0 ? overall - (prevTotals.c / prevTotals.i) * 100 : null;
+  const footDy = overall !== null && lyTotals.i > 0 ? overall - (lyTotals.c / lyTotals.i) * 100 : null;
   const foot = `
     <tr>
       <td>All channels</td>
       <td>${hasRates ? fmt(totalI) : '—'}</td>
-      <td>${fmt(totalC)}</td>
+      <td class="hide-sm">${fmt(totalC)}</td>
       <td>${channelRateCell(overall, false, null, totalC, hasRates ? totalI : null)}</td>
-      <td></td>
+      <td>${deltaCell(footDm)}</td>
+      <td>${deltaCell(footDy)}</td>
+      <td class="hide-sm"></td>
     </tr>`;
 
-  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()}, ${monthStatus(meta) === 'complete' ? 'FULL MONTH' : 'MONTH TO DATE'})`;
+  const status = monthStatus(meta);
+  document.getElementById('channelTitle').textContent = `CHANNEL PERFORMANCE (${meta.label.toUpperCase()}, ${status === 'complete' ? 'FULL MONTH' : 'MONTH TO DATE'})`;
   const view = document.getElementById('channelView');
   view.innerHTML = `<table class="chtable"><thead><tr>${head}</tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table>`;
   view.querySelectorAll('button[data-sort]').forEach(btn => {
@@ -1294,9 +1548,11 @@ function renderChannelView(focusSortKey) {
   document.getElementById('channelNote').textContent =
     `Conversion rate = Converted ÷ Intenders for the same period, not a cohort, so a channel with few Intenders can pass 100% ` +
     `(channels under ${CHANNEL_LOW_VOLUME} Intenders are dimmed and stay at the bottom when sorting by rate). The blue tick marks the all-channel rate; ` +
-    `bars are red or green when a channel is 10+ points under or over it. Mix vs. budget compares each channel's share of ` +
-    `App Completes with its share of the official budget (budget shares normalized to 100%). Channel figures come from a ` +
-    `separate weekly pull and stop at the date shown, so their totals trail the daily report.`;
+    `bars are red or green when a channel is 10+ points under or over it. The vs. columns are changes in rate, in percentage points. ` +
+    `Mix vs. budget compares each channel's share of App Completes with its share of the official budget (budget shares normalized to 100%). ` +
+    (data.source === 'export'
+      ? 'Figures come from the Tableau channel export (Net Applicants and Degree Intenders); WGU revises recent days for a while, so the latest numbers can still move.'
+      : 'This month still uses the hand-entered snapshot in channel_actuals.json; upload the Tableau channel export to replace it.');
 }
 
 function formatShortDate(dt) {
@@ -1427,10 +1683,11 @@ function renderChannelSelect() {
   });
 }
 
-loadData().then(({ daily, modelOutput, channelActuals }) => {
+loadData().then(({ daily, modelOutput, channelActuals, channelData }) => {
   DAILY = daily;
   MODEL_OUTPUT = modelOutput;
   CHANNEL_ACTUALS = channelActuals || {};
+  CHANNEL_DATA = channelData && (channelData.monthly || channelData.weekly) ? channelData : null;
   currentModelKey = bestModelKey(modelOutput);
 
   buildMonthMeta(daily);
