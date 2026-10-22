@@ -1,19 +1,19 @@
 {
   "Oct": {
-    "updated": "2026-10-21",
-    "through": "2026-10-19",
+    "updated": "2026-10-22",
+    "through": "2026-10-20",
     "channels": {
-      "Direct": { "intenders": 862, "converted": 855 },
-      "PS-TM": { "intenders": 1086, "converted": 966 },
-      "PS-NTM": { "intenders": 2891, "converted": 1410 },
-      "SEO": { "intenders": 534, "converted": 484 },
-      "Email": { "intenders": 530, "converted": 284 },
-      "Unknown": { "intenders": 464, "converted": 266 },
-      "Display": { "intenders": 273, "converted": 189 },
-      "Digital Video": { "intenders": 254, "converted": 161 },
-      "Paid Other": { "intenders": 19, "converted": 18 },
-      "Unpaid Other": { "intenders": 112, "converted": 105 },
-      "Paid Social": { "intenders": 16, "converted": 7 },
+      "Direct": { "intenders": 916, "converted": 906 },
+      "PS-TM": { "intenders": 1169, "converted": 1036 },
+      "PS-NTM": { "intenders": 3042, "converted": 1500 },
+      "SEO": { "intenders": 557, "converted": 521 },
+      "Email": { "intenders": 557, "converted": 296 },
+      "Unknown": { "intenders": 479, "converted": 274 },
+      "Display": { "intenders": 293, "converted": 200 },
+      "Digital Video": { "intenders": 268, "converted": 167 },
+      "Paid Other": { "intenders": 21, "converted": 21 },
+      "Unpaid Other": { "intenders": 117, "converted": 112 },
+      "Paid Social": { "intenders": 17, "converted": 7 },
       "Paid Search (other)": { "intenders": 1, "converted": 1 }
     }
   }
