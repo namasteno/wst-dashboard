@@ -3249,7 +3249,7 @@
     "date": "Oct 2, 2026",
     "Inquiries": 340,
     "Intenders": 343,
-    "App Complete": 227
+    "App Complete": 228
   },
   {
     "date": "Oct 3, 2026",
@@ -3260,20 +3260,20 @@
   {
     "date": "Oct 4, 2026",
     "Inquiries": 328,
-    "Intenders": 329,
+    "Intenders": 330,
     "App Complete": 195
   },
   {
     "date": "Oct 5, 2026",
     "Inquiries": 460,
     "Intenders": 470,
-    "App Complete": 308
+    "App Complete": 309
   },
   {
     "date": "Oct 6, 2026",
     "Inquiries": 412,
     "Intenders": 415,
-    "App Complete": 301
+    "App Complete": 302
   },
   {
     "date": "Oct 7, 2026",
@@ -3284,7 +3284,7 @@
   {
     "date": "Oct 8, 2026",
     "Inquiries": 413,
-    "Intenders": 409,
+    "Intenders": 408,
     "App Complete": 271
   },
   {
@@ -3309,19 +3309,19 @@
     "date": "Oct 12, 2026",
     "Inquiries": 407,
     "Intenders": 390,
-    "App Complete": 272
+    "App Complete": 273
   },
   {
     "date": "Oct 13, 2026",
     "Inquiries": 406,
-    "Intenders": 397,
+    "Intenders": 396,
     "App Complete": 254
   },
   {
     "date": "Oct 14, 2026",
     "Inquiries": 413,
-    "Intenders": 408,
-    "App Complete": 270
+    "Intenders": 409,
+    "App Complete": 269
   },
   {
     "date": "Oct 15, 2026",
@@ -3339,30 +3339,36 @@
     "date": "Oct 17, 2026",
     "Inquiries": 325,
     "Intenders": 326,
-    "App Complete": 180
+    "App Complete": 182
   },
   {
     "date": "Oct 18, 2026",
     "Inquiries": 323,
-    "Intenders": 322,
+    "Intenders": 321,
     "App Complete": 185
   },
   {
     "date": "Oct 19, 2026",
-    "Inquiries": 438,
-    "Intenders": 425,
-    "App Complete": 300
+    "Inquiries": 435,
+    "Intenders": 424,
+    "App Complete": 298
   },
   {
     "date": "Oct 20, 2026",
-    "Inquiries": 412,
-    "Intenders": 393,
-    "App Complete": 263
+    "Inquiries": 411,
+    "Intenders": 392,
+    "App Complete": 264
   },
   {
     "date": "Oct 21, 2026",
-    "Inquiries": 457,
+    "Inquiries": 452,
     "Intenders": 450,
-    "App Complete": 290
+    "App Complete": 297
+  },
+  {
+    "date": "Oct 22, 2026",
+    "Inquiries": 412,
+    "Intenders": 404,
+    "App Complete": 257
   }
 ]
