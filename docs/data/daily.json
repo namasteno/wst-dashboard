@@ -3247,9 +3247,9 @@
   },
   {
     "date": "Oct 2, 2026",
-    "Inquiries": 339,
-    "Intenders": 342,
-    "App Complete": 227
+    "Inquiries": 340,
+    "Intenders": 343,
+    "App Complete": 228
   },
   {
     "date": "Oct 3, 2026",
@@ -3260,13 +3260,13 @@
   {
     "date": "Oct 4, 2026",
     "Inquiries": 328,
-    "Intenders": 331,
-    "App Complete": 196
+    "Intenders": 330,
+    "App Complete": 197
   },
   {
     "date": "Oct 5, 2026",
     "Inquiries": 460,
-    "Intenders": 463,
+    "Intenders": 466,
     "App Complete": 309
   },
   {
@@ -3277,26 +3277,26 @@
   },
   {
     "date": "Oct 7, 2026",
-    "Inquiries": 392,
-    "Intenders": 392,
-    "App Complete": 248
+    "Inquiries": 393,
+    "Intenders": 390,
+    "App Complete": 249
   },
   {
     "date": "Oct 8, 2026",
     "Inquiries": 413,
     "Intenders": 405,
-    "App Complete": 271
+    "App Complete": 272
   },
   {
     "date": "Oct 9, 2026",
     "Inquiries": 377,
     "Intenders": 375,
-    "App Complete": 255
+    "App Complete": 256
   },
   {
     "date": "Oct 10, 2026",
     "Inquiries": 288,
-    "Intenders": 289,
+    "Intenders": 288,
     "App Complete": 173
   },
   {
@@ -3314,32 +3314,32 @@
   {
     "date": "Oct 13, 2026",
     "Inquiries": 403,
-    "Intenders": 396,
+    "Intenders": 395,
     "App Complete": 254
   },
   {
     "date": "Oct 14, 2026",
     "Inquiries": 412,
     "Intenders": 407,
-    "App Complete": 271
+    "App Complete": 272
   },
   {
     "date": "Oct 15, 2026",
     "Inquiries": 386,
     "Intenders": 398,
-    "App Complete": 259
+    "App Complete": 261
   },
   {
     "date": "Oct 16, 2026",
-    "Inquiries": 341,
+    "Inquiries": 340,
     "Intenders": 332,
-    "App Complete": 214
+    "App Complete": 213
   },
   {
     "date": "Oct 17, 2026",
-    "Inquiries": 324,
+    "Inquiries": 325,
     "Intenders": 326,
-    "App Complete": 182
+    "App Complete": 184
   },
   {
     "date": "Oct 18, 2026",
@@ -3349,50 +3349,62 @@
   },
   {
     "date": "Oct 19, 2026",
-    "Inquiries": 434,
-    "Intenders": 424,
+    "Inquiries": 433,
+    "Intenders": 423,
     "App Complete": 300
   },
   {
     "date": "Oct 20, 2026",
     "Inquiries": 410,
-    "Intenders": 391,
-    "App Complete": 267
+    "Intenders": 392,
+    "App Complete": 268
   },
   {
     "date": "Oct 21, 2026",
     "Inquiries": 445,
-    "Intenders": 448,
-    "App Complete": 295
+    "Intenders": 450,
+    "App Complete": 296
   },
   {
     "date": "Oct 22, 2026",
     "Inquiries": 408,
-    "Intenders": 402,
+    "Intenders": 403,
     "App Complete": 259
   },
   {
     "date": "Oct 23, 2026",
     "Inquiries": 362,
-    "Intenders": 352,
-    "App Complete": 247
+    "Intenders": 353,
+    "App Complete": 250
   },
   {
     "date": "Oct 24, 2026",
-    "Inquiries": 303,
-    "Intenders": 291,
-    "App Complete": 159
+    "Inquiries": 302,
+    "Intenders": 292,
+    "App Complete": 158
   },
   {
     "date": "Oct 25, 2026",
     "Inquiries": 354,
-    "Intenders": 354,
-    "App Complete": 199
+    "Intenders": 355,
+    "App Complete": 200
   },
   {
     "date": "Oct 26, 2026",
-    "Inquiries": 483,
-    "Intenders": 470,
-    "App Complete": 301
+    "Inquiries": 479,
+    "Intenders": 469,
+    "App Complete": 307
+  },
+  {
+    "date": "Oct 27, 2026",
+    "Inquiries": 452,
+    "Intenders": 438,
+    "App Complete": 276
+  },
+  {
+    "date": "Oct 28, 2026",
+    "Inquiries": 482,
+    "Intenders": 468,
+    "App Complete": 297
   }
 ]
